@@ -197,3 +197,59 @@ def initial_future_resource(n, L, timehorizon):
             chargingresource.append(
                 one)  # TODO chargingresourse最后是37*4个[0,0,0,0] charging resource[j][k]存放的是 从region0开始 到region j在k中的所有scheduling(预计schedule的充电） 之和
     return futuresupply, chargingresource
+
+
+def obtain_transition(n,K,starttimeslot):
+    pv = {} #the probability that one vacant taxi starting from region j at the beginning of time slot k will travel to region i and become vacant at the beginning of time slot k+ 1.
+
+    for k in range(K):
+        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'pv', 'r')
+        data = []
+        for line in fopen:
+            line = line.strip('\n')
+            line = line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                pv[i, j, k] = float(data[i][j])
+
+    po = {} #the probability that one vacant taxi starting from region j at the beginning of time slot k will travel to region i and become occupied at the beginning of time slot k+ 1.
+
+    for k in range(K):
+        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'po', 'r')
+        data = []
+        for line in fopen:
+            line = line.strip('\n')
+            line = line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                po[i, j, k] = float(data[i][j])
+
+    qv = {} # the probability that one occupied taxi starting from region j at the beginning of time slot k will travel to region i and become vacant at the beginning of time slot k + 1.
+
+    for k in range(K):
+        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'qv', 'r')
+        data = []
+        for line in fopen:
+            line = line.strip('\n')
+            line = line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                qv[i, j, k] = float(data[i][j])
+
+    qo = {} #the probability that one occupied taxi starting from region j at the beginning of time slot k will travel to region i and become occupied at the beginning of time slot k + 1.
+
+    for k in range(K):
+        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'qo', 'r')
+        data = []
+        for line in fopen:
+            line = line.strip('\n')
+            line = line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                qo[i, j, k] = float(data[i][j])
+
+    return po,pv,qo,qv

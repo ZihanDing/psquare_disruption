@@ -1,74 +1,13 @@
 # coding=utf-8
 from gurobipy import *
-import numpy as np
-import os
-from os import path
-import math
+import dir.data_process as dp
 
 
-def mpc_iteration(starttimeslot, timehorizon, vacant, occupied, beta, chargingresource, futuresupply,disruption):
-    n = 0  # number of regions
-    fopen = open('./datadir/chargerindex', 'r')
-    for k in fopen:
-        n = n + 1
-    # --------------------------------------------------------------
-    L = 15  # number of energy levels
-    K = timehorizon  # number of time horizon
+def mpc_iteration(starttimeslot, timehorizon, distance,vacant, occupied, beta, chargingresource, futuresupply,disruption):
+    n,p = dp.obtain_regions()
+    L, L1, L2, K = dp.exp_config()
 
-    L1 = 1
-    L2 = 3
-
-    pv = {} #the probability that one vacant taxi starting from region j at the beginning of time slot k will travel to region i and become vacant at the beginning of time slot k+ 1.
-
-    for k in range(K):
-        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'pv', 'r')
-        data = []
-        for line in fopen:
-            line = line.strip('\n')
-            line = line.split(',')
-            data.append(line)
-        for i in range(n):
-            for j in range(n):
-                pv[i, j, k] = float(data[i][j])
-
-    po = {} #the probability that one vacant taxi starting from region j at the beginning of time slot k will travel to region i and become occupied at the beginning of time slot k+ 1.
-
-    for k in range(K):
-        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'po', 'r')
-        data = []
-        for line in fopen:
-            line = line.strip('\n')
-            line = line.split(',')
-            data.append(line)
-        for i in range(n):
-            for j in range(n):
-                po[i, j, k] = float(data[i][j])
-
-    qv = {} # the probability that one occupied taxi starting from region j at the beginning of time slot k will travel to region i and become vacant at the beginning of time slot k + 1.
-
-    for k in range(K):
-        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'qv', 'r')
-        data = []
-        for line in fopen:
-            line = line.strip('\n')
-            line = line.split(',')
-            data.append(line)
-        for i in range(n):
-            for j in range(n):
-                qv[i, j, k] = float(data[i][j])
-
-    qo = {} #the probability that one occupied taxi starting from region j at the beginning of time slot k will travel to region i and become occupied at the beginning of time slot k + 1.
-
-    for k in range(K):
-        fopen = open('./transition/slot20/' + str((k + starttimeslot) % 72) + 'qo', 'r')
-        data = []
-        for line in fopen:
-            line = line.strip('\n')
-            line = line.split(',')
-            data.append(line)
-        for i in range(n):
-            for j in range(n):
-                qo[i, j, k] = float(data[i][j])
+    po,pv,qo,qv = dp.obtain_transition(n,K,starttimeslot)
 
     # get estimated demand from files
     inputdemand = []
@@ -97,15 +36,6 @@ def mpc_iteration(starttimeslot, timehorizon, vacant, occupied, beta, chargingre
             demand[i, k] = inputdemand[i][k]
     # ---------------------------------------------------------------------------------------------------------
     # get the distance matric
-    distance = [] # 这个distance是啥 为啥是37x37的还没0哇  不是37个region么 等我回来再看看！
-    fopen = open('./datadir/distance', 'r')
-    for k in fopen:
-        k = k.strip('\n')
-        k = k.split(',')
-        one = []
-        for value in k:
-            one.append(float(value))
-        distance.append(one)
 
     W = {}
     for i in range(n):
@@ -113,27 +43,7 @@ def mpc_iteration(starttimeslot, timehorizon, vacant, occupied, beta, chargingre
             for k in range(K):
                 W[i, j, k] = distance[i][j] # TODO W(i,j,k) describe the driving time from region i to region j during time slot k.
 
-    # get the number of chargers in each charging station
-    p = {}
-    fopen = open('./datadir/chargerindex', 'r')
-    chargderindex = []
-    for k in fopen:
-        chargderindex.append(k)
-    for i in range(len(chargderindex)):
-        k = chargderindex[i]
-        k = k.split(',')
-        k = k[2]
-        k = k.strip('\n')
-        # p[i] = 20
-        if float(k) > 40:
-            p[i] = int(float(k) / 5)
-            # p[i] = int(float(k) / 5) + disruptions[(starttimeslot+K) % 72][i]
-            # p[i] = 40
-        else:
-            p[i] = int(float(k) / 5)
-            # p[i] = int(float(k) / 5)  + disruptions[(starttimeslot+K) % 72][i] # 所以为什么要除以5 and这个刚刚在外层算过了好像
-
-    if starttimeslot > disruption[1] and starttimeslot<= disruption[2]: # 在disruption scale中
+    if disruption[1] < starttimeslot <= disruption[2]: # 在disruption scale中
         for i in range(len(disruption[0])):
             p[disruption[0][i]] = 0 # 单个region直接shut down  注意这里是disruption发生time slot的下一个time slot
 

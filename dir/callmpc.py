@@ -4,38 +4,6 @@ import dir.mpc
 import dir.update_dis as ud
 import dir.data_process as dp
 
-
-def gps_to_region(gps):
-    fopen = open('./datadir/chargerindex', 'r')
-    chargergps = []
-    for k in fopen:
-        k = k.split(',')
-        chargergps.append([float(k[0]), float(k[1])])
-    near = 1000
-    loc = 0
-    for i in range(len(chargergps)):
-        cgps = chargergps[i]
-        if abs(cgps[0] - gps[0]) + abs(cgps[1] - gps[1]) < near:
-            loc = i
-            near = abs(cgps[0] - gps[0]) + abs(cgps[1] - gps[1])
-    return loc
-
-
-def get_middle_region(current, future, costtime):
-    fopen = open('./datadir/chargerindex', 'r')
-    chargergps = []
-    for k in fopen:
-        k = k.split(',')
-        chargergps.append([float(k[0]), float(k[1])])
-    startx = chargergps[current][0]
-    starty = chargergps[current][1]
-    endx = chargergps[future][0]
-    endy = chargergps[future][1]
-    middlex = startx + (endx - startx) / costtime
-    middley = starty + (endy - endx) / costtime
-    return gps_to_region([middlex, middley])
-
-
 def call_mpc(future, beta1, round):
     n, p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
@@ -53,7 +21,7 @@ def call_mpc(future, beta1, round):
     chargestation = [-1]* num_of_v # 充电region 没有的时候置-1
     idledrivingtime = [0]*num_of_v #  等待充电时间 idle driving + waiting for charging
     withoutwaitingtime = [0] * num_of_v # idle driving
-    dispatchedtime = [0] * num_of_v # dispatch去充电的开始时间戳
+    dispatchedtime = [-1] * num_of_v # dispatch去充电的开始时间戳
 
     supplydemand = []
     regionratio = []
@@ -90,7 +58,7 @@ def call_mpc(future, beta1, round):
 
         # print "current time horizon:",ctimehorizon
 
-        X, Y = dir.mpc.mpc_iteration(time, ctimehorizon, Vacant, Occupied, beta, chargingresource, futuresupply, disruption)
+        X, Y = dir.mpc.mpc_iteration(time, ctimehorizon,distance, Vacant, Occupied, beta, chargingresource, futuresupply, disruption)
 
         demand, cdemand, supply, total_slot_served, total_demand, \
         energystatus, chargingstatus, chargestation, occupancystatus, location, \
