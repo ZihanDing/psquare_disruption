@@ -1,0 +1,72 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+# import dir.mpc
+#import dir.data_processing
+#import dir.callmpc
+# import dir.trystatus
+#import dir.plotfigure
+#import dir.rec
+import dir.ground_data
+import dir.callmpc
+#import dir.newplotfigure
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.ticker as ticker
+# dir.data_processing.evdemand_combine_gps()
+# dir.data_processing.evdemandwithregion()
+# dir.data_processing.evdemand_timeslot_region_to_region()
+# dir.data_processing.get_prediction_error()
+
+# dir.callmpc.call_mpc(10,0.1)
+# dir.callmpc.call_mpc(8,0.1)
+# dir.callmpc.call_mpc(6,0.1)
+# dir.callmpc.call_mpc(4,0.1)
+
+# dir.callmpc.call_mpc(10,0.01)
+# dir.callmpc.call_mpc(8,0.01)
+# dir.callmpc10.call_mpc(4,1)
+# dir.callmpc.call_mpc(4,0.01,3)
+
+for i in range(50,51):
+    dir.callmpc.call_mpc(4,0.5,0.5,i)
+#
+# dir.callmpc.call_mpc(10,1)
+# dir.callmpc.call_mpc(8,0.01) #out of memory
+# dir.callmpc.call_mpc(6,1)
+# dir.callmpc.call_mpc(4,1)
+# dir.callmpc.call_mpc(6,0.01)
+
+# 8, 1 finish
+# dir.callmpc.call_mpc(4,10)
+# dir.callmpc.call_mpc(4,1)
+#
+# # dir.callmpc.call_mpc(4,0.1)
+# dir.callmpc.call_mpc(4,0.1)
+# dir.callmpc.call_mpc(4,5)
+# dir.callmpc.call_mpc(8,10)
+# dir.callmpc.call_mpc(8,100)
+
+
+# dir.ground_data.ground_supply()
+
+# dir.rec.call_rec()
+#
+# dir.newplotfigure.temporal()
+# dir.newplotfigure.utilization()
+
+# dir.newplotfigure.betaratio()
+# dir.newplotfigure.betautilization()
+# dir.newplotfigure.betaregionratio()
+# cc=[]
+# for i in range(3):
+#     one=[]
+#     for j in range(2):
+#         one.append(i+j)
+#     cc.append(one)
+#
+# for i in range(3):
+#     for j in range(2):
+#         print cc[i][j]
+
+
+

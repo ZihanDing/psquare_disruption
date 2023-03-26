@@ -1,0 +1,7 @@
+Note:
+
+Number of corrupted charging position at region i in time slot k > free point in region i in time slot k
+How to solve? Interrupt the charging vehicles?
+
+Sol1: 设计实验的disruptions就在time slot I的时候直接置零freepoints 正在charging的继续charge
+
