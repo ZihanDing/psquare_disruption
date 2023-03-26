@@ -8,16 +8,17 @@
 @Date    ：3/22/23 6:32 PM
 '''
 
-import datetime
+from datetime import datetime
 import os
 import dir.update_dis as ud
 
 CHARGING_ENERGY = 3
 RIDING_ENERGY = 1
 TOTAL_ENERGY = 15
-DISRUPTION_REGION = [32,6,2,1]
-DISRUPTION_START = 12*3
-DISRUPTION_END = 18*3
+DISRUPTION_REGION = [32, 6, 2, 1]
+DISRUPTION_START = 12 * 3
+DISRUPTION_END = 18 * 3
+
 
 def exp_config():
     # experiment setup
@@ -32,8 +33,7 @@ def exp_config():
     L = TOTAL_ENERGY
     K = L / L2
 
-    return L,L1,L2,K
-
+    return L, L1, L2, K
 
 
 def obtain_regions():
@@ -43,17 +43,16 @@ def obtain_regions():
     #         n: number of regions
     #         p: number of charging poles in each region: List<>[]
     fopen = open('./datadir/chargerindex', 'r')
-    p = {} # number of charging poles in each region
-    n = 0 #number of regions
+    p = {}  # number of charging poles in each region
+    n = 0  # number of regions
     for k in fopen:
         k = k.strip().split(',')
         p[n] = int(float(k[-1]) / 5)
         n += 1
-    return n,p
+    return n, p
 
 
 def obtain_vehicles():
-
     """
     obtain initial vehicle information
     :param energystatus:
@@ -62,9 +61,9 @@ def obtain_vehicles():
     :return: num_of_v number of vehicles
     """
 
-    energystatus = [] # 车辆energy level
-    location = [] # 车辆timeslot结束时目前位置
-    occupancystatus = [] #是否载客
+    energystatus = []  # 车辆energy level
+    location = []  # 车辆timeslot结束时目前位置
+    occupancystatus = []  # 是否载客
 
     # path = '/Users/jiangxiao/Desktop/data/ev/20161213/'
     path = '/Users/zihanding/Developer/Psquare/newevaluation/datadir/ev/20161213/'
@@ -131,7 +130,8 @@ def obtain_vehicles():
             else:
                 occupancystatus.append(0)
     num_of_v = len(energystatus)
-    return energystatus,location,occupancystatus,num_of_v
+    return energystatus, location, occupancystatus, num_of_v
+
 
 def obtain_distance():
     """
@@ -148,7 +148,8 @@ def obtain_distance():
         distance.append(temp)
     return distance
 
-def calculate_VO(n,L,num_of_v,occupancystatus,location,energystatus,chargingstatus):
+
+def calculate_VO(n, L, num_of_v, occupancystatus, location, energystatus):
     """
     Calculate Vaccant and Occupied
     :param n:
@@ -166,13 +167,12 @@ def calculate_VO(n,L,num_of_v,occupancystatus,location,energystatus,chargingstat
             Occupied[i, j] = 0
             Vacant[i, j] = 0
     for i in range(len(energystatus)):
-        if occupancystatus[i] == 1 and chargingstatus[i] == 0:  # 在载客 不在充电
+        if occupancystatus[i] == 1:
             Occupied[location[i], energystatus[i]] += 1
-        elif occupancystatus[i] == 0 and chargingstatus[i] == 0:  # 不在载客 不在充电
-            if energystatus[i] == 0:  # 彻底没电了 不载客也不充电
-                print("energystatus = 0", i)
+        elif occupancystatus[i] == 0:
             Vacant[location[i], energystatus[i]] += 1
-    return Vacant,Occupied
+    return Vacant, Occupied
+
 
 def obtain_disruption():
     '''In summer, typically between noon and 6 p.m. when air conditioners are on full-throttle.
@@ -180,3 +180,20 @@ def obtain_disruption():
     disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]
     return disruption
 
+
+def initial_future_resource(n, L, timehorizon):
+    chargingresource = []
+    futuresupply = {}
+
+    for i in range(n):
+        for l in range(L):
+            for k in range(timehorizon):
+                futuresupply[i, l, k] = 0
+
+    for i in range(n):
+        one = []
+        for k in range(timehorizon):
+            one.append(0)
+            chargingresource.append(
+                one)  # TODO chargingresourse最后是37*4个[0,0,0,0] charging resource[j][k]存放的是 从region0开始 到region j在k中的所有scheduling(预计schedule的充电） 之和
+    return futuresupply, chargingresource
