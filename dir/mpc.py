@@ -18,15 +18,13 @@ def mpc_iteration(starttimeslot, timehorizon, distance,vacant, occupied, beta, c
         inputdemand.append(one)
 
     for k in range(K):
-
         fopen = open('./historydemand/slot20/prediction/' + str((k + starttimeslot) % 72), 'r')
         loc = 0
         for line in fopen:
-            line = line.strip('\n')
-            line = line.split(',')
+            line = line.strip().split(',')
             valuesum = 0
             for value in line:
-                valuesum = valuesum + (float(value))
+                valuesum += (float(value))
             inputdemand[loc][k] = valuesum
             loc = loc + 1
 
@@ -34,8 +32,6 @@ def mpc_iteration(starttimeslot, timehorizon, distance,vacant, occupied, beta, c
     for i in range(n):
         for k in range(K):
             demand[i, k] = inputdemand[i][k]
-    # ---------------------------------------------------------------------------------------------------------
-    # get the distance matric
 
     W = {}
     for i in range(n):

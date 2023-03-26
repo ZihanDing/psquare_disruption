@@ -253,3 +253,14 @@ def obtain_transition(n,K,starttimeslot):
                 qo[i, j, k] = float(data[i][j])
 
     return po,pv,qo,qv
+
+def obtain_rechable():
+    reachable = []
+    fopen = open('./datadir/reachable', 'r')
+    for k in fopen:
+        k = k.strip().split(',')
+        one = []
+        for value in k:
+            one.append(float(value))
+        reachable.append(one)
+    return reachable
