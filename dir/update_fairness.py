@@ -29,3 +29,5 @@ def update_fairness(time, L, L1, L2, p, distance, disruption, X, Y,
                 chargestation[j] = -1  # not charging in any region
                 occupancystatus[j] = 0  # 未载客
 
+    # dispatch for serving:
+    

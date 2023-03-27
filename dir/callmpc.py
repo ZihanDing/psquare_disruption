@@ -143,30 +143,3 @@ def call_mpc(future, beta1, round):
     for i in range(num_of_v):
         fwrite6.write(str(vehicle_status[i])+'\n')
     fwrite6.close()
-
-    # vehicle_status = np.array(vehicle_status)
-    # # [time, i, location[i], chargingstatus[i], chargestation[i], occupancystatus[i], energystatus[i],
-    # #  remainingchargingtime[i], remainingtriptime[i]])
-    # df = pd.DataFrame(vehicle_status, columns=['Timeslot','Vehicle_ID','Charge_Status','Charge_Station','Occupy_Status','EnergyStatus','Remain_Charging_Time','Remain_Trip_Time'])
-    # df.to_csv('./resultdata/beta/chargestatus/occupystatus/Vehicle_Status'+'-'+str(round),index = False)
-
-    # if sum(scheduling[point,0] for point in range(p[i]))>p[i]:
-    #     print 'HAHHAHHAHHHHAHAHH'
-    # for j in range(len(energystatus)):
-    #     if chargingstatus[j]==1 and chargestation[j]==stationid:
-    #         point=0
-    #         starttime=0
-    #         for z in range(timehorizon):
-    #             find =False
-    #             for y in range(p[i]):
-    #                 if scheduling[y,z]==0:
-    #                     point =y
-    #                     starttime=z
-    #                     find =True
-    #                     break
-    #             if find:
-    #                 break
-    #         if remainingchargingtime[j]+ starttime<timehorizon:
-    #             futuresupply[i,energystatus[j]*remainingchargingtime[j]*L2,remainingchargingtime[j]+ starttime] += 1
-    #         for k in range(starttime,min(timehorizon,remainingchargingtime[j]+starttime)):
-    #             scheduling[point,k]=1
