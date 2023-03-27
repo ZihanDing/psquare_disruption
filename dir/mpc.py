@@ -218,10 +218,8 @@ def mpc_iteration(starttimeslot, timehorizon, distance,vacant, occupied, beta, c
                 for q in range(1, (L - 1) / L2):
                     m.addConstr(Db[i, k, q] == (sum(
                         sum(sum(D[i, l1, k1, q1] for q1 in range(1, 1 + (L - 1 - l1) / L2)) for l1 in range(K)) for k1
-                        in range(k)) +
-                                                sum(sum(D[i, l1, k, q1] for q1 in
-                                                        range(1, 1 + min(q - 1, (L - 1 - l1) / L2))) for l1 in
-                                                    range(L))))
+                        in range(k)) + sum(sum(D[i, l1, k, q1] for q1 in range(1, 1 + min(q - 1, (L - 1 - l1) / L2)))
+                                           for l1 in range(L))))
 
         for i in range(n):
             for k in range(K):

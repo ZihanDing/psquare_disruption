@@ -57,4 +57,3 @@ def call_mpc_dis(future,beta1,beta2,round):
         print "number of Vacant Vehicles:",sum(Vacant[i, l] for i in range(n) for l in range(L)),"number of Occupied Vehicles:",sum(Occupied[i, l] for i in range(n) for l in range(L))
 
         S,C = dir.mpc_dis.mpc_iteration()
-        
