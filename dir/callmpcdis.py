@@ -195,8 +195,6 @@ def call_mpc_dis(future,beta1,beta2,round):
                                 dispatchnum -= 1
 
 
-
-
         #update serving vehicles
         for i in range(n):
             for j in range(n):
@@ -224,15 +222,16 @@ def call_mpc_dis(future,beta1,beta2,round):
                             location[ind] = get_middle_region(i, j, int(remainingtriptime[ind])/20 + 2)
                             # 优先选择已经在本地的车辆 还是优先选择dispatched 来的车辆
                         else:
-                            occupancystatus[index] = 0  # slot结束不载客
-                            remainingtriptime[index] = 0  # slot结束trip也结束了
-                            location[index] = j  # slot结束在乘客的目的地
+                            occupancystatus[ind] = 0  # slot结束不载客
+                            remainingtriptime[ind] = 0  # slot结束trip也结束了
+                            location[ind] = j  # slot结束在乘客的目的地
                             # supply[location[index]] +=max(0,1-((60.0*cdistance/30.0)/20.0))
-                        updatestatus[index] = 1  # 安排了 一辆车
+                        updatestatus[ind] = 1  # 安排了 一辆车
                         cnum -= 1
 
             # We know dispatch to this region needs one time slot.
             # 我们在这里选择的应当是 上一个slot就dispatch过来的车！！！
+
 
         for i in range(num_of_v):
             if updatestatus[i] == 0:
@@ -250,8 +249,7 @@ def call_mpc_dis(future,beta1,beta2,round):
                     else:  # 在载客 但是这个slot乘客就下车
                         energystatus[i] -= L1
                         if energystatus[i] < 0:
-                            print(i)
-                            print('Error!!')
+                            print i, 'Error!! Energy level < 0'
                             return
                         occupancystatus[i] = 0  # slot结束乘客已经下车 occupancy status置为零
                         supply[destination[i]] += 1  # 在乘客目的地空出来一辆车
@@ -259,7 +257,6 @@ def call_mpc_dis(future,beta1,beta2,round):
                         remainingtriptime[i] = 0
                         location[i] = destination[i]
                         # chargingstatus[i] = 0
-
 
                 elif occupancystatus[i] == 0 and chargingstatus[i] == 2:  # 没载客 在充电
                     idledrivingtime[i] += 20.0
