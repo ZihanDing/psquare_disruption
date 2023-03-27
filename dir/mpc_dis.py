@@ -13,7 +13,7 @@ import data_process as dp
 from gurobipy import *
 
 
-def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,vacant,occupied):
+def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,distance,vacant,occupied,alpha):
     n,p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
 
@@ -44,12 +44,7 @@ def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,vacant,occupie
             demand[i, k] = inputdemand[i][k]
 
 
-    # {0,1} represent if an e-taxi can reach region j from i within the time interval k.
-    w = {}
-    for i in range(n):
-        for j in range(n):
-            for k in range(K):
-                w[i, j, k] = 1 - reachable[i][j]
+
     try:
 
         # Create a new model
@@ -79,6 +74,13 @@ def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,vacant,occupie
                         else:
                             S[i, j, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS,
                                                         name="S[%s,%s,%s,%s]" % (i, j, l, k))
+        # {0,1} represent if an e-taxi can reach region j from i within the time interval k.
+        w = {}
+        for i in range(n):
+            for j in range(n):
+                for k in range(K):
+                    w[i, j, k] = 1 - reachable[i][j]
+
         DE = {} # number of passengers requesting taxi service in region i during time interval k.
         for i in range(n):
             for j in range(n):
@@ -139,8 +141,12 @@ def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,vacant,occupie
                 for q in range(1, 1 + ((L - 1) / L2)):
                     for kp in range(k + q, K + 1):
                         Df[i, k, q, kp] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="Df[%s,%s,%s,%s]" % (i, k, q, kp))
-        alpha = {}
+
         u = {}
+        for i in range(n):
+            for j in range(n):
+                for k in range(K):
+                    u[i, j, k] = distance[i][j]  # TODO W(i,j,k) describe the driving time from region i to region j during time slot k.
 
         Jservice = sum(sum(min(
             sum(S[i, j, l, k] for j in range(n) for l in range(L)),
@@ -151,7 +157,7 @@ def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,vacant,occupie
         ) / sum(DE[i,j,k] for j in range(n) - alpha[i,k])
         ) for i in range(n)) for k in range(K))
 
-        Jcost = sum(u[i,j] * sum((S[i,j,l,k] + sum(C[i,j,l,k,q] for q in range(L))) for l in range(L)) for i in range(n) for j in range(n))
+        Jcost = sum(w[i,j] * sum((S[i,j,l,k] + sum(C[i,j,l,k,q] for q in range(L))) for l in range(L)) for i in range(n) for j in range(n))
 
         if disruption[1] < starttimeslot <= disruption[2]: # now with disruption, consider fairness
             obj = Jfairness + beta1*Jcost
