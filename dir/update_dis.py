@@ -351,7 +351,6 @@ def calculate_region_ratio(n, demand, supply):
         unratio.append(max(0, 1 - c))
     return unratio
 
-
 def update_future_resource(n, L, L2, K, time, num_of_v, p, disruption, timehorizon, chargingstatus, chargestation,
                            energystatus, remainingchargingtime, dispatchedtime):
     '''计算prefix sum'''

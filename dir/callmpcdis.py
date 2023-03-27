@@ -11,8 +11,12 @@ This call_mpc_dis function calls the mpc_dis function, in this file we did the p
 '''
 
 import dir.data_process as dp
+import dir.update_fairness as uf
+import dir.update_dis as ud
 import dir.mpc_dis
 import math
+import random
+import dir.mpc
 
 def gps_to_region(gps):
     fopen = open('./datadir/chargerindex', 'r')
@@ -86,6 +90,19 @@ def call_mpc_dis(future,beta1,beta2,round):
 
         print "number of Vacant Vehicles:",sum(Vacant[i, l] for i in range(n) for l in range(L)),"number of Occupied Vehicles:",sum(Occupied[i, l] for i in range(n) for l in range(L))
 
+
+        # generate alpha first
+        futuresupply,chargingresource = ud.update_future_resource(n,L,L2,K,time,
+                                                                  num_of_v,p,disruption,timehorizon,
+                                                                  chargingstatus,chargestation,
+                                                                  energystatus,remainingchargingtime,
+                                                                  dispatchedtime)
+        X, Y = dir.mpc.mpc_iteration(time, ctimehorizon,distance, Vacant, Occupied, beta1, chargingresource, futuresupply, disruption)
+        alpha = uf.generate_alpha(time,L,L1,L2,p,distance,disruption,X,Y,
+            energystatus, chargingstatus, chargestation, occupancystatus,
+            location, remainingchargingtime, remainingtriptime, destination, idledrivingtime,
+            withoutwaitingtime, dispatchedtime)
+
         S,C = dir.mpc_dis.mpc_iteration()
 
         updatestatus = [0] * num_of_v
@@ -104,6 +121,11 @@ def call_mpc_dis(future,beta1,beta2,round):
             demand.append(csum)  # 37 每个line所有的数据加起来是csum 从i出去的demandd
             cdemand.append(one)  # 37x37 i到j的demand
         fopen.close()
+
+        supply = [0] * n
+        for i in range(num_of_v):
+            if occupancystatus[i] == 0 and chargingstatus[i] == 0 and updatestatus[i] == 0:
+                supply[location[i]] += 1
 
         # update disruption infomation
         if disruption[1] <= time <= disruption[2]:
@@ -178,3 +200,98 @@ def call_mpc_dis(future,beta1,beta2,round):
             # We know dispatch to this region needs one time slot.
             # 我们在这里选择的应当是 上一个slot就dispatch过来的车！！！
 
+        for i in range(num_of_v):
+            if updatestatus[i] == 0:
+                updatestatus[i] = 1
+                if occupancystatus[i] == 1 and chargingstatus[i] == 0:  # 不在充电 在载客 上一个slot就在载客了 没载完
+                    if remainingtriptime[i] > 20:  # 在载客 这个slot还要继续跑完
+                        energystatus[i] -= L1
+                        if energystatus[i] < 0:
+                            print('Error!')
+                            return
+                        occupancystatus[i] = 1
+                        remainingtriptime[i] -= 20
+                        chargingstatus[i] = 0
+                        location[i] = get_middle_region(location[i], destination[i], int(remainingtriptime[i] / 20) + 2)
+                    else:  # 在载客 但是这个slot乘客就下车
+                        energystatus[i] -= L1
+                        if energystatus[i] < 0:
+                            print(i)
+                            print('Error!!')
+                            return
+                        occupancystatus[i] = 0  # slot结束乘客已经下车 occupancy status置为零
+                        supply[destination[i]] += 1  # 在乘客目的地空出来一辆车
+                        # supply[destination[i]] += (1-(remainingtriptime[i])/20.0)
+                        remainingtriptime[i] = 0
+                        location[i] = destination[i]
+                        # chargingstatus[i] = 0
+
+
+                elif occupancystatus[i] == 0 and chargingstatus[i] == 2:  # 没载客 在充电
+                    idledrivingtime[i] += 20.0
+                    if remainingchargingtime[i] > 1:
+                        energystatus[i] += L2
+                        occupancystatus[i] = 0
+                        # chargingstatus[i] = 2
+                        remainingchargingtime[i] -= 1
+                    else:
+                        energystatus[i] += L2
+                        occupancystatus[i] = 0
+                        chargingstatus[i] = 0
+                        remainingchargingtime[i] = 0
+                        chargestation[i] = -1
+
+                elif occupancystatus[i] == 0 and chargingstatus[i] == 0:  # 没载客 没充电 就规划一条路线给它
+                    if energystatus[i] > L1:
+                        energystatus[i] -= L1
+                    fopen1 = open('./transition/slot20/' + str(time) + 'pv', 'r')
+                    transition = []
+                    for k in fopen1:
+                        k = k.strip().split(',')
+                        one = []
+                        for line in k:
+                            one.append(float(line))
+                        transition.append(one)
+                    fopen1 = open('./transition/slot20/' + str(time) + 'qv', 'r')
+                    transition1 = []
+                    for k in fopen1:
+                        k = k.strip('').split(',')
+                        one = []
+                        for line in k:
+                            one.append(float(line))
+                        transition1.append(one)
+                    fopen1 = open('./transition/slot20/' + str(time) + 'po', 'r')
+                    transition2 = []
+                    for k in fopen1:
+                        k = k.strip().split(',')
+                        one = []
+                        for line in k:
+                            one.append(float(line))
+                        transition2.append(one)
+                    fopen1 = open('./transition/slot20/' + str(time) + 'qo', 'r')
+                    transition3 = []
+                    for k in fopen1:
+                        k = k.strip().split(',')
+                        one = []
+                        for line in k:
+                            one.append(float(line))
+                        transition3.append(one)
+                    loc = location[i]
+                    transitionrow = transition[loc]
+                    max1 = max(transitionrow)
+                    for cc in range(len(transitionrow)):
+                        if transitionrow[cc] == max1:
+                            location[i] = cc
+                            break
+                    possible = []
+                    for j in range(n):
+                        possible.append(int(transition[loc][j] * 1000))
+                    mylist = []
+                    for j in range(n):
+                        for c in range(possible[j]):
+                            mylist.append(j)
+                    if len(mylist) == 0:
+                        location[i] = location[i]
+                    else:
+                        cc = random.choice(mylist)
+                        location[i] = cc
