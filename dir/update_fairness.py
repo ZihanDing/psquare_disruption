@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-'''
-@Project ：newevaluation_dis 
+"""
+@Project ：newevaluation_dis
 @File    ：update_fairness.py
-@IDE     ：PyCharm 
+@IDE     ：PyCharm
 @Author  ：Zihan Ding
 @Date    ：3/23/23 11:37 PM
 @Description:
-'''
+"""
 import update_dis as ud
 
 # def update_fairness(time, L, L1, L2, p, distance, disruption, X, Y,
@@ -29,7 +29,8 @@ import update_dis as ud
 #                 chargestation[j] = -1  # not charging in any region
 #                 occupancystatus[j] = 0  # 未载客
 
-    # dispatch for serving:
+# dispatch for serving:
+
 
 def generate_alpha(time, L, L1, L2, p, distance, disruption, X, Y,
                                  energystatus, chargingstatus, chargestation, occupancystatus,

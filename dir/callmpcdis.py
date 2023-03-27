@@ -61,7 +61,8 @@ def call_mpc_dis(future,beta1,beta2,round):
 
     Vacant,Occupied = dp.calculate_VO(n,L,num_of_v,occupancystatus,location,energystatus)
 
-    chargingstatus = [0]*num_of_v #是否在充电 (1,waiting for free charging point) (2, charging) (0,not charging) (3, heading to charging)
+    chargingstatus = [0]*num_of_v #是否在充电
+    # (1,waiting for free charging point) (2, charging) (0,not charging) (3, heading to charging) (4, heading to serve)
     remainingchargingtime = [0]*num_of_v #剩余充电时间
     remainingtriptime = [0]*num_of_v #剩余trip 时间
     destination = [0]*num_of_v # 目的地
@@ -127,7 +128,7 @@ def call_mpc_dis(future,beta1,beta2,round):
             if occupancystatus[i] == 0 and chargingstatus[i] == 0 and updatestatus[i] == 0:
                 supply[location[i]] += 1
 
-        # update disruption infomation
+        # update disruption infomation 释放connecting vehicles
         if disruption[1] <= time <= disruption[2]:
             for j in range(num_of_v):
                 if chargestation[j] in disruption[0] and (
@@ -173,23 +174,48 @@ def call_mpc_dis(future,beta1,beta2,round):
                                         # 因为没有更新energy 所以不能 update status
                                     dispatchnum -= 1
 
-        #update serving vehicles
+
+        #update serving decision:
         for i in range(n):
             for j in range(n):
                 for l in range(L):
                     dispatchnum = C[i,j,l]
+                    cdistance = distance[i][j]
+                    costtime = (60.0*cdistance/40)
+                    #C3: dispatch的距离不能超过1个timeslot能到达的距离。if distance(i,j) > 1timeslot ride: decision[i,j,k] = 0
+                    for ind in range(num_of_v):
+                        if dispatchnum >0:
+                            if updatestatus[ind] == 0 and energystatus[ind] == l and location[ind] == i and chargingstatus == 0:
+                                location[ind] = j
+                                chargingstatus[ind] = 4 # heading to serve
+                                dispatchedtime[ind] = time
+                                idledrivingtime[ind] += costtime
+                                withoutwaitingtime[ind] += costtime
+
+                                dispatchnum -= 1
+
+
+
+
+        #update serving vehicles
+        for i in range(n):
+            for j in range(n):
+                for l in range(L):
                     cnum = demand[i][j]
                     trip_distance = distance[i][j]
                     trip_time = (60.0*trip_distance/40) # 乘 60是因为 60分钟 40km/h的速度 point！！！记住奥
 
-                    if l < trip_time: # we might need constraint here, l 需要支持走过i-j的energy < 这个energy level的不能dispatch
+                    if l < trip_time: # C1: we might need constraint here, l 需要支持走过i-j的energy < 这个energy level的不能dispatch
                         print 'dispatch the wrong energy level of vehicles'
-                    if cnum < dispatchnum: # we might need constraint here dispatched num <= demand
-                        # 我觉得这里还要加constraint 说明已经在本地的车辆 满足demand的话就不需要再dispatch过来了。
-                        print 'Dispatch too much vehicles'
+                    # if cnum < dispatchnum: # we might need constraint here dispatched num <= demand
+                    #     # C2: 我觉得这里还要加constraint 说明已经在本地的车辆 满足demand的话就不需要再dispatch过来了。
+                    #     print 'Dispatch too much vehicles'
 
                     for ind in range(num_of_v):
-                        if energystatus[ind] == l and location[ind] == i and occupancystatus[ind] == 0 and chargingstatus[ind] == 0 and updatestatus[ind] == 0:
+                        #有两种情况可以serve passengers ：1）原本就在region i 并且available的车  2)dispatch 来region i serve的车
+                        avail = location[ind] == i and occupancystatus[ind] == 0 and chargingstatus[ind] == 0
+                        dispat = destination[ind] == j and occupancystatus[ind] == 0 and chargingstatus[ind] == 4
+                        if energystatus[ind] == l and updatestatus[ind] == 0 and (avail or dispat):
                             energystatus[ind] -= L1
                         if trip_time > 20: #这一个timeslot送不完
                             occupancystatus[ind] = 1
@@ -197,6 +223,14 @@ def call_mpc_dis(future,beta1,beta2,round):
                             destination[ind] = j
                             location[ind] = get_middle_region(i, j, int(remainingtriptime[ind])/20 + 2)
                             # 优先选择已经在本地的车辆 还是优先选择dispatched 来的车辆
+                        else:
+                            occupancystatus[index] = 0  # slot结束不载客
+                            remainingtriptime[index] = 0  # slot结束trip也结束了
+                            location[index] = j  # slot结束在乘客的目的地
+                            # supply[location[index]] +=max(0,1-((60.0*cdistance/30.0)/20.0))
+                        updatestatus[index] = 1  # 安排了 一辆车
+                        cnum -= 1
+
             # We know dispatch to this region needs one time slot.
             # 我们在这里选择的应当是 上一个slot就dispatch过来的车！！！
 
