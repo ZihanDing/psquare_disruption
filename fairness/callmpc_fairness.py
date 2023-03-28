@@ -133,11 +133,14 @@ def call_mpc_fairness(future,beta, beta1,beta2,round):
                     dispatch_vol = int(S[i, j, l])
                     #update serving decision
                     for ind in range(num_of_v):
+                        if dispatch_vol < 0:
+                            break
                         if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and vehicles['occupy_status'][ind] == 0 and vehicles['update_status'][ind] == 0:
                             vehicles['location'][ind] = j
                             vehicles['dispatched_trip_time'][ind] = time
                             vehicles['idle_driving_distance'][ind] += distance[i][j]
                             # 这里只是先把车dispatch 过去 至于谁serve 后面再定
+                            dispatch_vol -= 1
 
         for i in range(n):
             for j in range(n):
