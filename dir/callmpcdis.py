@@ -148,6 +148,44 @@ def call_mpc_dis(future, beta1, beta2, round):
                     chargestation[j] = -1  # not charging in any region
                     occupancystatus[j] = 0  # 未载客
 
+        for i in range(n):
+            connectingvehicle = 0
+            for j in range(num_of_v):
+                if chargingstatus[j] == 2 and chargestation[j] == i:
+                    connectingvehicle += 1
+            if i in disruption[0] and time >= disruption[1] and time <= disruption[2]:  # 如果disruption发生了那么没有freepoints了
+                freepoints = 0
+            else:
+                freepoints = p[i] - connectingvehicle
+
+            waitinginfo = []
+            for j in range(num_of_v):
+                if chargestation[j] == i and (chargingstatus[j] == 1 or chargingstatus[j] == 3):
+                    # 这里我认为应当是 dispatched time不能是当下时候的3 否则刚刚heading to charging就冲上了 但是如果先update这个充电信息，再执行decision update 就可以解决问题。
+                    # (chargingstatus[j] == 3 and dispatchedtime[j] != time) 这里表示 上一个slot的时候在heading to charge
+                    # 这里条件 ： 充电region是i && （上个slot就已经在这里waiting了 或者｜ 上个slot正在heading到这里充电）
+                    # if chargestation[j] == i and (chargingstatus[j] == 1 or (chargingstatus[j] == 3 and dispatchedtime[j] != time)):
+                    info = [j, dispatchedtime[j], remainingchargingtime[j]]
+                    waitinginfo.append(info)
+            waitinginfo = sorted(waitinginfo, key=lambda x: (x[2], x[1]))
+            # waitinginfo = sorted(waitinginfo, key=lambda x: (x[1], x[2]))
+            # TODO 这里我认为应当优先 dispatched time 排序 mar 24 先看下结果
+
+            for record in waitinginfo:
+                id1 = record[0]
+                # 如果i是disruption location 那么dispatch到这的车并不做任何update charging status还是3 charging station 还是-1
+                # 但是from my perspective dispatch到这里的车的charging status可以置零，not charging 并且free for dispatch， not only for charging but also for serving 能力范围内的passenger
+                if freepoints > 0:
+                    chargingstatus[id1] = 2  # charging
+                    # remainingchargingtime[id1] = futurecharginglength[id1]
+                    # updatestatus[id1]=1
+                    freepoints -= 1
+                else:  # idledrivingtime[record[0]] += 20.0
+                    if i not in disruption[0] or time < disruption[1] or time > disruption[2]:
+                        idledrivingtime[id1] += 20.0
+                        chargingstatus[id1] = 1  # waiting for charging
+                        updatestatus[id1] = 1  # 这辆车的状态就确定了 为等待charging 或者是 跑到了j但是并不能充电 所以要在这里等着下一个slot重新规划
+
         # update charging decision
         for i in range(n):  # TODO 这个大循环耗时太严重
             for j in range(n):
@@ -197,8 +235,7 @@ def call_mpc_dis(future, beta1, beta2, round):
                     # C3: dispatch for charging and serving 的距离不能超过1个timeslot能到达的距离。if distance(i,j) > 1timeslot ride: decision[i,j,k] = 0
                     for ind in range(num_of_v):
                         if dispatchnum > 0:
-                            if updatestatus[ind] == 0 and energystatus[ind] == l and location[
-                                ind] == i and chargingstatus == 0:
+                            if updatestatus[ind] == 0 and energystatus[ind] == l and location[ind] == i and chargingstatus == 0:
                                 location[ind] = j
                                 chargingstatus[ind] = 4  # heading to serve
                                 dispatchedtime[ind] = time
@@ -216,7 +253,7 @@ def call_mpc_dis(future, beta1, beta2, round):
                 cnum = demand[i][j]
                 trip_distance = distance[i][j]
                 trip_time = (60.0 * trip_distance / 40)  # 乘 60是因为 60分钟 40km/h的速度 point！！！记住奥
-
+                energy_required = int(trip_time/20)
                 # if l < trip_time:  # C1: we might need constraint here, l 需要支持走过i-j的energy < 这个energy level的不能dispatch
                 #     print 'dispatch the wrong energy level of vehicles'
                 # if cnum < dispatchnum: # we might need constraint here dispatched num <= demand
@@ -229,8 +266,8 @@ def call_mpc_dis(future, beta1, beta2, round):
                 for ind in v:
                     # 有两种情况可以serve passengers ：1）原本就在region i 并且available的车  2)dispatch 来region i serve的车
                     avail = location[ind] == i and occupancystatus[ind] == 0 and chargingstatus[ind] == 0
-                    dispat = destination[ind] == j and occupancystatus[ind] == 0 and chargingstatus[ind] == 4
-                    if energystatus[ind] == l and updatestatus[ind] == 0 and (avail or dispat):
+                    dispat = location[ind] == i and occupancystatus[ind] == 0 and chargingstatus[ind] == 4
+                    if energystatus[ind] > energy_required and updatestatus[ind] == 0 and (avail or dispat):
                         energystatus[ind] -= L1
                     if trip_time > 20:  # 这一个timeslot送不完
                         occupancystatus[ind] = 1
@@ -246,8 +283,7 @@ def call_mpc_dis(future, beta1, beta2, round):
                     updatestatus[ind] = 1  # 安排了 一辆车
                     cnum -= 1
 
-            # We know dispatch to this region needs one time slot.
-            # 我们在这里选择的应当是 上一个slot就dispatch过来的车！！！
+            # We know dispatch to this region needs one time slot. TODO how about dispatch from region i to region i ?
 
         for i in range(num_of_v):
             if updatestatus[i] == 0:
@@ -256,7 +292,7 @@ def call_mpc_dis(future, beta1, beta2, round):
                     if remainingtriptime[i] > 20:  # 在载客 这个slot还要继续跑完
                         energystatus[i] -= L1
                         if energystatus[i] < 0:
-                            print('Error!')
+                            print i, 'Error!! Energy level cannot support this trip!!'
                             return
                         occupancystatus[i] = 1
                         remainingtriptime[i] -= 20
@@ -265,7 +301,7 @@ def call_mpc_dis(future, beta1, beta2, round):
                     else:  # 在载客 但是这个slot乘客就下车
                         energystatus[i] -= L1
                         if energystatus[i] < 0:
-                            print i, 'Error!! Energy level < 0'
+                            print i, 'Error!! Energy level cannot support this trip'
                             return
                         occupancystatus[i] = 0  # slot结束乘客已经下车 occupancy status置为零
                         supply[destination[i]] += 1  # 在乘客目的地空出来一辆车
@@ -278,11 +314,16 @@ def call_mpc_dis(future, beta1, beta2, round):
                     idledrivingtime[i] += 20.0
                     if remainingchargingtime[i] > 1:
                         energystatus[i] += L2
+                        if energystatus[i] > L+3:
+                            print i, 'Error!! Energy overcharged!!'
                         occupancystatus[i] = 0
                         # chargingstatus[i] = 2
                         remainingchargingtime[i] -= 1
                     else:
                         energystatus[i] += L2
+                        if energystatus[i] > L:
+                            energystatus[i] = L
+                            # 不能overcharged
                         occupancystatus[i] = 0
                         chargingstatus[i] = 0
                         remainingchargingtime[i] = 0
