@@ -69,6 +69,21 @@ def call_mpc_fairness(future,beta, beta1,beta2,round):
         print "number of Vacant Vehicles:", sum(
             vacant[i, l] for i in range(n) for l in range(L)), "number of Occupied Vehicles:", sum(occupied[i, l] for i in range(n) for l in range(L))
 
+        # update demand
+        demand = []
+        cdemand = []
+        fopen = open('./historydemand/slot20/groundtruth/' + str(time), 'r')
+        for line in fopen:
+            line = line.strip().split(',')
+            csum = 0
+            one = []
+            for k in line:
+                one.append((float(k)))
+                csum += (float(k))
+            demand.append(csum)  # 37 每个line所有的数据加起来是csum 从i出去的demandd
+            cdemand.append(one)  # 37x37 i到j的demand
+        fopen.close()
+
         X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta)
 
         alpha = fairness.alpha_generator.generate_alpha()
@@ -115,10 +130,19 @@ def call_mpc_fairness(future,beta, beta1,beta2,round):
                                 dispatch_vol -= 1
                                 vehicles['update_status'][ind] = 1
 
+                    dispatch_vol = int(S[i, j, l])
                     #update serving decision
                     for ind in range(num_of_v):
                         if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and vehicles['occupy_status'][ind] == 0 and vehicles['update_status'][ind] == 0:
-                            dispatch_vol = int(S[i,j,l])
-                            
+                            vehicles['location'][ind] = j
+                            vehicles['dispatched_trip_time'][ind] = time
+                            vehicles['idle_driving_distance'][ind] += distance[i][j]
+                            # 这里只是先把车dispatch 过去 至于谁serve 后面再定
+
+        for i in range(n):
+            for j in range(n):
+                cnum = cdemand[i][j]
+                
+
 
 

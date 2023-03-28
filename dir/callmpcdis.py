@@ -253,7 +253,7 @@ def call_mpc_dis(future, beta1, beta2, round):
         # update vehicles for serving passengers
         for i in range(n):
             for j in range(n):
-                cnum = demand[i][j]
+                cnum = cdemand[i][j]
                 trip_distance = distance[i][j]
                 trip_time = (60.0 * trip_distance / 40)  # 乘 60是因为 60分钟 40km/h的速度 point！！！记住奥
                 energy_required = int(trip_time/20)
