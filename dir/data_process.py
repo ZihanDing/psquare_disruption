@@ -51,6 +51,36 @@ def obtain_regions():
         n += 1
     return n, p
 
+def gps_to_region(gps):
+    fopen = open('./datadir/chargerindex', 'r')
+    chargergps = []
+    for k in fopen:
+        k = k.split(',')
+        chargergps.append([float(k[0]), float(k[1])])
+    near = 1000
+    loc = 0
+    for i in range(len(chargergps)):
+        cgps = chargergps[i]
+        if abs(cgps[0] - gps[0]) + abs(cgps[1] - gps[1]) < near:
+            loc = i
+            near = abs(cgps[0] - gps[0]) + abs(cgps[1] - gps[1])
+    return loc
+
+
+def get_middle_region(current, future, costtime):
+    fopen = open('./datadir/chargerindex', 'r')
+    chargergps = []
+    for k in fopen:
+        k = k.split(',')
+        chargergps.append([float(k[0]), float(k[1])])
+    startx = chargergps[current][0]
+    starty = chargergps[current][1]
+    endx = chargergps[future][0]
+    endy = chargergps[future][1]
+    middlex = startx + (endx - startx) / costtime
+    middley = starty + (endy - endx) / costtime
+    return gps_to_region([middlex, middley])
+
 def obtain_reachable(n):
     reachable =[]
     fopen = open('./datadir/reachable','r')

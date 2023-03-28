@@ -31,8 +31,26 @@ import dir.update_dis as ud
 
 # dispatch for serving:
 
+import dir.data_process as dp
 
 def generate_alpha(time,X,Y,vehicls):
+    n, p = dp.obtain_regions()
+    L, L1, L2, K = dp.exp_config()
+
+    current = time
+    S,C = {},{}
+    for k in range(K):
+        alpha = []
+        # we want alpha[i,k] alpha: 4*37
+        for i in range(n):
+            for j in range(n):
+                for l in range(L):
+                    S[i,j,l] = X[i,j,l,k]
+                    C[i,j,l] = X[i,j,l,k]
+                    # transfer decision matrix
+        # 接下来的update和之前一样 copy过来修改一下 不能有disruption
+
+
 
 
     # 返回supply/demand

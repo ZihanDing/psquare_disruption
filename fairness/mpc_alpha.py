@@ -13,7 +13,7 @@ import dir.data_process as dp
 
 predictionerror = 1.0
 
-def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta):
+def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption,dis):
     n=0 # number of regions
     fopen =  open('./datadir/chargerindex20','r')
     for k in fopen:
@@ -116,30 +116,25 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta):
         for j in range(n):
             for k in range(K):
                 W[i,j,k] = distance[i][j]
-
-# get the number of chargers in each charging station
-    p={}
-    fopen =  open('./datadir/chargerindex20','r')
-    solarsize = []
-    chargderindex=[]
-    solarindex=[]
+# ------------------------------------------------------------------
+    # get the number of chargers in each charging station
+    # obtain region and charging stations infomation
+    # input:
+    # output:
+    #         n: number of regions
+    #         p: number of charging poles in each region: List<>[]
+    fopen = open('./datadir/chargerindex', 'r')
+    p = {}  # number of charging poles in each region
+    n = 0  # number of regions
     for k in fopen:
-        chargderindex.append(k)
-    for i in range(len(chargderindex)):
-        k=chargderindex[i]
-        k=k.split(',')
-        index = int(float(k[3]))
-        solarindex.append(index)
-        size = float(k[4].strip('\n'))
-        k=k[2]
-        k=k.strip('\n')
-        if float(k)>30:
-            p[i]= int(float(k)/2)
-            solarsize.append(size/2.0)
-        else:
-            p[i] = int(float(k)/1.0)
-            solarsize.append(size / 1.0)
+        k = k.strip().split(',')
+        p[n] = int(float(k[-1]) / 5)
+        n += 1
 
+    if dis:
+        for i in range(n):
+            if i in disruption[0] and disruption[1]<starttimeslot<=disruption[2]:
+                p[i] = 0
 
 
 #------------------------------------------------------------------
@@ -379,8 +374,12 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta):
                 x2 = int(float(line[1]))
                 x3 = int(float(line[2]))
                 x4 = int(float(line[3]))
+                if dis:
+                    if x4 == 0:
+                        out_charging[x1,x2,x3] = v.x
                 # if x4 == 0:
-                out_charging[x1, x2, x3, x4] = v.x
+                else:
+                    out_charging[x1, x2, x3, x4] = v.x
                 # print ('%s, %g' %(v.VarName,v.x))
         out1_serve = {}
         for v in m.getVars():
@@ -395,8 +394,11 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta):
                 x2 = int(float(line[1]))
                 x3 = int(float(line[2]))
                 x4 = int(float(line[3]))
-                # if x4 == 0:
-                out1_serve[x1, x2, x3, x4] = v.x
+                if dis:
+                    if x4 == 0:
+                        out1_serve[x1, x2, x3] = v.x
+                else:
+                    out1_serve[x1, x2, x3, x4] = v.x
 
         return out_charging, out1_serve
 

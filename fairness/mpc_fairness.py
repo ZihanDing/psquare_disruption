@@ -21,7 +21,7 @@ from os import  path
 
 predictionerror = 1.0
 
-def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,beta,storedenergy,storagesystemcapacity,day):
+def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,disruption,beta1,beta2,storedenergy,storagesystemcapacity,day,alpha):
     n=0 # number of regions
     fopen =  open('./datadir/chargerindex20','r')
     for k in fopen:
@@ -133,27 +133,25 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,bet
                 W[i,j,k] = distance[i][j]
 
 # get the number of chargers in each charging station
-    p={}
-    fopen =  open('./datadir/chargerindex20','r')
-    solarsize = []
-    chargderindex=[]
-    solarindex=[]
+    # get the number of chargers in each charging station
+    # obtain region and charging stations infomation
+    # input:
+    # output:
+    #         n: number of regions
+    #         p: number of charging poles in each region: List<>[]
+    fopen = open('./datadir/chargerindex', 'r')
+    p = {}  # number of charging poles in each region
+    n = 0  # number of regions
     for k in fopen:
-        chargderindex.append(k)
-    for i in range(len(chargderindex)):
-        k=chargderindex[i]
-        k=k.split(',')
-        index = int(float(k[3]))
-        solarindex.append(index)
-        size = float(k[4].strip('\n'))
-        k=k[2]
-        k=k.strip('\n')
-        if float(k)>30:
-            p[i]= int(float(k)/2)
-            solarsize.append(size/2.0)
-        else:
-            p[i] = int(float(k)/1.0)
-            solarsize.append(size / 1.0)
+        k = k.strip().split(',')
+        p[n] = int(float(k[-1]) / 5)
+        n += 1
+
+
+    for i in range(n):
+        if i in disruption[0] and disruption[1]<starttimeslot<=disruption[2]:
+            p[i] = 0
+
 
 
 
@@ -174,43 +172,43 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,bet
                 c[i,j,k] = 1-reachable[i][j]
 #------------------------------------------------------------------
 #   the predicted solar power in each charging station
-
-    solarradiation = []
-    for i in range(37):
-        one =[]
-        for j in range(timehorizon):
-            one.append(0.0)
-        solarradiation.append(one)
-
-    for slot in range(timehorizon):
-
-        # fopen = open('realsolardata/2019-07-31/' + str(starttimeslot + slot), 'r')
-        # fopen = open('/home/yuan/Dropbox/CPS/transportation solar uncertainty/motivationfigure/newdata/prediction_solar/'
-        #              +str(day)+'/' + str(starttimeslot + slot), 'r')
-        fopen = open('realsolardata/' + str(day) + '/' + str(starttimeslot + slot), 'r')
-        one =[]
-        for k in fopen:
-            k = k.strip('\n')
-            one.append(float(k))
-        for region in range(37):
-            solarradiation[region][slot] = one[region]
-
-
-
-
-    solar_generation = []
-    for slot in range(timehorizon):
-
-        one = []
-        for region in range(len(solarsize)):
-            size = solarsize[region]
-            unitvalue = solarradiation[region][slot]
-            energy = (unitvalue*predictionerror/7.5) * size*0.9
-            one.append(energy)
-        solar_generation.append(one)
-
-    utilitymax = 0
-#-------------------------------------------------------------------
+#
+#     solarradiation = []
+#     for i in range(37):
+#         one =[]
+#         for j in range(timehorizon):
+#             one.append(0.0)
+#         solarradiation.append(one)
+#
+#     for slot in range(timehorizon):
+#
+#         # fopen = open('realsolardata/2019-07-31/' + str(starttimeslot + slot), 'r')
+#         # fopen = open('/home/yuan/Dropbox/CPS/transportation solar uncertainty/motivationfigure/newdata/prediction_solar/'
+#         #              +str(day)+'/' + str(starttimeslot + slot), 'r')
+#         fopen = open('realsolardata/' + str(day) + '/' + str(starttimeslot + slot), 'r')
+#         one =[]
+#         for k in fopen:
+#             k = k.strip('\n')
+#             one.append(float(k))
+#         for region in range(37):
+#             solarradiation[region][slot] = one[region]
+#
+#
+#
+#
+#     solar_generation = []
+#     for slot in range(timehorizon):
+#
+#         one = []
+#         for region in range(len(solarsize)):
+#             size = solarsize[region]
+#             unitvalue = solarradiation[region][slot]
+#             energy = (unitvalue*predictionerror/7.5) * size*0.9
+#             one.append(energy)
+#         solar_generation.append(one)
+#
+#     utilitymax = 0
+# #-------------------------------------------------------------------
     try:
 
         # Create a new model
@@ -258,29 +256,29 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,bet
                         Y[i,j,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="Y[%s,%s,%s,%s]"%(i,j,l,k))
 
 
-        reverseflow = {}
-        for i in range(n):
-            for k in range(K):
-                reverseflow[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="reverseflow[%s,%s]"%(i,k))
-
-        chargingflow = {}
-        for i in range(n):
-            for k in range(K):
-                chargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="chargingflow[%s,%s]"%(i,k))
-
-        dischargingflow = {}
-        for i in range(n):
-            for k in range(K):
-                dischargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="dischargingflow[%s,%s]"%(i,k))
-
-
-        stored = {}
-        for i in range(n):
-            for k in range(K):
-                stored[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="stored[%s,%s]"%(i,k))
-
-        for i in range(n):
-            m.addConstr(stored[i,0] == storedenergy[i] )
+        # reverseflow = {}
+        # for i in range(n):
+        #     for k in range(K):
+        #         reverseflow[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="reverseflow[%s,%s]"%(i,k))
+        #
+        # chargingflow = {}
+        # for i in range(n):
+        #     for k in range(K):
+        #         chargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="chargingflow[%s,%s]"%(i,k))
+        #
+        # dischargingflow = {}
+        # for i in range(n):
+        #     for k in range(K):
+        #         dischargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="dischargingflow[%s,%s]"%(i,k))
+        #
+        #
+        # stored = {}
+        # for i in range(n):
+        #     for k in range(K):
+        #         stored[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="stored[%s,%s]"%(i,k))
+        #
+        # for i in range(n):
+        #     m.addConstr(stored[i,0] == storedenergy[i] )
 
 
         U={}
@@ -359,8 +357,8 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,bet
         for i in range(n):
             for k in range(K):
                 sdratio_diff[i, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="sdratio_diff[%s,%s]" % (i, k))
-                m.addConstr(kk[i, k] >= sum((S[i, l, k]) for l in range(L)) / demand[i, k] - alpha[i][k])
-                m.addConstr(kk[i, k] >= - sum((S[i, l, k]) for l in range(L)) / demand[i, k] + alpha[i][k])
+                m.addConstr(sdratio_diff[i, k] >= sum((S[i, l, k]) for l in range(L)) / demand[i, k] - alpha[i][k])
+                m.addConstr(sdratio_diff[i, k] >= - sum((S[i, l, k]) for l in range(L)) / demand[i, k] + alpha[i][k])
 
 
 
