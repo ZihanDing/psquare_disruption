@@ -21,9 +21,9 @@ from os import  path
 
 predictionerror = 1.0
 
-def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,disruption,beta1,beta2,storedenergy,storagesystemcapacity,day,alpha):
+def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,disruption,beta2,alpha):
     n=0 # number of regions
-    fopen =  open('./datadir/chargerindex20','r')
+    fopen =  open('./datadir/chargerindex','r')
     for k in fopen:
         n=n+1
 
@@ -367,7 +367,7 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,dis
 
         obj2 = sum(sum(sum((sum((X[i,j,l,k]+Y[i,j,l,k]) for l in range(L))*W[i,j,k]) for i in range(n)) for j in range(n)) for k in range(K))
 
-        obj_dis = obj11 + obj2*0.001
+        obj_dis = obj11 + obj2*beta2
         m.setObjective(obj_dis, GRB.MINIMIZE)
 
         m.setParam(GRB.Param.TimeLimit, 300)

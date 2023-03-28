@@ -15,7 +15,7 @@ import fairness.alpha_generator
 import fairness.mpc_fairness
 import math
 
-def call_mpc_fairness(future,beta, beta1,beta2,round):
+def call_mpc_fairness(future, beta1,beta2,round):
     """
 
     :param future: time horizon we consider
@@ -95,10 +95,10 @@ def call_mpc_fairness(future,beta, beta1,beta2,round):
             cdemand.append(one)  # 37x37 i到j的demand
         fopen.close()
 
-        X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta)
+        X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = False)
 
-        alpha = fairness.alpha_generator.generate_alpha()
-        S,C = fairness.mpc_fairness.mpc_iteration_optimize_utility()
+        alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
+        S,C = fairness.mpc_fairness.mpc_iteration_optimize_utility(time,timehorizon,vacant,occupied,disruption,beta2,alpha)
 
         vehicles['update_status'] = [0] * num_of_v
         # 这里只用 ： id	energy	location	vehicle_status
