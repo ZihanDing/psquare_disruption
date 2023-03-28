@@ -359,7 +359,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta):
         obj1 = sum( sum( (kk[i,k]) for i in range(n)) for k in range(K))
         obj2 = sum(sum(sum((sum((X[i,j,l,k]+Y[i,j,l,k]) for l in range(L))*W[i,j,k]) for i in range(n)) for j in range(n)) for k in range(K))
 
-        m.setObjective(obj1 + beta*obj2 ,GRB.MINIMIZE) # -0.001 is the negative weight between the two objectives. You can set up it as different values.
+        m.setObjective(obj1 - beta*obj2 ,GRB.MAXIMIZE) # -0.001 is the negative weight between the two objectives. You can set up it as different values.
         # In our evaluation, we evaluate the performances under the different weights.
         m.setParam(GRB.Param.TimeLimit, 300)
         m.Params.BarHomogeneous = 1

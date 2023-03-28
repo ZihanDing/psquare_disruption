@@ -142,7 +142,7 @@ def call_mpc_fairness(future,beta, beta1,beta2,round):
         for i in range(n):
             for j in range(n):
                 cnum = cdemand[i][j]
-                
+
 
 
 

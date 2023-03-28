@@ -13,170 +13,373 @@ import dir.data_process as dp
 from gurobipy import *
 
 
-def mpc_iteration_optimize_utility(starttimeslot,beta1,beta2, disruption,reachable,distance,vacant,occupied,alpha):
-    n,p = dp.obtain_regions()
-    L, L1, L2, K = dp.exp_config()
+from gurobipy import *
+import numpy as np
+import os
+from os import  path
 
-    po,pv,qo,qv = dp.obtain_transition(n,K,starttimeslot)
 
-    # get estimated demand from files
-    inputdemand = []
+predictionerror = 1.0
+
+def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,beta,storedenergy,storagesystemcapacity,day):
+    n=0 # number of regions
+    fopen =  open('./datadir/chargerindex20','r')
+    for k in fopen:
+        n=n+1
+
+#--------------------------------------------------------------
+    L=15 # number of energy levels
+    K=timehorizon # number of time horizon
+    L1=1
+    L2=3
+
+
+    pv={}
+
+    for k in range(K):
+        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'pv','r')
+        data=[]
+        for line in fopen:
+            line = line.strip('\n')
+            line =line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                pv[i,j,k]= float(data[i][j])
+
+    po={}
+
+    for k in range(K):
+        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'po','r')
+        data=[]
+        for line in fopen:
+            line = line.strip('\n')
+            line =line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                po[i,j,k]= float(data[i][j])
+
+    qv={}
+
+    for k in range(K):
+        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'qv','r')
+        data=[]
+        for line in fopen:
+            line = line.strip('\n')
+            line =line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                qv[i,j,k]= float(data[i][j])
+
+    qo={}
+
+
+    for k in range(K):
+        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'qo','r')
+        data=[]
+        for line in fopen:
+            line = line.strip('\n')
+            line =line.split(',')
+            data.append(line)
+        for i in range(n):
+            for j in range(n):
+                qo[i,j,k]= float(data[i][j])
+
+
+
+
+
+# get estimated demand from files
+    inputdemand =[]
     for i in range(n):
-        one = []
+        one=[]
         for j in range(K):
             one.append(0)
         inputdemand.append(one)
 
     for k in range(K):
-        fopen = open('./historydemand/slot20/prediction/' + str((k + starttimeslot) % 72), 'r')
-        loc = 0
-        for line in fopen:
-            line = line.strip().split(',')
-            valuesum = 0
-            for value in line:
-                valuesum += (float(value))
-            inputdemand[loc][k] = valuesum
-            loc = loc + 1
 
-    demand = {}
+        fopen = open('./historydemand/slot20/prediction/'+str(k+starttimeslot),'r')
+        loc =0
+        for line in fopen:
+            line =line.strip('\n')
+            line = line.split(',')
+            valuesum =0
+            for value in line:
+                valuesum = valuesum + float(value)*1.15
+            inputdemand[loc][k]= valuesum
+            loc = loc+1
+    demand={}
     for i in range(n):
         for k in range(K):
-            demand[i, k] = inputdemand[i][k]
+            demand[i,k] = inputdemand[i][k]
+#---------------------------------------------------------------------------------------------------------
+    #get the distance matric
+    distance =[]
+    fopen = open('./datadir/distance','r')
+    for k in fopen:
+        k=k.strip('\n')
+        k=k.split(',')
+        one =[]
+        for value in k:
+            one.append(float(value))
+        distance.append(one)
+    W={}
+    for i in range(n):
+        for j in range(n):
+            for k in range(K):
+                W[i,j,k] = distance[i][j]
+
+# get the number of chargers in each charging station
+    p={}
+    fopen =  open('./datadir/chargerindex20','r')
+    solarsize = []
+    chargderindex=[]
+    solarindex=[]
+    for k in fopen:
+        chargderindex.append(k)
+    for i in range(len(chargderindex)):
+        k=chargderindex[i]
+        k=k.split(',')
+        index = int(float(k[3]))
+        solarindex.append(index)
+        size = float(k[4].strip('\n'))
+        k=k[2]
+        k=k.strip('\n')
+        if float(k)>30:
+            p[i]= int(float(k)/2)
+            solarsize.append(size/2.0)
+        else:
+            p[i] = int(float(k)/1.0)
+            solarsize.append(size / 1.0)
 
 
 
+#------------------------------------------------------------------
+    reachable =[]
+    fopen = open('./datadir/reachable','r')
+    for k in fopen:
+        k=k.strip('\n')
+        k=k.split(',')
+        one =[]
+        for value in k:
+            one.append(float(value))
+        reachable.append(one)
+    c={}
+    for i in range(n):
+        for j in range(n):
+            for k in range(K):
+                c[i,j,k] = 1-reachable[i][j]
+#------------------------------------------------------------------
+#   the predicted solar power in each charging station
+
+    solarradiation = []
+    for i in range(37):
+        one =[]
+        for j in range(timehorizon):
+            one.append(0.0)
+        solarradiation.append(one)
+
+    for slot in range(timehorizon):
+
+        # fopen = open('realsolardata/2019-07-31/' + str(starttimeslot + slot), 'r')
+        # fopen = open('/home/yuan/Dropbox/CPS/transportation solar uncertainty/motivationfigure/newdata/prediction_solar/'
+        #              +str(day)+'/' + str(starttimeslot + slot), 'r')
+        fopen = open('realsolardata/' + str(day) + '/' + str(starttimeslot + slot), 'r')
+        one =[]
+        for k in fopen:
+            k = k.strip('\n')
+            one.append(float(k))
+        for region in range(37):
+            solarradiation[region][slot] = one[region]
+
+
+
+
+    solar_generation = []
+    for slot in range(timehorizon):
+
+        one = []
+        for region in range(len(solarsize)):
+            size = solarsize[region]
+            unitvalue = solarradiation[region][slot]
+            energy = (unitvalue*predictionerror/7.5) * size*0.9
+            one.append(energy)
+        solar_generation.append(one)
+
+    utilitymax = 0
+#-------------------------------------------------------------------
     try:
 
         # Create a new model
         m = Model("CPS")
 
-        C = {}
+        # Create variables
+        X={}
         for i in range(n):
             for j in range(n):
                 for l in range(L):
                     for k in range(K):
-                        for q in range(1, 1 + ((L - l - 1) / L2)):
-                            if l < 0:
-                                C[i, j, l, k, q] = m.addVar(lb=0.0, vtype=GRB.INTEGER,
-                                                            name="C[%s,%s,%s,%s,%s]" % (i, j, l, k, q))
-                            else:
-                                C[i, j, l, k, q] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS,
-                                                            name="C[%s,%s,%s,%s,%s]" % (i, j, l, k, q))
-        S = {} #
+                        X[i,j,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="X[%s,%s,%s,%s]"%(i,j,l,k))
+
+        V={}
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    V[i,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="V[%s,%s,%s]"%(i,l,k))
+
+
+
+        O={}
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    O[i,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="O[%s,%s,%s]"%(i,l,k))
+
+        for i in range(n):
+            for l in range(L):
+
+                m.addConstr(V[i,l,0]==vacant[i,l])
+                m.addConstr(O[i,l,0]==occupied[i,l])
+
+        S={}
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    S[i,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="S[%s,%s,%s]"%(i,l,k))
+
+        Y={}
         for i in range(n):
             for j in range(n):
                 for l in range(L):
                     for k in range(K):
+                        Y[i,j,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="Y[%s,%s,%s,%s]"%(i,j,l,k))
 
-                        if l < 0:
-                            S[i, j, l, k] = m.addVar(lb=0.0, vtype=GRB.INTEGER,
-                                                        name="S[%s,%s,%s,%s]" % (i, j, l, k))
-                        else:
-                            S[i, j, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS,
-                                                        name="S[%s,%s,%s,%s]" % (i, j, l, k))
-        # {0,1} represent if an e-taxi can reach region j from i within the time interval k.
-        w = {}
-        for i in range(n):
-            for j in range(n):
-                for k in range(K):
-                    w[i, j, k] = 1 - reachable[i][j]
 
-        DE = {} # number of passengers requesting taxi service in region i during time interval k.
-        for i in range(n):
-            for j in range(n):
-                for k in range(K):
-                    DE[i,j,k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS,
-                                         name = "DE[%s,%s,%s,%s]" % (i,j,k))
-
-        V = {} # The number of Vaccant l-th level e-taxis at region i at the begining of time slot k before being dispatched for charging respectively,
-        for i in range(n):
-            for l in range(L):
-                for k in range(K):
-                    V[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="V[%s,%s,%s]" % (i, l, k))
-                    m.addConstr(V[i, l, k] <= 800)
-
-        O = {} # The number of Occupied l-th level e-taxis at region i at the begining of time slot k before being dispatched for charging respectively,
-        for i in range(n):
-            for l in range(L):
-                for k in range(K):
-                    O[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="O[%s,%s,%s]" % (i, l, k))
-                    m.addConstr(O[i, l, k] <= 800)
-
-        for i in range(n): # 初始化V和O 给定timeslot0的时候现有的vacant和occupied
-            for l in range(L):
-                m.addConstr(V[i, l, 0] == vacant[i, l])
-                m.addConstr(O[i, l, 0] == occupied[i, l])
-
-        St = {} # total number of available e-taxis at the l-th energy level with region i during time slok k
-        for i in range(n):
-            for l in range(L):
-                for k in range(K):
-                    St[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="St[%s,%s,%s]" % (i, l, k))
-                    m.addConstr(St[i, l, k] <= 800)
-        D = {}
-        for i in range(n): # The number of l-th energy level e-taxis dispatched to region i during time slot k with q time slots charging duration.
-            for l in range(L):
-                for k in range(K):
-                    for q in range(1, 1 + ((L - l - 1) / L2)):
-                        D[i, l, k, q] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="D[%s,%s,%s,%s]" % (i, l, k, q))
-                        m.addConstr(D[i, l, k, q] <= 800)
-
-        Du = {}  # For l-th level e-taxis dispatched to region i at time slot k for charging q time slots, the number of unfininsh charging vehicles by the end of optimization time horizon.
-        for i in range(n):
-            for l in range(L):
-                for k in range(K):
-                    for q in range(1, 1 + ((L - l - 1) / L2)):
-                        Du[i, l, k, q] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="Du[%s,%s,%s,%s]" % (i, l, k, q))
-                        m.addConstr(Du[i, l, k, q] <= 800)
-        #
-        Db = {}  # The number of e-taxis with higher charging priority
+        reverseflow = {}
         for i in range(n):
             for k in range(K):
-                for q in range(1, 1 + ((L - 1) / L2)):
-                    Db[i, k, q] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="Db[%s,%s,%s]" % (i, k, q))
+                reverseflow[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="reverseflow[%s,%s]"%(i,k))
 
-        Df = {}
+        chargingflow = {}
         for i in range(n):
             for k in range(K):
-                for q in range(1, 1 + ((L - 1) / L2)):
-                    for kp in range(k + q, K + 1):
-                        Df[i, k, q, kp] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="Df[%s,%s,%s,%s]" % (i, k, q, kp))
+                chargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="chargingflow[%s,%s]"%(i,k))
 
-        u = {}
+        dischargingflow = {}
+        for i in range(n):
+            for k in range(K):
+                dischargingflow[i,k] = m.addVar(lb=-1000.0,vtype=GRB.CONTINUOUS,name="dischargingflow[%s,%s]"%(i,k))
+
+
+        stored = {}
+        for i in range(n):
+            for k in range(K):
+                stored[i,k] = m.addVar(vtype=GRB.CONTINUOUS,name="stored[%s,%s]"%(i,k))
+
+        for i in range(n):
+            m.addConstr(stored[i,0] == storedenergy[i] )
+
+
+        U={}
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    U[i,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="U[%s,%s,%s]"%(i,l,k))
+
+
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    m.addConstr(S[i,l,k] == sum(Y[j,i,l,k] for j in range(n)))
+                    # m.addConstr(S[i, l, k] +0.5 >= sum(Y[j, i, l, k] for j in range(n)))
+
+        for i in range(n):
+            for l in range(L-L1):
+                for k in range(K-1):
+                    m.addConstr(V[i,l,k+1]==(sum((pv[j,i,k]*S[j,l+L1,k]) for j in range(n)) + sum((qv[j,i,k]*O[j,l+L1,k]) for j in range(n)) + U[i,l,k]))
+
+
+        for i in range(n):
+            for l in range(L-L1):
+                for k in range(K-1):
+                    m.addConstr( O[i,l,k+1]== (sum((po[j,i,k]*S[j,l+L1,k]) for j in range(n)) + sum( (qo[j,i,k]*O[j,l+L1,k]) for j in range(n))) )
+
+
+#---------------describe the charging process in the charging station-------------------------------
+        H={}
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    H[i,l,k] = m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="H[%s,%s,%s]"%(i,l,k))
+                    m.addConstr(H[i,l,k]<= sum(X[j,i,l,k] for j in range(n)))
+
+        for i in range(n):
+            for k in range(K):
+                # m.addConstr(sum(H[i,l,k] for l in range(L)) <= p[i])
+                m.addConstr(sum(sum(X[j,i,l,k] for j in range(n)) for l in range(L))   <= p[i])
+
+        for i in range(n):
+            for l in range(L2,L):
+                for k in range(K):
+                    m.addConstr(U[i,l,k]== (H[i,l-L2,k] + sum(X[j,i,l,k] for j in range(n)) - H[i,l,k] ))
+#---------------------------------------------------------------------------------------------------
+
+        for i in range(n):
+            for l in range(L):
+                for k in range(K):
+                    m.addConstr(V[i,l,k]== sum((X[i,j,l,k]+Y[i,j,l,k]) for j in range(n)))
+
+
+        for i in range(n):
+            for k in range(K):
+                for l in range(L1):
+                    m.addConstr(sum(X[i,j,l,k] for j in range(n))==V[i,l,k])
+                    m.addConstr(sum(Y[i,j,l,k] for j in range(n)) == 0)
+
         for i in range(n):
             for j in range(n):
-                for k in range(K):
-                    u[i, j, k] = distance[i][j]  # TODO W(i,j,k) describe the driving time from region i to region j during time slot k.
+                for l in range(L):
+                    for k in range(K):
+                        m.addConstr((X[i,j,l,k]+Y[i,j,l,k])*c[i,j,k]==0)
 
-        Jservice = sum(sum(min(
-            sum(S[i, j, l, k] for j in range(n) for l in range(L)),
-            sum(DE[i,j,k] for j in range(n))) for i in range(n)) for k in range(K))
+        kk={}
 
-        Jfairness = sum(sum(abs(sum(
-            sum(S[i,j,l,k] for j in range(n)) for l in range(L)
-        ) / sum(DE[i,j,k] for j in range(n) - alpha[i,k])
-        ) for i in range(n)) for k in range(K))
 
-        Jcost = sum(w[i,j] * sum((S[i,j,l,k] + sum(C[i,j,l,k,q] for q in range(L))) for l in range(L)) for i in range(n) for j in range(n))
 
-        if disruption[1] < starttimeslot <= disruption[2]: # now with disruption, consider fairness
-            obj = Jfairness + beta1*Jcost
-            m.setObjective(obj, GRB.MINIMIZE)
-        else:
-            obj = Jservice + beta2*Jcost
-            m.setObjective(obj, GRB.MAXIMIZE)
+        for i in range(n):
+            for k in range(K):
+                kk[i,k]=m.addVar(lb=0.0,vtype=GRB.CONTINUOUS,name="kk[%s,%s]"%(i,k))
+                m.addConstr(kk[i,k]<= demand[i,k])
+                m.addConstr(kk[i,k]<= sum((S[i,l,k]) for l in range(L)))
 
-        m.setParam(GRB.Param.TimeLimit, 150)
-        # m.Params.BarHomogeneous = 1
+        sdratio_diff = {}
+        for i in range(n):
+            for k in range(K):
+                sdratio_diff[i, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="sdratio_diff[%s,%s]" % (i, k))
+                m.addConstr(kk[i, k] >= sum((S[i, l, k]) for l in range(L)) / demand[i, k] - alpha[i][k])
+                m.addConstr(kk[i, k] >= - sum((S[i, l, k]) for l in range(L)) / demand[i, k] + alpha[i][k])
+
+
+
+
+        obj11 = sum( sum( (sdratio_diff[i,k]) for i in range(n)) for k in range(K))
+
+        obj2 = sum(sum(sum((sum((X[i,j,l,k]+Y[i,j,l,k]) for l in range(L))*W[i,j,k]) for i in range(n)) for j in range(n)) for k in range(K))
+
+        obj_dis = obj11 + obj2*0.001
+        m.setObjective(obj_dis, GRB.MINIMIZE)
+
+        m.setParam(GRB.Param.TimeLimit, 300)
+        m.Params.BarHomogeneous = 1
+
 
         m.optimize()
-
-        print str(m.objVal) + "----------------"
-
-
-        S_out = {}
+        out_charging = {}
         for v in m.getVars():
-            if 'S' in v.VarName:
+            if 'X' in v.VarName:
                 line = v.VarName
                 line = line.split('[')
                 line = line[1]
@@ -187,31 +390,269 @@ def mpc_iteration_optimize_utility(starttimeslot,beta1,beta2, disruption,reachab
                 x2 = int(float(line[1]))
                 x3 = int(float(line[2]))
                 x4 = int(float(line[3]))
-                x5 = int(float(line[4]))
                 if x4 == 0:
-                    S_out[x1, x2, x3, x5] = v.x
-
-        C_out = {}
+                    out_charging[x1, x2, x3] = v.x
+                # print ('%s, %g' %(v.VarName,v.x))
+        out1_serve = {}
         for v in m.getVars():
-            if 'C' in v.VarName:
-                C_out = {}
-                # TODO: How to get correct C value
-                # line = v.VarName
-                # line = line.split('[')
-                # line = line[1]
-                # line = line.split(']')
-                # line = line[0]
-                # line = line.split(',')
-                # x1 = int(float(line[0]))
-                # x2 = int(float(line[1]))
-                # x3 = int(float(line[2]))
-                # x4 = int(float(line[3]))
-                # x5 = int(float(line[4]))
-                # if x4 == 0:
-                #     C_out[x1, x2, x3, x5] = v.x
-        return S_out,C_out
+            if 'Y' in v.VarName:
+                line = v.VarName
+                line = line.split('[')
+                line = line[1]
+                line = line.split(']')
+                line = line[0]
+                line = line.split(',')
+                x1 = int(float(line[0]))
+                x2 = int(float(line[1]))
+                x3 = int(float(line[2]))
+                x4 = int(float(line[3]))
+                if x4 == 0:
+                    out1_serve[x1, x2, x3] = v.x
+
+        return out_charging,out1_serve
+
+
+
     except GurobiError as e:
-        print 'Error code' + str(e.message) + ": " + str(e)
+        print('Error code ' + str(e.errno) + ": " + str(e))
 
     except AttributeError:
-        print 'Encountered an attribute error'
+        print('Encountered an attribute error')
+
+    # try:
+    #
+    #     # Create a new model
+    #     m = Model("CPS")
+    #
+    #     # Create variables
+    #     X = {}
+    #     for i in range(n):
+    #         for j in range(n):
+    #             for l in range(L):
+    #                 for k in range(K):
+    #                     X[i, j, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="X[%s,%s,%s,%s]" % (i, j, l, k))
+    #
+    #     V = {}
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 V[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="V[%s,%s,%s]" % (i, l, k))
+    #
+    #     O = {}
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 O[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="O[%s,%s,%s]" % (i, l, k))
+    #
+    #     for i in range(n):
+    #         for l in range(L):
+    #             m.addConstr(V[i, l, 0] == vacant[i, l])
+    #             m.addConstr(O[i, l, 0] == occupied[i, l])
+    #
+    #     S = {}
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 S[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="S[%s,%s,%s]" % (i, l, k))
+    #
+    #     Y = {}
+    #     for i in range(n):
+    #         for j in range(n):
+    #             for l in range(L):
+    #                 for k in range(K):
+    #                     Y[i, j, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="Y[%s,%s,%s,%s]" % (i, j, l, k))
+    #
+    #     reverseflow = {}
+    #     for i in range(n):
+    #         for k in range(K):
+    #             reverseflow[i, k] = m.addVar(vtype=GRB.CONTINUOUS, name="reverseflow[%s,%s]" % (i, k))
+    #
+    #     chargingflow = {}
+    #     for i in range(n):
+    #         for k in range(K):
+    #             chargingflow[i, k] = m.addVar(lb=-1000.0, vtype=GRB.CONTINUOUS, name="chargingflow[%s,%s]" % (i, k))
+    #
+    #     dischargingflow = {}
+    #     for i in range(n):
+    #         for k in range(K):
+    #             dischargingflow[i, k] = m.addVar(lb=-1000.0, vtype=GRB.CONTINUOUS,
+    #                                              name="dischargingflow[%s,%s]" % (i, k))
+    #
+    #     stored = {}
+    #     for i in range(n):
+    #         for k in range(K):
+    #             stored[i, k] = m.addVar(vtype=GRB.CONTINUOUS, name="stored[%s,%s]" % (i, k))
+    #
+    #     for i in range(n):
+    #         m.addConstr(stored[i, 0] == storedenergy[i])
+    #
+    #     U = {}
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 U[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="U[%s,%s,%s]" % (i, l, k))
+    #
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 m.addConstr(S[i, l, k] == sum(Y[j, i, l, k] for j in range(n)))
+    #                 # m.addConstr(S[i, l, k] +0.5 >= sum(Y[j, i, l, k] for j in range(n)))
+    #
+    #     for i in range(n):
+    #         for l in range(L - L1):
+    #             for k in range(K - 1):
+    #                 m.addConstr(V[i, l, k + 1] == (sum((pv[j, i, k] * S[j, l + L1, k]) for j in range(n)) + sum(
+    #                     (qv[j, i, k] * O[j, l + L1, k]) for j in range(n)) + U[i, l, k]))
+    #
+    #     for i in range(n):
+    #         for l in range(L - L1):
+    #             for k in range(K - 1):
+    #                 m.addConstr(O[i, l, k + 1] == (sum((po[j, i, k] * S[j, l + L1, k]) for j in range(n)) + sum(
+    #                     (qo[j, i, k] * O[j, l + L1, k]) for j in range(n))))
+    #
+    #     # ---------------describe the charging process in the charging station-------------------------------
+    #     H = {}
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 H[i, l, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="H[%s,%s,%s]" % (i, l, k))
+    #                 m.addConstr(H[i, l, k] <= sum(X[j, i, l, k] for j in range(n)))
+    #
+    #     for i in range(n):
+    #         for k in range(K):
+    #             # m.addConstr(sum(H[i,l,k] for l in range(L)) <= p[i])
+    #             m.addConstr(sum(sum(X[j, i, l, k] for j in range(n)) for l in range(L)) <= p[i])
+    #
+    #     for i in range(n):
+    #         for l in range(L2, L):
+    #             for k in range(K):
+    #                 m.addConstr(U[i, l, k] == (H[i, l - L2, k] + sum(X[j, i, l, k] for j in range(n)) - H[i, l, k]))
+    #     # ---------------------------------------------------------------------------------------------------
+    #
+    #     for i in range(n):
+    #         for l in range(L):
+    #             for k in range(K):
+    #                 m.addConstr(V[i, l, k] == sum((X[i, j, l, k] + Y[i, j, l, k]) for j in range(n)))
+    #
+    #     for i in range(n):
+    #         for k in range(K):
+    #             for l in range(L1):
+    #                 m.addConstr(sum(X[i, j, l, k] for j in range(n)) == V[i, l, k])
+    #                 m.addConstr(sum(Y[i, j, l, k] for j in range(n)) == 0)
+    #
+    #     # for i in range(n):
+    #     #     for j in range(n):
+    #     #         for l in range(L):
+    #     #             for k in range(K):
+    #     #                 m.addConstr((X[i,j,l,k]+Y[i,j,l,k])*c[i,j,k]==0)
+    #
+    #     kk = {}
+    #
+    #     for i in range(n):
+    #         for k in range(K):
+    #             kk[i, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="kk[%s,%s]" % (i, k))
+    #             m.addConstr(kk[i, k] <= demand[i, k])
+    #             m.addConstr(kk[i, k] <= sum((S[i, l, k]) for l in range(L)))
+    #
+    #     usedsolarpower = {}
+    #     for region in range(n):
+    #         for slot in range(timehorizon):
+    #             usedsolarpower[region, slot] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS,
+    #                                                     name="usedsolarpower[%s,%s]" % (region, slot))
+    #
+    #     for region in range(n):
+    #         for slot in range(timehorizon):
+    #             m.addConstr(usedsolarpower[region, slot] <= solar_generation[slot][region])
+    #             m.addConstr(usedsolarpower[region, slot] <= 30.0 * sum(
+    #                 sum(X[j, region, l, slot] for j in range(n)) for l in range(L)))
+    #
+    #     obj1 = sum(sum((kk[i, k]) for i in range(n)) for k in range(K))
+    #
+    #     m.addConstr(obj1>= utilitymax*0.9)
+    #
+    #     obj2 = sum(sum(
+    #         sum((sum((X[i, j, l, k] + Y[i, j, l, k]) for l in range(L)) * W[i, j, k]) for i in range(n)) for j in
+    #         range(n)) for k in range(K))
+    #     obj3 = sum(sum(usedsolarpower[region, slot] for region in range(n)) for slot in range(timehorizon))
+    #     # m.addConstr(obj3<=0.9*sum(sum(solar_generation[slot][region] for slot in range(timehorizon)) for region in range(n)))
+    #
+    #     m.setObjective(obj3, GRB.MAXIMIZE)
+    #
+    #     m.setParam(GRB.Param.TimeLimit, 300)
+    #     m.Params.BarHomogeneous = 1
+    #
+    #     m.optimize()
+    #     utilitymax = m.objValue
+    #
+    #     out = {}
+    #     for v in m.getVars():
+    #         if 'X' in v.VarName:
+    #             line = v.VarName
+    #             line = line.split('[')
+    #             line = line[1]
+    #             line = line.split(']')
+    #             line = line[0]
+    #             line = line.split(',')
+    #             x1 = int(float(line[0]))
+    #             x2 = int(float(line[1]))
+    #             x3 = int(float(line[2]))
+    #             x4 = int(float(line[3]))
+    #             if x4 == 0:
+    #                 out[x1, x2, x3] = v.x
+    #             # print ('%s, %g' %(v.VarName,v.x))
+    #     out1 = {}
+    #     for v in m.getVars():
+    #         if 'Y' in v.VarName:
+    #             line = v.VarName
+    #             line = line.split('[')
+    #             line = line[1]
+    #             line = line.split(']')
+    #             line = line[0]
+    #             line = line.split(',')
+    #             x1 = int(float(line[0]))
+    #             x2 = int(float(line[1]))
+    #             x3 = int(float(line[2]))
+    #             x4 = int(float(line[3]))
+    #             if x4 == 0:
+    #                 out1[x1, x2, x3] = v.x
+    #     supply1 = {}
+    #     for v in m.getVars():
+    #         if 'S' in v.VarName:
+    #             line = v.VarName
+    #             line = line.split('[')
+    #             line = line[1]
+    #             line = line.split(']')
+    #             line = line[0]
+    #             line = line.split(',')
+    #             x1 = int(float(line[0]))
+    #             x2 = int(float(line[1]))
+    #             x3 = int(float(line[2]))
+    #             # x4 = int(float(line[3]))
+    #             if x3 == 0:
+    #                 supply1[x1, x2] = v.x
+    #
+    #     serveddemand = {}
+    #     for v in m.getVars():
+    #         if 'kk' in v.VarName:
+    #             line = v.VarName
+    #             line = line.split('[')
+    #             line = line[1]
+    #             line = line.split(']')
+    #             line = line[0]
+    #             line = line.split(',')
+    #             x1 = int(float(line[0]))
+    #             x2 = int(float(line[1]))
+    #             serveddemand[x1, x2] = v.x
+    #
+    #     return out, out1, serveddemand
+    #
+    #
+    # except GurobiError as e:
+    #     print('Error code ' + str(e.errno) + ": " + str(e))
+    #
+    # except AttributeError:
+    #     print('Encountered an attribute error')
+
+    return
+
+
