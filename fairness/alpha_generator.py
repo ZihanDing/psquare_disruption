@@ -2,13 +2,13 @@
 # -*- coding: UTF-8 -*-
 """
 @Project ：newevaluation_dis
-@File    ：update_fairness.py
+@File    ：alpha_generator.py
 @IDE     ：PyCharm
 @Author  ：Zihan Ding
 @Date    ：3/23/23 11:37 PM
 @Description:
 """
-import update_dis as ud
+import dir.update_dis as ud
 
 # def update_fairness(time, L, L1, L2, p, distance, disruption, X, Y,
 #                     energystatus, chargingstatus, chargestation, occupancystatus,
@@ -32,21 +32,10 @@ import update_dis as ud
 # dispatch for serving:
 
 
-def generate_alpha(time, L, L1, L2, p, distance, disruption, X, Y,
-                                 energystatus, chargingstatus, chargestation, occupancystatus,
-                                 location, remainingchargingtime, remainingtriptime, destination, idledrivingtime,
-                                 withoutwaitingtime, dispatchedtime):
-    demand, cdemand, supply, total_slot_served, total_demand, \
-    energystatus, chargingstatus, chargestation, occupancystatus, location, \
-    remainingchargingtime, remainingtriptime, destination, idledrivingtime, \
-    withoutwaitingtime, dispatchedtime = ud.update_status_withdisruption(time, L, L1, L2, p, distance, disruption, X, Y,
-                                 energystatus, chargingstatus, chargestation, occupancystatus,
-                                 location, remainingchargingtime, remainingtriptime, destination, idledrivingtime,
-                                 withoutwaitingtime, dispatchedtime)
-    unratio = ud.calculate_region_ratio(len(chargestation),demand,supply)
+def generate_alpha(time,X,Y,vehicls):
 
-    for i in range(len(unratio)):
-        unratio[i] = 1-unratio[i]
-    return unratio
+
+    # 返回supply/demand
+    return
 
 

@@ -51,7 +51,21 @@ def obtain_regions():
         n += 1
     return n, p
 
-
+def obtain_reachable(n):
+    reachable =[]
+    fopen = open('./datadir/reachable','r')
+    for k in fopen:
+        k=k.strip('\n')
+        k=k.split(',')
+        one =[]
+        for value in k:
+            one.append(float(value))
+        reachable.append(one)
+    c={}
+    for i in range(n):
+        for j in range(n):
+            c[i,j] = 1-reachable[i][j]
+    return c
 def obtain_vehicles():
     """
     obtain initial vehicle information

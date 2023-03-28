@@ -8,3 +8,31 @@ Sol1: 设计实验的disruptions就在time slot I的时候直接置零freepoints
 idle driving distance 有bug 要修改 Mar 25
 
 
+
+
+mpc iteration 需要三个文件
+1.用来算alpha 需要返回X[x1,x2,x3,x4] no disruption
+2.用来算disruption情况下的 k=0时的决策，分为fairness和一般情况。（这两个可以合并）
+2号只需要返回第一个timeslot的决策即可
+
+
+callmpc_fairness 主函数 调用mpc_fairness
+mpc_fairness 需要参数alpha 主函数使用alpha_generator生成
+alpha generator调用mpc_alpha 来计算alpha
+
+
+Question: In p square we consider Jidle and Jwait. same as Jcost?
+
+Tips:for i in range(n):
+        for j in range(n):
+            for l in range(L):
+                for k in range(K):
+                    m.addConstr((X[i,j,l,k]+Y[i,j,l,k])*c[i,j,k]==0)
+    因为有这个constraint 我们认为车可以在1个timeslot里到达乘客所在地并且可以忽略riding的时间，但是distance不忽略
+
+Question: kk那里是不是缺了一个 == 的constraint kk应当是 当前region的serve？A: 没有哦
+
+Question：charing station16 只有自己可达 service始终是0
+A: 没关系！初始状态有车 而且之后会有trip过去！
+
+Question: future charging length从哪里来

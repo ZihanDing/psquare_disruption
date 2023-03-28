@@ -8,6 +8,7 @@
 #import dir.rec
 import dir.ground_data
 import dir.callmpc
+import fairness.callmpc_fairness
 #import dir.newplotfigure
 import matplotlib.pyplot as plt
 import numpy as np
@@ -27,8 +28,8 @@ import matplotlib.ticker as ticker
 # dir.callmpc10.call_mpc(4,1)
 # dir.callmpc.call_mpc(4,0.01,3)
 
-for i in range(0,1):
-    dir.callmpc.call_mpc(4,0.5,i)
+# for i in range(0,1):
+#     dir.callmpc.call_mpc(4,0.5,i)
 #
 # dir.callmpc.call_mpc(10,1)
 # dir.callmpc.call_mpc(8,0.01) #out of memory
@@ -68,5 +69,5 @@ for i in range(0,1):
 #     for j in range(2):
 #         print cc[i][j]
 
-
+fairness.callmpc_fairness.call_mpc_fairness(4,0.1,0.1,0.1,0)
 

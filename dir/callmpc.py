@@ -3,6 +3,7 @@
 import dir.mpc
 import dir.update_dis as ud
 import dir.data_process as dp
+import pandas as pd
 
 def call_mpc(future, beta1, round):
     n, p = dp.obtain_regions()

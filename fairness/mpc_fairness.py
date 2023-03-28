@@ -2,18 +2,18 @@
 # -*- coding: UTF-8 -*-
 '''
 @Project ：newevaluation_dis 
-@File    ：mpc_dis.py
+@File    ：mpc_fairness.py
 @IDE     ：PyCharm 
 @Author  ：Zihan Ding
 @Date    ：3/26/23 4:18 PM
 @Description: This file is for our CDC paper Fairness-aware charging problem. \
 The file contains the optimization part of the mpc_iteration.
 '''
-import data_process as dp
+import dir.data_process as dp
 from gurobipy import *
 
 
-def mpc_iteration(starttimeslot,beta1,beta2, disruption,reachable,distance,vacant,occupied,alpha):
+def mpc_iteration_optimize_utility(starttimeslot,beta1,beta2, disruption,reachable,distance,vacant,occupied,alpha):
     n,p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
 

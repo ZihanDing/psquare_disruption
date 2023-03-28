@@ -11,9 +11,9 @@ This call_mpc_dis function calls the mpc_dis function, in this file we did the p
 '''
 
 import dir.data_process as dp
-import dir.update_fairness as uf
+import fairness.alpha_generator as uf
 import dir.update_dis as ud
-import dir.mpc_dis
+import fairness.mpc_fairness
 import math
 import random
 import dir.mpc
@@ -99,6 +99,8 @@ def call_mpc_dis(future, beta1, beta2, round):
             Vacant[i, l] for i in range(n) for l in range(L)), "number of Occupied Vehicles:", sum(
             Occupied[i, l] for i in range(n) for l in range(L))
 
+        updatestatus = [0] * num_of_v
+
         # obtain demand and supply in each time slot.
         demand = []
         cdemand = []
@@ -132,9 +134,10 @@ def call_mpc_dis(future, beta1, beta2, round):
                                   location, remainingchargingtime, remainingtriptime, destination, idledrivingtime,
                                   withoutwaitingtime, dispatchedtime)
 
-        S, C = dir.mpc_dis.mpc_iteration()
+        #Our method iteration.
+        S, C = fairness.mpc_fairness.mpc_iteration()
 
-        updatestatus = [0] * num_of_v
+
 
         # update disruption infomation 释放connecting vehicles
         if disruption[1] <= time <= disruption[2]:
@@ -383,3 +386,6 @@ def call_mpc_dis(future, beta1, beta2, round):
                     else:
                         cc = random.choice(mylist)
                         location[i] = cc
+
+
+        # update variable used for MPC iteration.
