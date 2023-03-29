@@ -15,7 +15,7 @@ predictionerror = 1.0
 
 def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption,dis):
     n=0 # number of regions
-    fopen =  open('./datadir/chargerindex','r')
+    fopen = open('./datadir/chargerindex','r')
     for k in fopen:
         n=n+1
 
@@ -355,6 +355,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
         obj2 = sum(sum(sum((sum((X[i,j,l,k]+Y[i,j,l,k]) for l in range(L))*W[i,j,k]) for i in range(n)) for j in range(n)) for k in range(K))
 
         m.setObjective(obj1 - beta*obj2 ,GRB.MAXIMIZE) # -0.001 is the negative weight between the two objectives. You can set up it as different values.
+        # m.setObjective(obj1, GRB.MAXIMIZE)
         # In our evaluation, we evaluate the performances under the different weights.
         m.setParam(GRB.Param.TimeLimit, 300)
         m.Params.BarHomogeneous = 1

@@ -113,19 +113,20 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         fopen.close()
 
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
+
         X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = False)
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
         S, C = {}, {}
         for i in range(n):
             for j in range(n):
                 for l in range(L):
-                    S[i,j,l] = X[i,j,l,0]
-                    C[i,j,l] = Y[i,j,l,0]
+                    C[i,j,l] = X[i,j,l,0]
+                    S[i,j,l] = Y[i,j,l,0]
         if if_dis_time:
             alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
             print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
 
-            S, C = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
+            C, S = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
             print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
 
         # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
