@@ -50,11 +50,11 @@ def get_middle_region(current, future, costtime):
     return gps_to_region([middlex, middley])
 
 
-def call_mpc_dis(future, beta1, beta2, round):
+def call_mpc_dis(beta1, beta2, round):
     n, p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
 
-    timehorizon = future
+    timehorizon = K
 
     energystatus, location, occupancystatus, num_of_v = dp.obtain_vehicles()
 
@@ -72,7 +72,7 @@ def call_mpc_dis(future, beta1, beta2, round):
     withoutwaitingtime = [0] * num_of_v  # idle driving
     dispatchedtime = [-1] * num_of_v  # dispatch去充电的开始时间戳
 
-    disruption = dp.obtain_disruption()
+    disruption = dp.obtain_disruption(1)
     print'disruption region: ' + str(disruption[0]), 'disruption start time:', disruption[1], 'disruption end time:', \
         disruption[2]
 

@@ -28,11 +28,7 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,dis
         n=n+1
 
 #--------------------------------------------------------------
-    L=15 # number of energy levels
-    K=timehorizon # number of time horizon
-    L1=1
-    L2=3
-
+    L, L1, L2, K = dp.exp_config()
 
     pv={}
 
@@ -114,7 +110,10 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,dis
     demand={}
     for i in range(n):
         for k in range(K):
-            demand[i,k] = inputdemand[i][k]
+            if inputdemand[i][k] == 0:
+                demand[i,k] = 1.0
+            else:
+                demand[i,k] = inputdemand[i][k]
 #---------------------------------------------------------------------------------------------------------
     #get the distance matric
     distance =[]
@@ -357,8 +356,8 @@ def mpc_iteration_optimize_utility(starttimeslot,timehorizon,vacant,occupied,dis
         for i in range(n):
             for k in range(K):
                 sdratio_diff[i, k] = m.addVar(lb=0.0, vtype=GRB.CONTINUOUS, name="sdratio_diff[%s,%s]" % (i, k))
-                m.addConstr(sdratio_diff[i, k] >= sum((S[i, l, k]) for l in range(L)) / demand[i, k] - alpha[i][k])
-                m.addConstr(sdratio_diff[i, k] >= - sum((S[i, l, k]) for l in range(L)) / demand[i, k] + alpha[i][k])
+                m.addConstr(sdratio_diff[i, k] >= sum((S[i, l, k]) for l in range(L)) / demand[i, k] - alpha[k][i])
+                m.addConstr(sdratio_diff[i, k] >= - sum((S[i, l, k]) for l in range(L)) / demand[i, k] + alpha[k][i])
 
 
 

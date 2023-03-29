@@ -15,10 +15,11 @@ import dir.update_dis as ud
 CHARGING_ENERGY = 3
 RIDING_ENERGY = 1
 TOTAL_ENERGY = 15
-DISRUPTION_REGION = [32, 6, 2, 1]
-DISRUPTION_START = 12 * 3
-DISRUPTION_END = 18 * 3
-
+# DISRUPTION_REGION = [32, 6, 2, 1]
+# DISRUPTION_START = 12 * 3
+# DISRUPTION_END = 18 * 3
+# DISRUPTION_START = 6 * 3
+# DISRUPTION_END = 13 * 3
 
 def exp_config():
     # experiment setup
@@ -31,7 +32,7 @@ def exp_config():
     L1 = RIDING_ENERGY
     L2 = CHARGING_ENERGY
     L = TOTAL_ENERGY
-    K = L / L2
+    K = 2
 
     return L, L1, L2, K
 
@@ -85,8 +86,7 @@ def obtain_reachable(n):
     reachable =[]
     fopen = open('./datadir/reachable','r')
     for k in fopen:
-        k=k.strip('\n')
-        k=k.split(',')
+        k=k.strip().split(',')
         one =[]
         for value in k:
             one.append(float(value))
@@ -218,11 +218,25 @@ def calculate_VO(n, L, num_of_v, occupancystatus, location, energystatus):
     return Vacant, Occupied
 
 
-def obtain_disruption():
+def obtain_disruption(slot):
     '''In summer, typically between noon and 6 p.m. when air conditioners are on full-throttle.
     In winter, typically between 6 a.m. and 9 a.m., and again between 5 p.m. and 9 p.m. — before and after work.'''
-    disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]
-    return disruption
+    if slot == 1:
+        DISRUPTION_START = 12 * 3
+        DISRUPTION_END = 18 * 3
+        DISRUPTION_REGION = [32, 6, 2, 1]
+
+        disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]
+        return disruption
+    elif slot == 2:
+        DISRUPTION_START = 16 * 3
+        DISRUPTION_END = 12 * 3
+        DISRUPTION_REGION = [32, 6, 2, 1]
+
+        disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]
+        return disruption
+    else:
+        return 0
 
 
 def initial_future_resource(n, L, timehorizon):

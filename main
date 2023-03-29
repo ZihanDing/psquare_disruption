@@ -70,5 +70,15 @@ import matplotlib.ticker as ticker
 #         print cc[i][j]
 beta1 = 0.1
 beta2 = 0.1
-fairness.callmpc_fairness.call_mpc_fairness(4,beta1,beta2,0)
+fairness.callmpc_fairness.call_mpc_fairness(1,beta1,beta2,0)
+fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,1)
 
+# beta1 = 0.01
+# beta2 = 0.01
+# fairness.callmpc_fairness.call_mpc_fairness(1,beta1,beta2,2)
+# fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,3)
+
+# beta1 = 0.001
+# beta2 = 0.001
+# fairness.callmpc_fairness.call_mpc_fairness(1,beta1,beta2,4)
+# fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,5)

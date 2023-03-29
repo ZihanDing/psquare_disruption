@@ -32,7 +32,7 @@ def call_mpc(future, beta1, round):
 
     futuresupply, chargingresource = dp.initial_future_resource(n, L, timehorizon)
 
-    disruption = dp.obtain_disruption()
+    disruption = dp.obtain_disruption(1)
     print'disruption region: ' + str(disruption[0]), 'disruption start time:', disruption[1], 'disruption end time:', disruption[2]
 
     passenger_served = []

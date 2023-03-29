@@ -25,7 +25,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
     pv={}
 
     for k in range(K):
-        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'pv','r')
+        fopen = open('./transition/slot20/'+str((k + starttimeslot) % 72)+'pv','r')
         data=[]
         for line in fopen:
             line = line.strip('\n')
@@ -38,7 +38,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
     po={}
 
     for k in range(K):
-        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'po','r')
+        fopen = open('./transition/slot20/'+str((k + starttimeslot) % 72)+'po','r')
         data=[]
         for line in fopen:
             line = line.strip('\n')
@@ -51,7 +51,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
     qv={}
 
     for k in range(K):
-        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'qv','r')
+        fopen = open('./transition/slot20/'+str((k + starttimeslot) % 72)+'qv','r')
         data=[]
         for line in fopen:
             line = line.strip('\n')
@@ -65,7 +65,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
 
 
     for k in range(K):
-        fopen = open('./transition/slot20/'+str(k+starttimeslot)+'qo','r')
+        fopen = open('./transition/slot20/'+str((k + starttimeslot) % 72)+'qo','r')
         data=[]
         for line in fopen:
             line = line.strip('\n')
@@ -86,7 +86,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
 
     for k in range(K):
 
-        fopen = open('./historydemand/slot20/prediction/'+str(k+starttimeslot),'r')
+        fopen = open('./historydemand/slot20/prediction/'+str((k + starttimeslot) % 72),'r')
         loc =0
         for line in fopen:
             line =line.strip('\n')
@@ -379,6 +379,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
                         out_charging[x1,x2,x3] = v.x
                 # if x4 == 0:
                 else:
+                    # if x4 == 0:
                     out_charging[x1, x2, x3, x4] = v.x
                 # print ('%s, %g' %(v.VarName,v.x))
         out1_serve = {}
@@ -398,6 +399,7 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
                     if x4 == 0:
                         out1_serve[x1, x2, x3] = v.x
                 else:
+                    # if x4 == 0:
                     out1_serve[x1, x2, x3, x4] = v.x
 
         return out_charging, out1_serve
