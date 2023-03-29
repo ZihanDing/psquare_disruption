@@ -32,7 +32,7 @@ def exp_config():
     L1 = RIDING_ENERGY
     L2 = CHARGING_ENERGY
     L = TOTAL_ENERGY
-    K = 2
+    K = 3
 
     return L, L1, L2, K
 

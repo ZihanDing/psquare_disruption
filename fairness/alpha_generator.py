@@ -53,7 +53,7 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
 
         demand = []
         cdemand = []
-        fopen = open('./historydemand/slot20/groundtruth/' + str(time+k), 'r')
+        fopen = open('./historydemand/slot20/groundtruth/' + str((time+k)%72), 'r')
         for line in fopen:
             line = line.strip().split(',')
             csum = 0
@@ -92,16 +92,9 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                     if sum(C[i, j, l] for l in range(L)) > 0 or sum(S[i, j, l] for l in range(L)) > 0:
                         print('Optimization Error! Not reachable regions dispatched')  # 校验一下
                     continue
-
                 for l in range(L):
-
-                    # update charging decision
-                    if l < 2 * L1:
-                        dispatch_vol = math.ceil(C[i, j, l])
-                    else:
-                        dispatch_vol = int(C[i, j, l])
                     # update serving decision
-                    dispatch_vol = int(S[i, j, l])
+                    dispatch_vol = S[i, j, l]
                     # update serving decision
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
@@ -109,7 +102,7 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                         if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and \
                                 vehicles['vehicle_status'][ind] != 2 and vehicles['update_status'][ind] == 0:
                             vehicles['location'][ind] = j
-                            vehicles['vehicle_status'][ind] = 1  # (send for Charging)
+                            vehicles['vehicle_status'][ind] = 1  # (send for serving)
                             vehicles['dispatched_serving_time'][ind] = time
                             vehicles['update_status'][ind] = 1
                             # vehicles['idle_driving_distance'][ind] += distance[i][j]
@@ -118,7 +111,13 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                     if dispatch_vol > 0:
                         print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
 
+        # 优先serve 后charge
+        for i in range(n):
+            for j in range(n):
+                for l in range(L):
+                    # update charging decision
 
+                    dispatch_vol = C[i, j, l]
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
                             break
@@ -138,6 +137,12 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                     if dispatch_vol > 0:
                         print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
 
+        # 再捡个漏：
+        for ind in range(num_of_v):
+            if vehicles['dispatched_charging_time'][ind] != time and vehicles['dispatched_serving_time'][ind] != time and vehicles['vehicle_status'][ind] != 2:
+                if vehicles['energy'][ind] > 2*L1:
+                    vehicles['vehicle_status'][ind] = 1 ## (serving)
+                    vehicles['dispatched_serving_time'][ind] = time
 
         p_num = p
         # if_dis_time = disruption[1] <= time <= disruption[2]
@@ -183,7 +188,7 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                             vehicles['location'][ind] = j
                         num_to_serve -= 1
                         vehicles['update_status'][ind] = 1
-                region_served  += cdemand[i][j] - num_to_serve
+                region_served += (cdemand[i][j] - num_to_serve)
             supply.append(region_served)
 
 

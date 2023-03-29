@@ -29,10 +29,17 @@ def call_mpc_fairness(slot,beta1,beta2,round):
 
     # 指定路径新建文件夹
     try:
+        os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/supply/round-' + str(round))
+    except:
+        print('directory already exist')
+    try:
         os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/vehicles_history/round-' + str(round))
     except:
         print('directory already exist')
-
+    try:
+        os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/demand/round-' + str(round))
+    except:
+        print('directory already exist')
     n, p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
 
@@ -45,6 +52,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
     reachable = dp.obtain_reachable(n)
 
     vehicles = pd.read_csv('/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/vehicles_initial.csv')
+    # vehicles = pd.read_csv('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/vehicles_history/round-0/71.csv')
     #这里只用 ： id	energy	location	vehicle_status
     # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
     # vehicle_status: (0:C), (1:S), (2:O)
@@ -107,16 +115,28 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
         X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = False)
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
-
-        alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
-
-        print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
+        S, C = {}, {}
+        for i in range(n):
+            for j in range(n):
+                for l in range(L):
+                    S[i,j,l] = X[i,j,l,0]
+                    C[i,j,l] = Y[i,j,l,0]
         if if_dis_time:
-            S,C = fairness.mpc_fairness.mpc_iteration_optimize_utility(time,timehorizon,vacant,occupied,disruption,beta2,alpha)
-        else:
-            S,C = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = True)
-        print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
+            alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
+            print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
+
+            S, C = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
+            print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
+
+        # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
+        # if if_dis_time:
+        #     S,C = fairness.mpc_fairness.mpc_iteration_optimize_utility(time,timehorizon,vacant,occupied,disruption,beta2,alpha)
+        # else:
+        #     S,C = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = True)
+        # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
+        #
         vehicles['update_status'] = [0] * num_of_v
+
         # 这里只用 ： id	energy	location	vehicle_status
         # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
         # vehicle_status: (0:C), (1:S), (2:O)
@@ -138,9 +158,8 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     continue
 
                 for l in range(L):
-
                     # update serving decision
-                    dispatch_vol = int(S[i, j, l])
+                    dispatch_vol = S[i, j, l]
                     # update serving decision
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
@@ -156,11 +175,11 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     if dispatch_vol > 0:
                         print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
 
+        for i in range(n):
+            for j in range(n):
+                for l in range(L):
                     # update charging decision
-                    if l < 2*L1:
-                        dispatch_vol = math.ceil(C[i, j, l])
-                    else:
-                        dispatch_vol = int(C[i, j, l])
+                    dispatch_vol = C[i, j, l]
 
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
@@ -181,8 +200,12 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     if dispatch_vol > 0:
                         print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
 
-
-
+        # 再捡个漏：
+        for ind in range(num_of_v):
+            if vehicles['dispatched_charging_time'][ind] != time and vehicles['dispatched_serving_time'][ind] != time and vehicles['vehicle_status'][ind] != 2:
+                if vehicles['energy'][ind] > 2*L1:
+                    vehicles['vehicle_status'][ind] = 1 ## (serving)
+                    vehicles['dispatched_serving_time'][ind] = time
         p_num = p
 
         if if_dis_time:
@@ -195,11 +218,13 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         #update serving info
         vehicles.sort_values(['energy', 'dispatched_serving_time'],ascending=True, inplace=True)  # 优先给低energy的充电，同等energy level 就给先dispachted过来的先充
         serve = []
+        supply = []
         for i in range(n):
             region_served = []
             for j in range(n):
                 num_to_serve = cdemand[i][j]
                 if num_to_serve <= 0:
+                    region_served.append(0.0)
                     continue
                 trip_distance = distance[i][j]
                 trip_time = (60*trip_distance/40)  # 60分钟 40km.h的速度
@@ -223,9 +248,16 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                         vehicles['update_status'][ind] = 1
                 region_served.append(cdemand[i][j] - num_to_serve)
             serve.append(region_served)
+            supply.append(sum(region_served))
+        fwrite3 = open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/supply/round-' + str(round) + '/' + str(time), 'w')
+        for i in range(len(serve)):
+            fwrite3.write(str(serve[i]) + '\n')
+        fwrite3.close()
 
-        total_serve.append(serve)  # 54*37*37
-        total_demand.append(cdemand)
+        fwrite1 = open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/demand/round-' + str(round) + '/' + str(time), 'w')
+        for i in range(len(cdemand)):
+            fwrite1.write(str(cdemand[i]) + '\n')
+        fwrite1.close()
 
         # update charging info:
         # 这里只用 ： id	energy	location	vehicle_status
@@ -276,14 +308,14 @@ def call_mpc_fairness(slot,beta1,beta2,round):
 
         print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
         print 'update completed? ',sum(vehicles['update_status'])
-        # print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
 
-    fwrite3 = open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/supplydemand/passenger-served'+'-'+str(round),'w')
-    for i in range(len(total_serve)):
-        for j in range(0,len(total_serve[i])):
-            fwrite3.write(str(total_serve[i][j])+'\n')
-        for j in range(0,len(total_demand[i])):
-            fwrite3.write(str(total_demand[i][j])+'\n')
-    fwrite3.close()
+        alpha_k = []
+        for i in range(n):
+            if demand[i] == 0 or demand[i] < supply[i]:
+                alpha_k.append(1.0)
+            else:
+                alpha_k.append(float(supply[i])/float(demand[i]))
+        print 'alpha_k', alpha_k
+        # print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
 
 

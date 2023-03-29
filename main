@@ -68,10 +68,7 @@ import matplotlib.ticker as ticker
 # for i in range(3):
 #     for j in range(2):
 #         print cc[i][j]
-beta1 = 0.1
-beta2 = 0.1
-fairness.callmpc_fairness.call_mpc_fairness(1,beta1,beta2,0)
-fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,1)
+
 
 # beta1 = 0.01
 # beta2 = 0.01
@@ -82,3 +79,19 @@ fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,1)
 # beta2 = 0.001
 # fairness.callmpc_fairness.call_mpc_fairness(1,beta1,beta2,4)
 # fairness.callmpc_fairness.call_mpc_fairness(2,beta1,beta2,5)
+
+beta1 = 0.1
+beta2 = 0.1
+# fairness.callmpc_fairness.call_mpc_fairness(1,0.1,0.1,0) # K = 1,beta1 = 0.1,beta2 = 0,2
+
+print 'Round 1 begin'
+fairness.callmpc_fairness.call_mpc_fairness(1, 0.1, 0.1,1) # K = 3
+
+print 'Round 2 begin'
+fairness.callmpc_fairness.call_mpc_fairness(2, 0.1, 0.1, 2) # K = 3
+
+print 'Round 3 begin'
+fairness.callmpc_fairness.call_mpc_fairness(1,0.01,0.01,3)# K=3
+
+print 'Round 4 begin'
+fairness.callmpc_fairness.call_mpc_fairness(2,0.01,0.01,3)# K=3
