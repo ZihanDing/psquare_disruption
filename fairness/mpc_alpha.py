@@ -15,7 +15,7 @@ predictionerror = 1.0
 
 def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption,dis):
     n=0 # number of regions
-    fopen =  open('./datadir/chargerindex20','r')
+    fopen =  open('./datadir/chargerindex','r')
     for k in fopen:
         n=n+1
 

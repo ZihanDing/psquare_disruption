@@ -215,7 +215,12 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                 vehicles['update_status'] = 1
             print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
 
-        alpha_k= [x1/x2 for x1 in supply for x2 in demand]
+        alpha_k = []
+        for i in range(n):
+            if demand[i] == 0:
+                alpha_k.append(1.0)
+            else:
+                alpha_k.append(float(supply[i])/float(demand[i]))
         alpha.append(alpha_k)
     return alpha
 

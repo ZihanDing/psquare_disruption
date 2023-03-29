@@ -62,7 +62,7 @@ def call_mpc_fairness(future, beta1,beta2,round):
 
     for time in range(18,72):
 
-        vehicles.to_csv('./resultdata/fairness_beta/vehicles_history/round-' + str(round)+'/'+str(time)+'.csv')
+        # vehicles.to_csv('./resultdata/fairness_beta/vehicles_history/round-' + str(round)+'/'+str(time)+'.csv')
 
         if disruption[1] <= time <= disruption[2]:
             print 'Current Time slot:', str(time), '(Disruption happened in Region ' + str(disruption[0]) + ')', '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`'
@@ -71,11 +71,15 @@ def call_mpc_fairness(future, beta1,beta2,round):
 
         vacant = {}
         occupied = {}
-        for i in range(num_of_v):
-            if vehicles['vehicle_status'][i] == 2: # occupied
-                occupied[vehicles['location'][i], vehicles['energy_status'][i]] += 1
+        for i in range(n):
+            for l in range(L):
+                vacant[i,l] = 0
+                occupied[i,l] = 0
+        for ind in range(num_of_v):
+            if vehicles['vehicle_status'][ind] == 2: # occupied
+                occupied[vehicles['location'][ind], vehicles['energy'][ind]] += 1
             else:
-                vacant[vehicles['location'][i], vehicles['energy_status'][i]] += 1
+                vacant[vehicles['location'][ind], vehicles['energy'][ind]] += 1
 
         print "number of Vacant Vehicles:", sum(
             vacant[i, l] for i in range(n) for l in range(L)), "number of Occupied Vehicles:", sum(occupied[i, l] for i in range(n) for l in range(L))
@@ -230,7 +234,7 @@ def call_mpc_fairness(future, beta1,beta2,round):
             if vehicles['update_status'][ind] == 0 and vehicles['vehicle_status'][ind] == 1:
                 not_serving += 1
                 vehicles['update_status'] = 1
-            print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
+        print 'wait for charge: ', wait_for_charing, " not_serving: ", not_serving
 
 
 
