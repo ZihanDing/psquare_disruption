@@ -32,7 +32,7 @@ def exp_config():
     L1 = RIDING_ENERGY
     L2 = CHARGING_ENERGY
     L = TOTAL_ENERGY
-    K = 3
+    K = 4
 
     return L, L1, L2, K
 
@@ -94,7 +94,7 @@ def obtain_reachable(n):
     c={}
     for i in range(n):
         for j in range(n):
-            c[i,j] = 1-reachable[i][j]
+            c[i,j] = reachable[i][j]
     return c
 def obtain_vehicles():
     """
@@ -225,12 +225,13 @@ def obtain_disruption(slot):
         DISRUPTION_START = 12 * 3
         DISRUPTION_END = 18 * 3
         DISRUPTION_REGION = [32, 6, 2, 1]
+        # DISRUPTION_REGION = []
 
         disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]
         return disruption
     elif slot == 2:
         DISRUPTION_START = 16 * 3
-        DISRUPTION_END = 12 * 3
+        DISRUPTION_END = 20 * 3
         DISRUPTION_REGION = [32, 6, 2, 1]
 
         disruption = [DISRUPTION_REGION, DISRUPTION_START, DISRUPTION_END]

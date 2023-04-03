@@ -69,26 +69,17 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
         for i in range(n):
             for j in range(n):
                 for l in range(L):
-                    S[i,j,l] = X[i,j,l,k]
-                    C[i,j,l] = Y[i,j,l,k]
+                    C[i,j,l] = X[i,j,l,k]
+                    S[i,j,l] = Y[i,j,l,k]
                     # transfer decision matrix
         # 接下来的update和之前一样 copy过来修改一下 不能有disruption
         vehicles['update_status'] = [0] * num_of_v
-        # 这里只用 ： id	energy	location	vehicle_status
-        # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
-        # vehicle_status: (0:C), (1:S), (2:O)
 
-        # if if_dis_time:  # 在disruption happen的时候
-        #     for i in range(num_of_v):
-        #         if vehicles['location'][i] in disruption[0] and vehicles[]:
-        #             vehicles['charging_status'] = 0  # 停止充电
-        #             vehicles['charging_station'][i] = -1  # 停止充电
-        #             vehicles['occupy_status'][i] = 0  # 可用
 
         # update decisions
         for i in range(n):
             for j in range(n):
-                if reachable[i, j]:  # reachable = 0: 可达，1 不可达 则不用dispatch了
+                if not  reachable[i, j]:  # reachable = 0: 可达，1 不可达 则不用dispatch了
                     if sum(C[i, j, l] for l in range(L)) > 0 or sum(S[i, j, l] for l in range(L)) > 0:
                         print('Optimization Error! Not reachable regions dispatched')  # 校验一下
                     continue
@@ -99,7 +90,7 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
                             break
-                        if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and \
+                        if vehicles['location'][ind] == i and vehicles['energy'][ind] >= l and \
                                 vehicles['vehicle_status'][ind] != 2 and vehicles['update_status'][ind] == 0:
                             vehicles['location'][ind] = j
                             vehicles['vehicle_status'][ind] = 1  # (send for serving)
@@ -108,8 +99,8 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                             # vehicles['idle_driving_distance'][ind] += distance[i][j]
                             # 这里只是先完成这个slot所有的dispatch decision 至于谁serve 后面再定
                             dispatch_vol -= 1
-                    if dispatch_vol > 0:
-                        print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
+                    # if dispatch_vol > 0:
+                        # print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
 
         # 优先serve 后charge
         for i in range(n):
@@ -134,8 +125,8 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                             # vehicles['remain_charging_time'][ind] = q # we don't have the q!!!
                             dispatch_vol -= 1
                             # vehicles['update_status'][ind] = 1
-                    if dispatch_vol > 0:
-                        print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
+                    # if dispatch_vol > 0:
+                        # print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
 
         # 再捡个漏：
         for ind in range(num_of_v):
@@ -192,23 +183,23 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
             supply.append(region_served)
 
 
-            vehicles.sort_values(['energy', 'dispatched_charging_time'], ascending=True,
-                                 inplace=True)  # 优先给低energy的充电，同等energy level 就给先dispachted过来的先充
-            for i in range(n):
-                num_of_charge = p_num[i]
-                for ind in range(num_of_v):
-                    if num_of_charge <= 0:
-                        break
-                    if vehicles['location'][ind] == i and vehicles['vehicle_status'][ind] == 0:  # sent for charging
-                        vehicles['energy'][ind] += L2
-                        if vehicles['energy'][ind] >= L:
-                            vehicles['energy'][ind] = L - 1
-                        vehicles['update_status'][ind] = 1  # 更新完毕
-                        num_of_charge -= 1
+        vehicles.sort_values(['energy', 'dispatched_charging_time'], ascending=True,
+                             inplace=True)  # 优先给低energy的充电，同等energy level 就给先dispachted过来的先充
+        for i in range(n):
+            num_of_charge = p_num[i]
+            for ind in range(num_of_v):
+                if num_of_charge <= 0:
+                    break
+                if vehicles['location'][ind] == i and vehicles['vehicle_status'][ind] == 0:  # sent for charging
+                    vehicles['energy'][ind] += L2
+                    if vehicles['energy'][ind] >= L:
+                        vehicles['energy'][ind] = L - 1
+                    vehicles['update_status'][ind] = 1  # 更新完毕
+                    num_of_charge -= 1
 
-                # 这里只用 ： id	energy	location	vehicle_status
-                # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
-                # vehicle_status: (0:C), (1:S), (2:O)
+            # 这里只用 ： id	energy	location	vehicle_status
+            # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
+            # vehicle_status: (0:C), (1:S), (2:O)
 
         vehicles.sort_values('id', ascending=True, inplace=True)
         wait_for_charing = 0
@@ -225,8 +216,9 @@ def generate_alpha(time,X,Y,vehicls,reachable,distance):
                 if vehicles['vehicle_status'][ind] == 2:
                     vehicles['energy'][ind] -= L1
                     if vehicles['energy'][ind] < 0:
-                        print('Error, low energy level')
-                        return
+                        print 'Error, low energy level',str(vehicles['id'][ind])
+                        vehicles['energy'][ind] = 0
+                        vehicles['vehicle_status'][ind] = 0
                     if vehicles['remain_trip_time'][ind] > 20:
                         vehicles['remain_trip_time'][ind] -= 20
                         vehicles['location'][ind] = dp.get_middle_region(vehicles['location'][ind],vehicles['destination'][ind], int(vehicles['remain_trip_time'][ind] / 20) + 2)

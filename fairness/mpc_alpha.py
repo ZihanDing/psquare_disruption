@@ -319,11 +319,11 @@ def mpc_iteration_optimize_utility(starttimeslot,vacant,occupied,beta,disruption
                     m.addConstr(sum(X[i,j,l,k] for j in range(n))==V[i,l,k])
                     m.addConstr(sum(Y[i,j,l,k] for j in range(n)) == 0)
 
-        for i in range(n): # ij之间的距离不能不reachable
-            for j in range(n):
-                for l in range(L):
-                    for k in range(K):
-                        m.addConstr((X[i,j,l,k]+Y[i,j,l,k])*c[i,j,k]==0)
+        # for i in range(n): # ij之间的距离不能不reachable
+        #     for j in range(n):
+        #         for l in range(L):
+        #             for k in range(K):
+        #                 m.addConstr((X[i,j,l,k]+Y[i,j,l,k])*c[i,j,k]==0)
 
         kk={}
         for i in range(n): #卡着upper bound serve，

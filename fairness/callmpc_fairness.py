@@ -15,6 +15,11 @@ import fairness.alpha_generator
 import fairness.mpc_fairness
 import math
 import os
+import json
+import numpy as np
+import copy
+
+pd.set_option('mode.chained_assignment', None)
 
 def call_mpc_fairness(slot,beta1,beta2,round):
     """
@@ -40,6 +45,14 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/demand/round-' + str(round))
     except:
         print('directory already exist')
+    try:
+        os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/C/round-' + str(round))
+    except:
+        print('directory already exist')
+    try:
+        os.makedirs('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/S/round-' + str(round))
+    except:
+        print('directory already exist')
     n, p = dp.obtain_regions()
     L, L1, L2, K = dp.exp_config()
 
@@ -52,7 +65,8 @@ def call_mpc_fairness(slot,beta1,beta2,round):
     reachable = dp.obtain_reachable(n)
 
     vehicles = pd.read_csv('/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/vehicles_initial.csv')
-    # vehicles = pd.read_csv('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/vehicles_history/round-0/71.csv')
+    vlim = np.array(vehicles['location'])
+    # vehicles = pd.read_csv('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/vehicles_history/round-0/54.csv')
     #这里只用 ： id	energy	location	vehicle_status
     # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
     # vehicle_status: (0:C), (1:S), (2:O)
@@ -114,6 +128,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
 
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
 
+        #using for without disruption
         X,Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time,vacant,occupied,beta1, disruption, dis = False)
         print '*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************'
         S, C = {}, {}
@@ -122,12 +137,26 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                 for l in range(L):
                     C[i,j,l] = X[i,j,l,0]
                     S[i,j,l] = Y[i,j,l,0]
-        if if_dis_time:
+
+        #using for pure rebalancing
+        # X, Y = fairness.mpc_alpha.mpc_iteration_optimize_utility(time, vacant, occupied, beta1, disruption, dis=True)
+        # S,C = Y,X
+
+        # using for fairness + disruption
+        if disruption[1] < time <= disruption[2]:
             alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
             print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
 
             C, S = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
             print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
+
+        with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/C/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
+            json_str = json.dumps({str(k): v for k, v in C.items()})
+            f.write(json_str)
+        with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/S/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
+            json_str = json.dumps({str(k): v for k, v in S.items()})
+            f.write(json_str)
+
 
         # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
         # if if_dis_time:
@@ -137,6 +166,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'
         #
         vehicles['update_status'] = [0] * num_of_v
+        vehicles['decision'] = [0] * num_of_v
 
         # 这里只用 ： id	energy	location	vehicle_status
         # remain_trip_time	destination	dispatched_charging_time	dispatched_serving_time	update_status
@@ -153,8 +183,8 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         # update decisions
         for i in range(n):
             for j in range(n):
-                if reachable[i,j]: # reachable = 0: 可达，1 不可达 则不用dispatch了
-                    if sum(C[i,j,l] for l in range(L)) > 0 or sum(S[i,j,l] for l in range(L)) > 0:
+                if not reachable[i,j]: # reachable = 0:
+                    if sum(S[i,j,l] for l in range(L)) > 0:
                         print('Optimization Error! Not reachable regions dispatched')  # 校验一下
                     continue
 
@@ -165,19 +195,23 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
                             break
-                        if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and vehicles['vehicle_status'][ind] != 2 and vehicles['update_status'][ind] == 0:
+                        if vehicles['location'][ind] == i and vehicles['energy'][ind] >= l and vehicles['vehicle_status'][ind] != 2 and vehicles['update_status'][ind] == 0:
                             vehicles['location'][ind] = j
                             vehicles['vehicle_status'][ind] = 1  # (send for Charging)
                             vehicles['dispatched_serving_time'][ind] = time
-                            vehicles['update_status'][ind] = 1
-                            # vehicles['idle_driving_distance'][ind] += distance[i][j]
+                            vehicles['decision'][ind] = 1
                             # 这里只是先完成这个slot所有的dispatch decision 至于谁serve 后面再定
                             dispatch_vol -= 1
-                    if dispatch_vol > 0:
-                        print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
+                    # if dispatch_vol > 0:
+                    #     print "Error, dispatch too much vehicles to serving, we don't have such vehicles in this region"
 
+        #update charging decision
         for i in range(n):
             for j in range(n):
+                if not reachable[i,j]: # reachable = 0:
+                    if sum(C[i,j,l] for l in range(L)) > 0:
+                        print('Optimization Error! Not reachable regions dispatched')  # 校验一下
+                    continue
                 for l in range(L):
                     # update charging decision
                     dispatch_vol = C[i, j, l]
@@ -185,9 +219,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     for ind in range(num_of_v):
                         if dispatch_vol <= 0:
                             break
-                        v = vehicles.iloc[ind]
-                        if v['location'] == i and v['energy'] == l and v['vehicle_status'] != 2 and v['update_status'] == 0:
-                            # vehicles['idle_driving_distance'][ind] += distance[i][j]
+                        if vehicles['location'][ind] == i and vehicles['energy'][ind] == l and vehicles['vehicle_status'][ind] != 2 and vehicles['decision'][ind] == 0:
                             # if if_dis_time and j in disruption[0]:
                             #     vehicles['location'][ind] = j
                             # else:
@@ -198,8 +230,8 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                             # vehicles['remain_charging_time'][ind] = q # we don't have the q!!!
                             dispatch_vol -= 1
                             # vehicles['update_status'][ind] = 1
-                    if dispatch_vol > 0:
-                        print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
+                    # if dispatch_vol > 0:
+                    #     print "Error, dispatch too much vehicles to charging, we don't have such vehicles in this region"
 
         # 再捡个漏：
         for ind in range(num_of_v):
@@ -207,7 +239,12 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                 if vehicles['energy'][ind] > 2*L1:
                     vehicles['vehicle_status'][ind] = 1 ## (serving)
                     vehicles['dispatched_serving_time'][ind] = time
-        p_num = p
+                    vehicles['decision']= 1
+        if time == 35:
+            print 35
+        if time == 36:
+            vehicles.to_csv('36-check.csv')
+        p_num = copy.deepcopy(p)
 
         if if_dis_time:
             for i in range(n):
@@ -233,8 +270,9 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                 for ind in range(num_of_v):
                     if num_to_serve <= 0:
                         break
-                    if vehicles['location'][ind] == i and vehicles['vehicle_status'][ind] == 1 and vehicles['energy'][ind] > energy_lb: # sent for serving
+                    if vehicles['location'][ind] == i and vehicles['vehicle_status'][ind] == 1 and vehicles['update_status'][ind] == 0 and vehicles['energy'][ind] > energy_lb: # sent for serving
                         vehicles['energy'][ind] -= L1
+                        vehicles['idle_driving_distance'][ind] += distance[vlim[ind]][i]
                         if vehicles['energy'][ind] < 0:
                             print('Error!! energy level doesn\'t support the trip ')
                         if trip_time > 20:
@@ -272,6 +310,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     break
                 if vehicles['location'][ind] == i and vehicles['vehicle_status'][ind] == 0 and vehicles['update_status'][ind] == 0: # sent for charging
                     vehicles['energy'][ind] += L2
+                    vehicles['idle_driving_distance'][ind] += distance[vlim[ind]][i]
                     if vehicles['energy'][ind] >= L:
                         vehicles['energy'][ind] = L-1
                     vehicles['update_status'][ind] = 1  # 更新完毕
@@ -290,7 +329,7 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                 vehicles['update_status'][ind] = 1
                 if vehicles['vehicle_status'][ind] == 0:
                     wait_for_charing += 1
-                    vehicles['update_status'][ind] = 1
+                    # vehicles['update_status'][ind] = 1
                 if vehicles['vehicle_status'][ind] == 1:
                     not_serving += 1
                     vehicles['update_status'][ind] = 1
@@ -298,12 +337,14 @@ def call_mpc_fairness(slot,beta1,beta2,round):
                     vehicles['energy'][ind] -= L1
                     if vehicles['energy'][ind] < 0:
                         print('Error, low energy level')
-                        return
-                    if vehicles['remain_trip_time'][ind] > 20:
+                        vehicles['energy'][ind] = 0
+                        vehicles['vehicle_status'][ind] = 0
+                        # return
+                    if vehicles['remain_trip_time'][ind] > 20: #送不完
                         vehicles['remain_trip_time'][ind] -= 20
                         vehicles['location'][ind] = dp.get_middle_region(vehicles['location'][ind],vehicles['destination'][ind], int(vehicles['remain_trip_time'][ind] / 20) + 2)
                     else:
-                        vehicles['vehicle_status'][ind] = 0
+                        vehicles['vehicle_status'][ind] = 0 # 送完了
                         vehicles['remain_trip_time'][ind] = 0
                         vehicles['location'][ind] = vehicles['destination'][ind]
 

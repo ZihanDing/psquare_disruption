@@ -1,0 +1,2611 @@
+/Users/zihanding/.conda/envs/newevaluation/bin/python /Users/zihanding/Developer/Psquare/newevaluation_dis/main 
+disruption region: [32, 6, 2, 1] disruption start time: 48 disruption end time: 36
+Current Time slot: 18 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 726 number of Occupied Vehicles: 0
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter Username
+Academic license - for non-commercial use only - expires 2023-10-20
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 414596 nonzeros
+Model fingerprint: 0x7863b448
+Coefficient statistics:
+  Matrix range     [8e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-02, 3e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7478 rows and 95919 columns
+Presolve time: 0.37s
+Presolved: 2586 rows, 35727 columns, 113847 nonzeros
+
+Ordering time: 0.02s
+
+Barrier statistics:
+ AA' NZ     : 1.064e+05
+ Factor NZ  : 4.504e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.705e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.72874158e+06  9.95292728e+02  3.65e+04 0.00e+00  2.09e+04     1s
+   1  -2.46336601e+06  7.94070681e+04  1.94e+04 2.29e+01  1.13e+04     1s
+   2  -1.69563429e+06  1.35533758e+05  1.35e+04 1.19e+01  7.86e+03     1s
+   3  -8.69124271e+05  1.65296096e+05  6.94e+03 5.93e+00  4.10e+03     1s
+   4  -1.47743680e+05  5.27672960e+04  1.32e+03 1.37e+00  3.52e+02     1s
+   5  -4.99490827e+04  2.21193534e+04  4.75e+02 4.83e-01  8.23e+01     1s
+   6  -1.68895071e+04  8.99374523e+03  1.66e+02 1.83e-01  2.03e+01     1s
+   7  -5.28151420e+03  2.85649760e+03  4.85e+01 6.25e-02  4.67e+00     1s
+   8  -3.14565409e+03  1.55614904e+03  2.72e+01 3.66e-02  2.44e+00     1s
+   9  -2.50751933e+03  1.21086382e+03  2.15e+01 3.07e-02  1.86e+00     1s
+  10  -1.81415199e+03  8.43217490e+02  1.55e+01 2.10e-02  1.26e+00     1s
+  11  -9.43323213e+02  5.61194784e+02  8.22e+00 1.36e-02  6.91e-01     1s
+  12  -4.85916946e+02  4.05998499e+02  4.71e+00 8.32e-03  4.01e-01     1s
+  13  -1.30349869e+02  3.29411220e+02  2.10e+00 4.92e-03  2.05e-01     1s
+  14   1.72300405e+01  2.91059041e+02  9.72e-01 2.78e-03  1.21e-01     1s
+
+Barrier performed 14 iterations in 0.95 seconds (0.40 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 7832 iterations and 0.95 seconds (0.69 work units)
+Optimal objective  2.601247291e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  104
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Current Time slot: 19 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 648 number of Occupied Vehicles: 78
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 417816 nonzeros
+Model fingerprint: 0x19b2f06b
+Coefficient statistics:
+  Matrix range     [8e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 3e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 6039 rows and 82459 columns
+Presolve time: 0.28s
+Presolved: 4025 rows, 49187 columns, 160462 nonzeros
+
+Ordering time: 0.14s
+
+Barrier statistics:
+ AA' NZ     : 1.605e+05
+ Factor NZ  : 6.602e+05 (roughly 27 MB of memory)
+ Factor Ops : 2.160e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.20289888e+06  1.41190851e+03  2.84e+04 0.00e+00  1.93e+04     1s
+   1  -2.50819403e+06  7.76475006e+04  1.74e+04 2.31e+01  1.18e+04     1s
+   2  -1.75365936e+06  1.25496095e+05  1.22e+04 1.29e+01  8.29e+03     1s
+   3  -6.53877303e+05  1.75815993e+05  4.54e+03 6.79e+00  3.28e+03     1s
+   4  -1.71711693e+05  3.56402522e+04  1.29e+03 8.90e-01  2.71e+02     1s
+   5  -5.01797236e+04  2.02470503e+04  4.01e+02 3.90e-01  6.32e+01     1s
+   6  -1.70252363e+04  7.42694692e+03  1.42e+02 1.42e-01  1.49e+01     1s
+   7  -5.67622719e+03  3.49723416e+03  4.60e+01 7.01e-02  4.28e+00     1s
+   8  -3.03666804e+03  1.90299833e+03  2.42e+01 3.79e-02  2.02e+00     1s
+   9  -2.40092565e+03  1.32425880e+03  1.91e+01 2.56e-02  1.42e+00     1s
+  10  -1.60797278e+03  1.25925886e+03  1.30e+01 2.53e-02  1.08e+00     1s
+  11  -1.13226843e+03  8.51553322e+02  9.67e+00 1.55e-02  7.00e-01     1s
+  12  -7.00565576e+02  7.05363460e+02  6.91e+00 1.05e-02  4.77e-01     1s
+  13  -2.64657277e+02  5.88498537e+02  4.19e+00 6.51e-03  2.79e-01     1s
+  14   8.41585646e+00  5.25296044e+02  2.53e+00 3.79e-03  1.65e-01     1s
+  15   1.97999758e+02  4.96273083e+02  1.41e+00 2.37e-03  9.38e-02     1s
+  16   2.73150188e+02  4.87972131e+02  9.36e-01 1.74e-03  6.72e-02     1s
+  17   3.22601197e+02  4.79394217e+02  6.46e-01 1.20e-03  4.86e-02     1s
+
+Barrier performed 17 iterations in 1.14 seconds (0.65 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 10180 iterations and 1.14 seconds (1.20 work units)
+Optimal objective  4.654220320e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  67
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Current Time slot: 20 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 602 number of Occupied Vehicles: 124
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 421246 nonzeros
+Model fingerprint: 0xe23635c9
+Coefficient statistics:
+  Matrix range     [8e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 4e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5534 rows and 79479 columns
+Presolve time: 0.28s
+Presolved: 4530 rows, 52167 columns, 170585 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.729e+05
+ Factor NZ  : 9.267e+05 (roughly 30 MB of memory)
+ Factor Ops : 5.126e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.68688180e+06  2.06440880e+03  2.59e+04 0.00e+00  1.38e+04     0s
+   1  -2.81350557e+06  8.71017058e+04  1.59e+04 1.93e+01  8.55e+03     0s
+   2  -1.41337463e+06  1.63969592e+05  7.95e+03 1.03e+01  4.40e+03     1s
+   3  -7.06198147e+05  2.44737627e+05  3.91e+03 4.48e+00  2.23e+03     1s
+   4  -6.99970289e+04  3.26222657e+04  4.17e+02 6.06e-01  5.66e+01     1s
+   5  -2.03414104e+04  1.39054775e+04  1.22e+02 2.26e-01  1.21e+01     1s
+   6  -9.73764267e+03  6.44681847e+03  5.80e+01 1.05e-01  4.35e+00     1s
+   7  -6.10276694e+03  4.75175388e+03  3.60e+01 7.67e-02  2.61e+00     1s
+   8  -4.94352753e+03  4.04932982e+03  2.90e+01 6.47e-02  2.05e+00     1s
+   9  -2.22144143e+03  2.69805486e+03  1.25e+01 4.45e-02  9.92e-01     1s
+  10  -1.40744686e+03  1.59281621e+03  7.86e+00 2.54e-02  5.50e-01     1s
+  11  -6.88108657e+02  1.27395157e+03  4.28e+00 1.88e-02  3.46e-01     1s
+  12  -5.17486229e+02  1.21364905e+03  3.53e+00 1.71e-02  3.02e-01     1s
+
+Barrier performed 12 iterations in 1.10 seconds (0.60 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 4854 iterations and 1.10 seconds (1.12 work units)
+Optimal objective  6.642143109e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  57
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.798597733710992, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Current Time slot: 21 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 594 number of Occupied Vehicles: 132
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 423374 nonzeros
+Model fingerprint: 0x93149406
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5409 rows and 76380 columns
+Presolve time: 0.14s
+Presolved: 4655 rows, 55266 columns, 180613 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.836e+05
+ Factor NZ  : 1.049e+06 (roughly 30 MB of memory)
+ Factor Ops : 6.437e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.53656038e+06  2.43354317e+03  5.59e+04 0.00e+00  9.80e+03     0s
+   1  -2.61823774e+06  8.81176728e+04  3.30e+04 1.65e+01  5.88e+03     0s
+   2  -1.23028024e+06  1.49506341e+05  1.55e+04 9.45e+00  2.88e+03     0s
+   3  -7.64347780e+05  2.11260869e+05  9.58e+03 4.51e+00  1.80e+03     0s
+   4  -7.20073916e+04  5.22022558e+04  1.01e+03 9.95e-01  7.69e+01     1s
+   5  -1.89462780e+04  1.67029743e+04  2.54e+02 3.36e-01  1.27e+01     1s
+   6  -7.70217331e+03  7.27489927e+03  9.61e+01 1.54e-01  3.99e+00     1s
+   7  -5.61714521e+03  4.21626505e+03  6.83e+01 9.15e-02  2.29e+00     1s
+
+Barrier performed 7 iterations in 0.70 seconds (0.47 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 4997 iterations and 0.70 seconds (0.92 work units)
+Optimal objective  8.596019553e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  61
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.3712903008224579, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+Current Time slot: 22 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 582 number of Occupied Vehicles: 144
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 424032 nonzeros
+Model fingerprint: 0x76ee3e53
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5323 rows and 74451 columns
+Presolve time: 0.16s
+Presolved: 4741 rows, 57195 columns, 184178 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.805e+05
+ Factor NZ  : 1.049e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.202e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -9.18638218e+06  4.08566102e+03  1.13e+05 0.00e+00  2.09e+04     0s
+   1  -5.09386418e+06  1.12874373e+05  6.38e+04 2.07e+01  1.20e+04     0s
+   2  -2.55430927e+06  2.26083657e+05  3.17e+04 1.06e+01  6.19e+03     0s
+   3  -1.69962213e+06  3.32451215e+05  2.09e+04 3.10e+00  4.05e+03     0s
+   4  -2.23205745e+05  6.47265285e+04  3.08e+03 4.32e-01  1.77e+02     1s
+   5  -6.47687135e+04  3.71759569e+04  9.52e+02 2.16e-01  4.22e+01     1s
+   6  -2.84023861e+04  2.50384856e+04  4.24e+02 1.45e-01  1.70e+01     1s
+   7  -1.31007917e+04  9.43509939e+03  1.92e+02 5.45e-02  5.42e+00     1s
+   8  -5.99097072e+03  5.23602604e+03  9.01e+01 3.03e-02  2.23e+00     1s
+   9  -2.47694084e+03  2.99048583e+03  4.09e+01 1.63e-02  9.30e-01     1s
+
+Barrier performed 9 iterations in 0.80 seconds (0.54 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 8924 iterations and 0.80 seconds (1.02 work units)
+Optimal objective  1.104633224e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  50
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5284702549569593, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9975618295828724]
+Current Time slot: 23 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 553 number of Occupied Vehicles: 173
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 424116 nonzeros
+Model fingerprint: 0xc7f73c58
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5353 rows and 73639 columns
+Presolve time: 0.14s
+Presolved: 4711 rows, 58007 columns, 186274 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.826e+05
+ Factor NZ  : 1.077e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.578e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -2.05106323e+07  6.13742371e+03  3.32e+05 0.00e+00  6.41e+04     0s
+   1  -1.18723205e+07  3.11957024e+05  1.95e+05 2.45e+01  3.84e+04     0s
+   2  -5.36579906e+06  5.35109396e+05  8.95e+04 1.23e+01  1.79e+04     0s
+   3  -3.18121944e+06  6.25544902e+05  5.28e+04 7.00e+00  1.07e+04     0s
+
+Barrier performed 3 iterations in 0.46 seconds (0.35 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 5644 iterations and 0.46 seconds (0.60 work units)
+Optimal objective  1.270202896e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  45
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.3167105869954854, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9727539457715398, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.756586402266445]
+Current Time slot: 24 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 547 number of Occupied Vehicles: 179
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 424690 nonzeros
+Model fingerprint: 0x7070bd71
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5316 rows and 73714 columns
+Presolve time: 0.16s
+Presolved: 4748 rows, 57932 columns, 185660 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.781e+05
+ Factor NZ  : 1.059e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.341e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.81765170e+06  4.62795052e+03  1.04e+05 0.00e+00  1.84e+04     0s
+   1  -4.63301237e+06  1.19500579e+05  5.61e+04 1.95e+01  1.01e+04     0s
+   2  -2.15021718e+06  2.15043042e+05  2.60e+04 1.09e+01  4.96e+03     0s
+   3  -1.57766487e+06  3.02644183e+05  1.90e+04 3.55e+00  3.55e+03     0s
+   4  -1.75082700e+05  8.56864285e+04  2.36e+03 6.81e-01  1.75e+02     1s
+
+Barrier performed 4 iterations in 0.58 seconds (0.39 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 6831 iterations and 0.58 seconds (0.69 work units)
+Optimal objective  1.328061307e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  41
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.31077195467462543, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9458276881392186, 0.956221398997156, 1.0, 1.0, 0.828725212464981, 1.0, 0.7572108540288562, 1.0, 0.8934693696883333, 0.7062998969867276]
+Current Time slot: 25 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 541 number of Occupied Vehicles: 185
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427966 nonzeros
+Model fingerprint: 0x71cdc322
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5311 rows and 72801 columns
+Presolve time: 0.14s
+Presolved: 4753 rows, 58845 columns, 189118 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.826e+05
+ Factor NZ  : 1.096e+06 (roughly 35 MB of memory)
+ Factor Ops : 6.992e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.72651329e+06  5.83214960e+03  9.52e+04 0.00e+00  2.26e+04     0s
+   1  -4.87781486e+06  1.48524566e+05  5.40e+04 2.48e+01  1.30e+04     0s
+   2  -2.51062251e+06  2.52236327e+05  2.78e+04 1.28e+01  6.83e+03     0s
+   3  -1.87942066e+06  3.28688886e+05  2.07e+04 5.11e+00  5.03e+03     0s
+   4  -1.75282653e+05  9.31049162e+04  2.15e+03 9.71e-01  1.96e+02     1s
+
+Barrier performed 4 iterations in 0.51 seconds (0.39 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 6480 iterations and 0.51 seconds (0.65 work units)
+Optimal objective  1.357887627e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  0  not_serving:  33
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8518919465811507, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8881426677123976, 1.0, 0.662582625118516, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9938739376775858, 1.0, 1.0, 0.8518919465812717, 1.0, 0.7197018169382718, 0.6625826251184845, 1.0, 0.4538951841360848, 1.0, 0.539050271282582, 0.7402647259937274]
+Current Time slot: 26 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 532 number of Occupied Vehicles: 194
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427616 nonzeros
+Model fingerprint: 0x01d912da
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5368 rows and 74517 columns
+Presolve time: 0.13s
+Presolved: 4696 rows, 57129 columns, 184337 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.834e+05
+ Factor NZ  : 1.073e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.697e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.40192171e+07  4.89863604e+03  1.67e+05 0.00e+00  2.98e+04     0s
+   1  -8.33585254e+06  1.42732441e+05  1.01e+05 1.77e+01  1.83e+04     0s
+   2  -3.76700440e+06  2.36960613e+05  4.58e+04 9.76e+00  8.63e+03     0s
+   3  -2.59956918e+06  3.28845444e+05  3.15e+04 2.90e+00  5.84e+03     0s
+
+Barrier performed 3 iterations in 0.45 seconds (0.36 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 6602 iterations and 0.45 seconds (0.64 work units)
+Optimal objective  1.444321787e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  2  not_serving:  24
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8176291130969909, 0.44566786038780754, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.3280610638967683, 1.0, 0.9575836459687375, 0.5905099150125751, 1.0, 0.8748295037243808, 0.4601375961149547, 1.0, 0.34097685381369675, 1.0, 0.26051908015323566, 1.0]
+Current Time slot: 27 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 552 number of Occupied Vehicles: 174
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 426790 nonzeros
+Model fingerprint: 0x7b669363
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5417 rows and 73977 columns
+Presolve time: 0.15s
+Presolved: 4647 rows, 57669 columns, 185454 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.782e+05
+ Factor NZ  : 1.059e+06 (roughly 34 MB of memory)
+ Factor Ops : 6.310e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.60580422e+07  5.75313795e+03  2.90e+05 1.78e+01  5.63e+04     0s
+   1  -7.84548717e+06  1.21940062e+05  1.46e+05 3.02e+01  2.92e+04     0s
+   2  -3.41470342e+06  2.39091281e+05  6.47e+04 1.24e+01  1.31e+04     0s
+   3  -1.50957601e+06  3.21515910e+05  2.85e+04 3.15e+00  5.93e+03     0s
+   4  -1.37114382e+05  4.00436665e+04  3.02e+03 3.44e-01  1.57e+02     1s
+
+Barrier performed 4 iterations in 0.50 seconds (0.41 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 7440 iterations and 0.50 seconds (0.69 work units)
+Optimal objective  1.407775069e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  2  not_serving:  43
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9927762039659068, 1.0, 1.0, 1.0, 0.9691386753000283, 0.8509510319713289, 1.0, 1.0, 1.0, 0.5811372901264528, 1.0, 1.0, 1.0, 1.0, 0.5584366147305205, 1.0, 1.0, 0.8509510319695702, 0.6733612513854634, 0.5069495509617608, 0.6414861625627258, 0.7331270429287173, 0.21726409326926696, 1.0, 0.035246492448528746, 0.9797133591775324]
+Current Time slot: 28 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 550 number of Occupied Vehicles: 176
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429226 nonzeros
+Model fingerprint: 0xaf739343
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5573 rows and 76400 columns
+Presolve time: 0.15s
+Presolved: 4491 rows, 55246 columns, 177592 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.693e+05
+ Factor NZ  : 1.036e+06 (roughly 30 MB of memory)
+ Factor Ops : 6.476e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -2.02212131e+07  7.53886108e+03  1.32e+05 1.52e+01  5.40e+04     0s
+   1  -1.44760314e+07  1.35173048e+05  9.60e+04 2.84e+01  3.91e+04     0s
+   2  -9.39405712e+06  2.38472753e+05  6.25e+04 1.58e+01  2.55e+04     0s
+
+Barrier performed 2 iterations in 0.39 seconds (0.34 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 8411 iterations and 0.39 seconds (0.53 work units)
+Optimal objective  1.342593218e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  1  not_serving:  39
+update completed?  726
+alpha_k [1.0, 0.9295523839255078, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8012211928637494, 1.0, 1.0, 1.0, 0.49785805419240153, 0.9044293465209797, 1.0, 1.0, 0.0, 0.1602442385726086, 1.0, 1.0, 0.5082031566168714, 1.0, 1.0, 0.8893555240792691, 0.3204884771455253, 0.24704320113330602, 0.7217957876580646, 0.4160727598029651, 0.32487873025735314, 0.9666907870425304, 0.2405985958860008, 1.0, 0.1520265853126188, 1.0]
+Current Time slot: 29 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 574 number of Occupied Vehicles: 152
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429002 nonzeros
+Model fingerprint: 0xbe900350
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5586 rows and 77156 columns
+Presolve time: 0.13s
+Presolved: 4478 rows, 54490 columns, 175827 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.693e+05
+ Factor NZ  : 9.822e+05 (roughly 30 MB of memory)
+ Factor Ops : 5.743e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.03250093e+07  5.20401128e+03  1.29e+05 0.00e+00  2.19e+04     0s
+   1  -6.00760882e+06  8.61383540e+04  7.65e+04 2.15e+01  1.33e+04     0s
+   2  -3.07667056e+06  1.75260858e+05  3.94e+04 1.20e+01  7.02e+03     0s
+
+Barrier performed 2 iterations in 0.36 seconds (0.31 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 6623 iterations and 0.36 seconds (0.50 work units)
+Optimal objective  1.294831126e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  2  not_serving:  46
+update completed?  726
+alpha_k [1.0, 0.9720073155117918, 1.0, 1.0, 0.8881507203991567, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7273797974304942, 1.0, 1.0, 1.0, 0.6417389791753078, 0.8564310518140159, 1.0, 1.0, 0.0, 0.5488240332034373, 1.0, 1.0, 0.4783668938056455, 1.0, 0.38063602302808935, 0.655539817437674, 1.0, 0.3687411473081326, 0.794211701895453, 0.22263616441274395, 0.07866477809251571, 0.7866477809250798, 0.13333013236010413, 1.0, 0.11096912270114619, 0.8064554588620964]
+Current Time slot: 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 580 number of Occupied Vehicles: 146
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428806 nonzeros
+Model fingerprint: 0x92932340
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5775 rows and 79697 columns
+Presolve time: 0.19s
+Presolved: 4289 rows, 51949 columns, 167151 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.607e+05
+ Factor NZ  : 9.370e+05 (roughly 30 MB of memory)
+ Factor Ops : 5.417e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.61816817e+07  5.65929504e+03  2.11e+05 0.00e+00  3.59e+04     0s
+   1  -1.01336610e+07  1.43730707e+05  1.34e+05 2.08e+01  2.34e+04     0s
+   2  -6.00013563e+06  2.57351196e+05  8.01e+04 1.02e+01  1.39e+04     0s
+   3  -3.70046204e+06  3.24690980e+05  4.95e+04 4.58e+00  8.64e+03     0s
+
+Barrier performed 3 iterations in 0.47 seconds (0.35 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 7542 iterations and 0.47 seconds (0.51 work units)
+Optimal objective  1.180589089e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  3  not_serving:  53
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 0.6991684492498614, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8841611707657234, 1.0, 1.0, 1.0, 1.0, 0.625422487056999, 1.0, 1.0, 0.34547146904058507, 1.0, 0.6717500786905551, 0.7705368549683801, 0.9446485481580181, 0.3022875354104858, 0.3749302764783732, 0.5257174528879534, 0.0, 0.663984181827176, 0.11025685182147871, 1.0, 0.10719416149328555, 0.5257174528885061]
+Current Time slot: 31 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 565 number of Occupied Vehicles: 161
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429226 nonzeros
+Model fingerprint: 0xf1aeaadb
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 5919 rows and 81143 columns
+Presolve time: 0.14s
+Presolved: 4145 rows, 50503 columns, 163796 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.601e+05
+ Factor NZ  : 9.367e+05 (roughly 30 MB of memory)
+ Factor Ops : 5.665e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.90186656e+06  4.32713162e+03  8.20e+04 2.41e+01  4.01e+04     0s
+   1  -6.30320414e+06  9.50333562e+04  5.88e+04 3.45e+01  2.89e+04     0s
+   2  -3.42101396e+06  1.62930893e+05  3.17e+04 1.94e+01  1.61e+04     0s
+
+Barrier performed 2 iterations in 0.36 seconds (0.33 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 6713 iterations and 0.37 seconds (0.49 work units)
+Optimal objective  1.073266238e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  63
+update completed?  726
+alpha_k [1.0, 1.0, 0.9307877765052156, 1.0, 0.48583269101770693, 1.0, 0.31247875354090576, 1.0, 1.0, 1.0, 1.0, 0.9764961048159788, 1.0, 1.0, 1.0, 0.506722303039445, 0.6793016381332528, 0.8720337308122229, 1.0, 0.0, 0.5681431882563106, 0.8522147823843852, 1.0, 0.3048573205276525, 1.0, 0.6249575070820069, 0.8063967833315376, 0.21550258864896088, 0.0, 0.5681431882560954, 1.0, 0.0, 0.5504807057198391, 0.07836457769057577, 1.0, 0.15059217038123232, 0.48073654390920123]
+Current Time slot: 32 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 589 number of Occupied Vehicles: 137
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429198 nonzeros
+Model fingerprint: 0x207aa1bc
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 6198 rows and 82205 columns
+Presolve time: 0.15s
+Presolved: 3866 rows, 49441 columns, 159829 nonzeros
+
+Ordering time: 0.03s
+
+Barrier statistics:
+ AA' NZ     : 1.533e+05
+ Factor NZ  : 9.015e+05 (roughly 30 MB of memory)
+ Factor Ops : 5.326e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.63023047e+06  5.72227661e+03  5.85e+04 1.35e+01  1.95e+04     0s
+   1  -4.53278582e+06  1.13140354e+05  4.08e+04 2.48e+01  1.35e+04     0s
+   2  -2.10531569e+06  1.99511364e+05  1.91e+04 1.39e+01  6.54e+03     0s
+   3  -1.23219474e+06  2.92827611e+05  1.12e+04 5.19e+00  3.83e+03     0s
+   4  -1.00655609e+05  6.89303167e+04  1.05e+03 9.66e-01  1.30e+02     0s
+
+Barrier performed 4 iterations in 0.48 seconds (0.37 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 3673 iterations and 0.48 seconds (0.61 work units)
+Optimal objective  9.544179439e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  70
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5287101809558531, 1.0, 1.0, 1.0, 0.5501443774807799, 0.8268127297936011, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6476699716708687, 1.0, 0.7619646725543405, 0.0, 0.6952389526416002, 0.06267773919404278, 1.0, 0.0, 0.4939855716138408]
+Current Time slot: 33 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 615 number of Occupied Vehicles: 111
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 435330 nonzeros
+Model fingerprint: 0x5d89c17c
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-02, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 6516 rows and 85437 columns
+Presolve time: 0.13s
+Presolved: 3548 rows, 46209 columns, 151726 nonzeros
+
+Ordering time: 0.09s
+
+Barrier statistics:
+ AA' NZ     : 1.479e+05
+ Factor NZ  : 5.985e+05 (roughly 25 MB of memory)
+ Factor Ops : 1.772e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.15629161e+07  4.50727940e+03  2.25e+05 2.35e+01  6.91e+04     0s
+   1  -6.99846790e+06  1.70795042e+05  1.37e+05 2.95e+01  4.29e+04     0s
+   2  -3.03732341e+06  3.48980792e+05  6.02e+04 1.24e+01  1.93e+04     0s
+   3  -9.32257902e+05  4.03063045e+05  1.83e+04 4.29e+00  6.19e+03     0s
+   4  -1.58531206e+05  9.71494546e+04  3.30e+03 9.26e-01  5.07e+02     0s
+
+Barrier performed 4 iterations in 0.46 seconds (0.38 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 7844 iterations and 0.47 seconds (0.63 work units)
+Optimal objective  8.364692103e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  14  not_serving:  76
+update completed?  726
+alpha_k [1.0, 1.0, 0.9850267927239829, 1.0, 1.0, 0.6593324499694293, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6659422990909136, 0.630842776204304, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.9733002832869254, 0.3785056657223914, 1.0, 0.3096864537729722, 0.9733002832889385, 1.0, 1.0, 0.09874060844936984, 0.890348554597157, 0.12432667852214535, 1.0, 0.07953037334243195, 0.6193729075455224]
+Current Time slot: 34 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 611 number of Occupied Vehicles: 115
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 432026 nonzeros
+Model fingerprint: 0x2acf1acf
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-02, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 6590 rows and 85667 columns
+Presolve time: 0.13s
+Presolved: 3474 rows, 45979 columns, 149246 nonzeros
+
+Ordering time: 0.09s
+
+Barrier statistics:
+ AA' NZ     : 1.457e+05
+ Factor NZ  : 5.795e+05 (roughly 25 MB of memory)
+ Factor Ops : 1.726e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.08616216e+06  2.59912043e+03  9.86e+04 2.05e+01  3.10e+04     0s
+   1  -3.41304093e+06  6.06431161e+04  5.57e+04 3.05e+01  1.80e+04     0s
+   2  -1.70257488e+06  1.23600930e+05  2.78e+04 1.52e+01  9.19e+03     0s
+   3  -7.63961261e+05  1.99565661e+05  1.25e+04 6.03e+00  4.34e+03     0s
+
+Barrier performed 3 iterations in 0.42 seconds (0.36 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 3177 iterations and 0.42 seconds (0.57 work units)
+Optimal objective  8.061376903e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  10  not_serving:  73
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.679324279287224, 0.9668522300542115, 0.7699008498580521, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9448783157341215, 0.21320331226850991, 1.0, 0.1135919286675304, 1.0, 0.056564144071289506, 0.42860459682814633]
+Current Time slot: 35 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 615 number of Occupied Vehicles: 111
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 419692 nonzeros
+Model fingerprint: 0x44603b7d
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-02, 4e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 6917 rows and 88771 columns
+Presolve time: 0.12s
+Presolved: 3147 rows, 42875 columns, 133296 nonzeros
+
+Ordering time: 0.08s
+
+Barrier statistics:
+ AA' NZ     : 1.204e+05
+ Factor NZ  : 4.972e+05 (roughly 23 MB of memory)
+ Factor Ops : 1.379e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.76834376e+06  3.28936676e+03  1.59e+05 6.54e+00  2.42e+04     0s
+   1  -3.67730629e+06  1.45168302e+05  8.72e+04 1.68e+01  1.36e+04     0s
+   2  -1.76227185e+06  2.66910625e+05  4.20e+04 8.09e+00  6.67e+03     0s
+   3  -1.09600561e+06  3.04486975e+05  2.61e+04 4.14e+00  4.16e+03     0s
+
+Barrier performed 3 iterations in 0.37 seconds (0.29 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2673 iterations and 0.37 seconds (0.51 work units)
+Optimal objective  7.740049375e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+35
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  82
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9016364293893135, 1.0, 0.40747030943574236, 1.0, 1.0, 0.0, 1.0, 0.5885682247409343, 1.0, 1.0, 1.0, 1.0, 0.8692699934627046, 1.0, 1.0, 1.0, 0.7606112442798664, 0.16816234992566073, 1.0, 0.2682083049448469, 0.908666732931608, 0.1701884023343643, 1.0]
+Current Time slot: 36 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 618 number of Occupied Vehicles: 108
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 421974 nonzeros
+Model fingerprint: 0xdd555b14
+Coefficient statistics:
+  Matrix range     [8e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 4e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7055 rows and 92021 columns
+Presolve time: 0.11s
+Presolved: 3009 rows, 39625 columns, 123891 nonzeros
+
+Ordering time: 0.07s
+
+Barrier statistics:
+ AA' NZ     : 1.120e+05
+ Factor NZ  : 4.682e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.298e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.69703917e+06  3.33659887e+03  1.30e+05 0.00e+00  3.64e+04     0s
+   1  -4.08272058e+06  1.21734199e+05  8.00e+04 2.10e+01  2.25e+04     0s
+
+Barrier performed 1 iterations in 0.29 seconds (0.25 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2313 iterations and 0.29 seconds (0.39 work units)
+Optimal objective  7.586743079e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  83
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 0.8978487960350058, 0.7560831966605842, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5011249094146437, 0.8706412567614608, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8327872890754625, 0.2660292728990907, 0.8182925736002757, 0.28017976613814316, 1.0, 0.05300952301304165, 0.9754406672961469]
+Current Time slot: 37 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 616 number of Occupied Vehicles: 110
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427406 nonzeros
+Model fingerprint: 0x36d23bd5
+Coefficient statistics:
+  Matrix range     [8e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7318 rows and 94956 columns
+Presolve time: 0.12s
+Presolved: 2746 rows, 36690 columns, 115003 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 1.056e+05
+ Factor NZ  : 4.137e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.081e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.26 seconds (0.24 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2088 iterations and 0.26 seconds (0.36 work units)
+Optimal objective  8.052139463e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  93
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5128798609325371, 1.0, 1.0, 0.0, 0.8679505338845193, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8515741087175841, 0.32009523235494103, 1.0, 0.5014825306898333, 1.0, 0.12913713236634505, 0.778162547621473]
+Current Time slot: 38 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 609 number of Occupied Vehicles: 117
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428596 nonzeros
+Model fingerprint: 0x3f2641c9
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 5e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7354 rows and 95219 columns
+Presolve time: 0.13s
+Presolved: 2710 rows, 36427 columns, 114575 nonzeros
+
+Ordering time: 0.07s
+
+Barrier statistics:
+ AA' NZ     : 1.053e+05
+ Factor NZ  : 4.093e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.031e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.28 seconds (0.23 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2324 iterations and 0.28 seconds (0.33 work units)
+Optimal objective  9.685461968e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  5  not_serving:  91
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.45782470598285396, 0.8166602863492133, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.839345294303009, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.976381260719247, 0.2297827421668149, 1.0, 0.20260058828018712, 1.0]
+Current Time slot: 39 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 609 number of Occupied Vehicles: 117
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 430738 nonzeros
+Model fingerprint: 0xc51ca55f
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7323 rows and 95198 columns
+Presolve time: 0.20s
+Presolved: 2741 rows, 36448 columns, 114969 nonzeros
+
+Ordering time: 0.08s
+
+Barrier statistics:
+ AA' NZ     : 1.059e+05
+ Factor NZ  : 4.148e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.093e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.71331138e+06  5.02968999e+03  5.12e+04 0.00e+00  2.14e+04     0s
+   1  -4.35762789e+06  5.36899255e+04  3.39e+04 3.05e+01  1.42e+04     0s
+
+Barrier performed 1 iterations in 0.41 seconds (0.23 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2121 iterations and 0.43 seconds (0.33 work units)
+Optimal objective  1.056352076e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  8  not_serving:  88
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.93930100797159, 0.7316527811176695, 0.38650663485925335, 1.0, 1.0, 1.0, 1.0, 0.9578642689983836, 1.0, 1.0, 1.0, 1.0, 0.8159584513696427, 1.0, 1.0, 1.0, 0.8392715499797735, 0.4687420890840001, 0.8550797469826427, 0.31813542508284726, 0.5245447187376335, 0.07896372110027315, 0.18132410030417714]
+Current Time slot: 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 601 number of Occupied Vehicles: 125
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 433706 nonzeros
+Model fingerprint: 0x74a1876a
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7612 rows and 98713 columns
+Presolve time: 0.11s
+Presolved: 2452 rows, 32933 columns, 103194 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.344e+04
+ Factor NZ  : 3.816e+05 (roughly 17 MB of memory)
+ Factor Ops : 1.064e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.23 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1925 iterations and 0.23 seconds (0.31 work units)
+Optimal objective  1.199495185e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  15  not_serving:  93
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 0.8677683349057365, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7390962083240923, 0.3038182042124281, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7228777962277565, 0.6576770538242295, 1.0, 0.0, 1.0, 0.652196411708956, 0.174695467422113, 0.6987818696882437, 0.0674066112239545, 0.4875222346670252, 0.14069433617875346, 0.23036764934765774]
+Current Time slot: 41 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 615 number of Occupied Vehicles: 111
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 430346 nonzeros
+Model fingerprint: 0xbbeecdc9
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+00, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7661 rows and 99307 columns
+Presolve time: 0.11s
+Presolved: 2403 rows, 32339 columns, 100596 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 8.949e+04
+ Factor NZ  : 4.450e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.576e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.39271566e+06  7.53559181e+03  3.89e+04 2.65e+01  2.45e+04     0s
+
+Barrier performed 0 iterations in 0.20 seconds (0.17 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1948 iterations and 0.20 seconds (0.26 work units)
+Optimal objective  1.286930939e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  19  not_serving:  98
+update completed?  726
+alpha_k [1.0, 1.0, 0.9712579801296519, 1.0, 0.7840837206747445, 0.9822237960348191, 1.0, 0.9354512343181536, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9700975763300796, 0.7790413816347678, 0.20787805207058724, 1.0, 1.0, 0.0, 1.0, 1.0, 0.8929307236668346, 0.9031942952048341, 0.6091310362998118, 0.45159714760180525, 0.8970080329077923, 0.9354512343172782, 1.0, 0.6731751873128591, 1.0, 0.2425243940825199, 0.5658902528593273, 0.05487283776731279, 0.1954674220962921, 0.020335896398224647, 0.0]
+Current Time slot: 42 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 625 number of Occupied Vehicles: 101
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428120 nonzeros
+Model fingerprint: 0x932ca8e1
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7636 rows and 99342 columns
+Presolve time: 0.14s
+Presolved: 2428 rows, 32304 columns, 100346 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 8.889e+04
+ Factor NZ  : 3.473e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.543e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.24 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1821 iterations and 0.24 seconds (0.28 work units)
+Optimal objective  1.179947360e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  14  not_serving:  105
+update completed?  726
+alpha_k [1.0, 0.9921558598259425, 0.8433375187114002, 1.0, 0.6389554732336165, 0.9734087287535809, 0.9344723796041291, 1.0, 1.0, 0.5051202051912895, 1.0, 1.0, 0.4037843615569625, 1.0, 1.0, 0.5576069754827705, 0.32788504547497904, 0.5562335592877142, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.7691130696326198, 0.9836551364250447, 0.59331579657398, 1.0, 0.6922017626696775, 0.5617047090512091, 0.9998469905217909, 0.3737889518414189, 0.42401888079797706, 0.016837340173022713, 0.19267471744401674, 0.04195162197995933, 0.056634689672945465]
+Current Time slot: 43 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 641 number of Occupied Vehicles: 85
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431382 nonzeros
+Model fingerprint: 0x108649cb
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7629 rows and 99882 columns
+Presolve time: 0.10s
+Presolved: 2435 rows, 31764 columns, 99554 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 8.985e+04
+ Factor NZ  : 4.625e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.707e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.66226617e+06  5.31329827e+03  7.59e+04 0.00e+00  1.81e+04     0s
+
+Barrier performed 0 iterations in 0.19 seconds (0.17 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1852 iterations and 0.19 seconds (0.26 work units)
+Optimal objective  1.155159640e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  11  not_serving:  104
+update completed?  726
+alpha_k [1.0, 0.8522952943569861, 1.0, 1.0, 0.7996292750091986, 1.0, 1.0, 0.9136189801707411, 1.0, 0.9184529430282898, 1.0, 0.599094413226604, 1.0, 1.0, 0.8957048825196982, 0.5256934608119845, 0.33222508369835324, 0.8701133144487073, 0.7613491501419365, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8913355904104748, 0.553708472830742, 0.7007107222547347, 0.4511698667509426, 0.0, 0.6411361264357587, 1.0, 0.375974888959034, 0.4859675426433196, 0.0, 0.3752621403543081, 0.02003550395110172, 0.22769320378074392]
+Current Time slot: 44 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 640 number of Occupied Vehicles: 86
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431914 nonzeros
+Model fingerprint: 0x59240846
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7648 rows and 99917 columns
+Presolve time: 0.11s
+Presolved: 2416 rows, 31729 columns, 99540 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.074e+04
+ Factor NZ  : 4.590e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.676e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -5.32438885e+06  5.94341013e+03  7.49e+04 0.00e+00  2.59e+04     0s
+   1  -2.86755934e+06  1.08066778e+05  4.09e+04 2.74e+01  1.45e+04     0s
+
+Barrier performed 1 iterations in 0.21 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1958 iterations and 0.21 seconds (0.28 work units)
+Optimal objective  1.215219248e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  12  not_serving:  95
+update completed?  726
+alpha_k [1.0, 0.9207123240283318, 0.8307549719604141, 1.0, 0.5879479116522416, 0.7538332152972765, 1.0, 0.9381035568150952, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6958460448902616, 1.0, 0.4993544865663902, 0.34135843711553704, 0.8615236746265693, 1.0, 1.0, 1.0, 1.0, 0.7538332152972764, 0.6461427559701655, 1.0, 0.0, 1.0, 0.695846044890302, 0.0, 0.7839865439093803, 1.0, 0.0, 0.48897289640924935, 0.05352661883767159, 0.4093212028768493, 0.019516717548173156, 0.0615374053304238]
+Current Time slot: 45 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 626 number of Occupied Vehicles: 100
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431592 nonzeros
+Model fingerprint: 0x555f1b72
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7637 rows and 99328 columns
+Presolve time: 0.11s
+Presolved: 2427 rows, 32318 columns, 101105 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.114e+04
+ Factor NZ  : 4.620e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.705e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -5.31027158e+06  4.54136547e+03  7.09e+04 0.00e+00  1.69e+04     0s
+   1  -2.54503020e+06  8.39847023e+04  3.45e+04 1.91e+01  8.56e+03     0s
+
+Barrier performed 1 iterations in 0.23 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4244 iterations and 0.23 seconds (0.29 work units)
+Optimal objective  1.259112519e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  12  not_serving:  107
+update completed?  726
+alpha_k [1.0, 0.903303824362903, 0.6079929587058062, 0.8899545067606657, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8759309811996433, 0.9953761150003376, 1.0, 1.0, 0.7329438925753684, 0.19425888695965998, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.17711839693395576, 1.0, 1.0, 0.894360222141864, 0.8602893565358432, 0.2656775954009415, 0.46837976078059546, 0.018030016454333556, 0.20073418319152259, 0.19117541256368561, 0.050605256266851764]
+Current Time slot: 46 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 633 number of Occupied Vehicles: 93
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 432320 nonzeros
+Model fingerprint: 0x3844ad37
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7675 rows and 99831 columns
+Presolve time: 0.10s
+Presolved: 2389 rows, 31815 columns, 99606 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.003e+04
+ Factor NZ  : 4.604e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.702e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.17910406e+06  4.82271698e+03  8.46e+04 0.00e+00  1.99e+04     0s
+   1  -3.43455813e+06  1.17386925e+05  4.75e+04 1.48e+01  1.13e+04     0s
+
+Barrier performed 1 iterations in 0.22 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4007 iterations and 0.23 seconds (0.27 work units)
+Optimal objective  1.214846771e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  13  not_serving:  95
+update completed?  726
+alpha_k [1.0, 1.0, 0.8565109869076307, 1.0, 0.8343530790508663, 1.0, 1.0, 0.954174535725621, 1.0, 0.9802190019609344, 1.0, 0.8532167138811834, 0.4538386775965766, 1.0, 1.0, 0.6357472945162939, 0.35160029418168437, 0.6588546053128673, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.4688003922424656, 0.5654602669316339, 1.0, 0.677156122128006, 0.7844283790981165, 1.0, 0.4599551018224792, 0.43531464993931057, 0.07547250896779027, 0.20411883107195336, 0.06326372075245013, 0.058600049030267005]
+Current Time slot: 47 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 642 number of Occupied Vehicles: 84
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 432236 nonzeros
+Model fingerprint: 0x969a9b51
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 8005 rows and 102917 columns
+Presolve time: 0.11s
+Presolved: 2059 rows, 28729 columns, 89259 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 7.927e+04
+ Factor NZ  : 2.954e+05 (roughly 15 MB of memory)
+ Factor Ops : 6.776e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.40622618e+06  5.34616599e+03  6.38e+04 0.00e+00  3.94e+04     0s
+   1  -2.06773680e+06  1.04043735e+05  3.02e+04 3.79e+01  1.90e+04     0s
+   2  -6.91734229e+05  2.42229719e+05  1.00e+04 1.32e+01  6.66e+03     0s
+   3  -1.72384166e+05  2.63932071e+05  2.45e+03 2.96e+00  1.73e+03     0s
+
+Barrier performed 3 iterations in 0.25 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4123 iterations and 0.25 seconds (0.27 work units)
+Optimal objective  1.171680667e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  7  not_serving:  105
+update completed?  726
+alpha_k [0.9915240793202305, 1.0, 0.808307673358483, 1.0, 0.830886099988004, 1.0, 1.0, 0.7175503205608523, 1.0, 0.8580496840268609, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5912356480052453, 0.28168297707970935, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9295538243622554, 0.6523184732366705, 1.0, 1.0, 0.7150414033559218, 1.0, 0.2529398161529306, 0.6124967059755267, 0.03755773027731503, 0.212643031716662, 0.15114696331109245, 0.12271337615344809]
+Current Time slot: 48 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 614 number of Occupied Vehicles: 112
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431844 nonzeros
+Model fingerprint: 0xfacaa627
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7659 rows and 99841 columns
+Presolve time: 0.11s
+Presolved: 2405 rows, 31805 columns, 100059 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 8.983e+04
+ Factor NZ  : 3.778e+05 (roughly 17 MB of memory)
+ Factor Ops : 1.036e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.22 seconds (0.20 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4433 iterations and 0.23 seconds (0.28 work units)
+Optimal objective  1.044683290e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  5  not_serving:  108
+update completed?  726
+alpha_k [1.0, 0.8082904549916317, 0.9992561761114293, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.605188608916145, 1.0, 1.0, 0.8763461204116211, 0.24569623011534306, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.32759497348721794, 1.0, 1.0, 0.8741613239898693, 0.6309236526422541, 0.5110481586400768, 0.4800307848499621, 0.06026511304719535, 0.27602909803123654, 0.04272977915049467, 0.0]
+Current Time slot: 49 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 624 number of Occupied Vehicles: 102
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 430808 nonzeros
+Model fingerprint: 0xc3bfb26a
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7654 rows and 99397 columns
+Presolve time: 0.10s
+Presolved: 2410 rows, 32249 columns, 100940 nonzeros
+
+Ordering time: 0.07s
+
+Barrier statistics:
+ AA' NZ     : 9.073e+04
+ Factor NZ  : 3.527e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.737e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.58557783e+06  7.42816258e+03  1.18e+05 2.68e+01  5.31e+04     0s
+
+Barrier performed 0 iterations in 0.22 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1982 iterations and 0.22 seconds (0.29 work units)
+Optimal objective  1.028485611e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  8  not_serving:  119
+update completed?  726
+alpha_k [1.0, 0.9261469408774197, 0.9079241422723224, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9831798866847203, 0.27288258079452626, 0.7428470254956285, 1.0, 1.0, 1.0, 1.0, 0.8626610618657807, 1.0, 1.0, 1.0, 0.6410871589892126, 1.0, 0.5571352691221008, 1.0, 1.0, 0.29713881019848676, 0.44842594831738614, 0.025615414672250814, 0.6329584122557779, 0.3851799391454257, 0.08571311832647335]
+Current Time slot: 50 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 622 number of Occupied Vehicles: 104
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429184 nonzeros
+Model fingerprint: 0x6177aad5
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7662 rows and 99479 columns
+Presolve time: 0.11s
+Presolved: 2402 rows, 32167 columns, 100441 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 9.037e+04
+ Factor NZ  : 3.753e+05 (roughly 17 MB of memory)
+ Factor Ops : 1.005e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.40151336e+06  5.75861949e+03  4.93e+04 2.68e+01  2.95e+04     0s
+
+Barrier performed 0 iterations in 0.24 seconds (0.20 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4115 iterations and 0.24 seconds (0.27 work units)
+Optimal objective  1.051701283e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  11  not_serving:  115
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8741902023060275, 1.0, 1.0, 1.0, 0.30964161011918734, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8590057571055975, 1.0, 1.0, 1.0, 0.6770130119556035, 1.0, 0.6052086015968063, 1.0, 0.6886856500927452, 0.3698497009762241, 0.5706252529340009, 0.021000929392949758, 0.30065201498672667, 0.2929209631725125, 0.1884139986103609]
+Current Time slot: 51 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 623 number of Occupied Vehicles: 103
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429254 nonzeros
+Model fingerprint: 0xbf90b655
+Coefficient statistics:
+  Matrix range     [9e-04, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7656 rows and 99368 columns
+Presolve time: 0.11s
+Presolved: 2408 rows, 32278 columns, 100856 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.079e+04
+ Factor NZ  : 3.627e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.230e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -5.93563754e+06  5.91265349e+03  4.34e+04 2.36e+01  2.52e+04     0s
+   1  -2.70320042e+06  5.73872905e+04  2.00e+04 3.17e+01  1.21e+04     0s
+
+Barrier performed 1 iterations in 0.23 seconds (0.22 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4298 iterations and 0.23 seconds (0.28 work units)
+Optimal objective  1.080765073e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  7  not_serving:  108
+update completed?  726
+alpha_k [1.0, 0.9469708264997801, 0.7596148434421697, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.27539457709442344, 0.722910764872936, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7785192852468394, 1.0, 1.0, 0.9967406000517184, 0.6247376980376653, 0.27539457709412, 0.7856290504094554, 0.04126707730157902, 0.4290106273231385, 0.1730042856105584, 0.24097025495764537]
+Current Time slot: 52 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 619 number of Occupied Vehicles: 107
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427462 nonzeros
+Model fingerprint: 0x518c6bc3
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7662 rows and 99340 columns
+Presolve time: 0.11s
+Presolved: 2402 rows, 32306 columns, 100458 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 8.942e+04
+ Factor NZ  : 3.602e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.197e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.52896247e+06  4.83421727e+03  1.06e+05 3.29e+01  5.39e+04     0s
+   1  -3.93157178e+06  3.52236436e+05  5.54e+04 3.61e+01  2.88e+04     0s
+   2  -1.42119800e+06  5.99910019e+05  1.98e+04 1.56e+01  1.08e+04     0s
+
+Barrier performed 2 iterations in 0.25 seconds (0.22 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 3913 iterations and 0.25 seconds (0.28 work units)
+Optimal objective  1.086720455e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  114
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 0.7588506677460746, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9310621661443382, 0.2329804681677692, 0.7811698050325973, 1.0, 1.0, 1.0, 1.0, 0.9485633346821132, 1.0, 1.0, 1.0, 0.8075606768243925, 1.0, 0.9485633346824132, 1.0, 1.0, 0.23298046816760634, 0.5678898911584577, 0.01924621258776048, 0.471475266943013, 0.11487791250474488, 0.06775452390584533]
+Current Time slot: 53 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 624 number of Occupied Vehicles: 102
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 425320 nonzeros
+Model fingerprint: 0xc48fc689
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7662 rows and 99230 columns
+Presolve time: 0.10s
+Presolved: 2402 rows, 32416 columns, 99773 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 8.890e+04
+ Factor NZ  : 3.731e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.948e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.22 seconds (0.20 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4427 iterations and 0.23 seconds (0.27 work units)
+Optimal objective  1.096375883e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  103
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8497853393936842, 0.24333475867213458, 0.2865942713252917, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.36847834884629077, 0.46391159027428397, 0.043132917089036875, 0.36731227812221173, 0.13671458172761958, 0.11618686675349438]
+Current Time slot: 54 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 625 number of Occupied Vehicles: 101
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 424564 nonzeros
+Model fingerprint: 0x1edb30d0
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7665 rows and 99082 columns
+Presolve time: 0.11s
+Presolved: 2399 rows, 32564 columns, 100584 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 8.805e+04
+ Factor NZ  : 3.475e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.560e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.62071389e+06  5.40612578e+03  1.07e+05 1.83e+01  3.65e+04     0s
+   1  -5.07496256e+06  2.19661543e+05  6.33e+04 2.48e+01  2.19e+04     0s
+
+Barrier performed 1 iterations in 0.22 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with primal simplex
+Solved in 4321 iterations and 0.23 seconds (0.28 work units)
+Optimal objective  1.036755343e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  8  not_serving:  119
+update completed?  726
+alpha_k [1.0, 0.9503966005664162, 1.0, 1.0, 1.0, 1.0, 0.9051396195865352, 0.6411405638744245, 1.0, 1.0, 1.0, 1.0, 0.7119075659677271, 1.0, 1.0, 0.9355134323265835, 0.2586113198818338, 0.47519830028319987, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9503966005656469, 1.0, 1.0, 0.4295577855665902, 0.7919971671387841, 0.11661307982414969, 0.5053233459049727, 0.1284319730495877, 0.13199952785640084]
+Current Time slot: 55 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 621 number of Occupied Vehicles: 105
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 426972 nonzeros
+Model fingerprint: 0x81be717d
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7619 rows and 99110 columns
+Presolve time: 0.11s
+Presolved: 2445 rows, 32536 columns, 100901 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 8.965e+04
+ Factor NZ  : 4.879e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.948e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.25569765e+06  4.34636595e+03  9.86e+04 0.00e+00  3.04e+04     0s
+   1  -3.80607581e+06  1.73299900e+05  5.22e+04 1.94e+01  1.62e+04     0s
+
+Barrier performed 1 iterations in 0.23 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2009 iterations and 0.23 seconds (0.29 work units)
+Optimal objective  1.043980461e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  8  not_serving:  111
+update completed?  726
+alpha_k [1.0, 0.9493560181831537, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7657864562253103, 1.0, 1.0, 0.6274838855366492, 0.13446083261494804, 0.4757844846374691, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.4757844846370163, 1.0, 1.0, 1.0, 1.0, 0.8531308000389066, 0.4948158640226947, 0.7206056272174717, 0.17616071108407766, 0.5734620940656686, 0.2641365822184559, 0.11245815091424374]
+Current Time slot: 56 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 616 number of Occupied Vehicles: 110
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427392 nonzeros
+Model fingerprint: 0x5482ee8a
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7621 rows and 99624 columns
+Presolve time: 0.10s
+Presolved: 2443 rows, 32022 columns, 99350 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 8.896e+04
+ Factor NZ  : 3.494e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.502e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.49191555e+06  4.44376584e+03  6.41e+04 0.00e+00  1.82e+04     0s
+
+Barrier performed 0 iterations in 0.21 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1906 iterations and 0.21 seconds (0.27 work units)
+Optimal objective  1.036315527e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  7  not_serving:  113
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 0.9511050004148305, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7052880075543724, 0.989794017382603, 0.3173796033991734, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9765526258441827, 1.0, 0.7324144693829582, 0.2929657877534551, 0.9206431243644781, 0.05932329035500609, 0.44473574998638693, 0.041898297478497715, 0.0]
+Current Time slot: 57 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 641 number of Occupied Vehicles: 85
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 427462 nonzeros
+Model fingerprint: 0xe25b8ef1
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7601 rows and 98856 columns
+Presolve time: 0.13s
+Presolved: 2463 rows, 32790 columns, 101921 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.045e+04
+ Factor NZ  : 4.808e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.824e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -5.26160979e+06  3.69121907e+03  3.78e+04 0.00e+00  1.20e+04     0s
+   1  -3.36252311e+06  5.17117138e+04  2.47e+04 1.78e+01  7.72e+03     0s
+
+Barrier performed 1 iterations in 0.27 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2056 iterations and 0.27 seconds (0.30 work units)
+Optimal objective  1.040412083e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  115
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8206179178464422, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.574432542492651, 1.0, 0.13129886685556866, 0.5182850007452109, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.4304880880504537, 0.9847415014169695, 0.12270922136024327, 0.4376628895175976, 0.07517110697828687, 0.13262511803578864]
+Current Time slot: 58 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 628 number of Occupied Vehicles: 98
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429156 nonzeros
+Model fingerprint: 0xc0c7efc1
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7610 rows and 99022 columns
+Presolve time: 0.12s
+Presolved: 2454 rows, 32624 columns, 101795 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.139e+04
+ Factor NZ  : 3.582e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.967e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.45929957e+06  3.69814646e+03  4.25e+04 0.00e+00  1.65e+04     0s
+
+Barrier performed 0 iterations in 0.22 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1896 iterations and 0.22 seconds (0.28 work units)
+Optimal objective  1.085104512e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  101
+update completed?  726
+alpha_k [1.0, 1.0, 0.9603163361664133, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8778514984345033, 1.0, 0.1853242052251504, 0.9530959125850998, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5132054913922779, 1.0, 0.1615975768742855, 0.813618461963207, 0.17361226660474907, 0.4601152681449393]
+Current Time slot: 59 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 626 number of Occupied Vehicles: 100
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428176 nonzeros
+Model fingerprint: 0x3f56b6c4
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7650 rows and 98942 columns
+Presolve time: 0.11s
+Presolved: 2414 rows, 32704 columns, 101881 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.117e+04
+ Factor NZ  : 4.805e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.875e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.16357938e+06  6.02488830e+03  6.80e+04 2.47e+01  3.18e+04     0s
+
+Barrier performed 0 iterations in 0.20 seconds (0.17 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1973 iterations and 0.20 seconds (0.27 work units)
+Optimal objective  1.119065216e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  114
+update completed?  726
+alpha_k [1.0, 0.8986355736202402, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8201832616383874, 0.34069150868005627, 0.1795536329531465, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6327128018350715, 1.0, 1.0, 1.0, 1.0, 0.3114133321532592, 1.0, 0.08828550723283138, 0.5050602190087528, 0.02745241495563428, 0.1640366523276001]
+Current Time slot: 60 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 630 number of Occupied Vehicles: 96
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428302 nonzeros
+Model fingerprint: 0xca9ea6c5
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7612 rows and 98781 columns
+Presolve time: 0.11s
+Presolved: 2452 rows, 32865 columns, 102103 nonzeros
+
+Ordering time: 0.07s
+
+Barrier statistics:
+ AA' NZ     : 9.164e+04
+ Factor NZ  : 3.586e+05 (roughly 17 MB of memory)
+ Factor Ops : 8.983e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.47969743e+06  4.37173984e+03  7.39e+04 0.00e+00  1.75e+04     0s
+
+Barrier performed 0 iterations in 0.22 seconds (0.22 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1899 iterations and 0.22 seconds (0.29 work units)
+Optimal objective  1.156516244e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  107
+update completed?  726
+alpha_k [1.0, 1.0, 0.8087433527165137, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8665107350534407, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9697798226542892, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.614644948064426, 1.0, 1.0, 0.7158132159135813, 1.0, 0.5986801442189458, 0.9684531744714394, 0.08552573488836342, 0.5845101999772383, 0.07657536728384344, 0.2832465198452357]
+Current Time slot: 61 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 629 number of Occupied Vehicles: 97
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 428750 nonzeros
+Model fingerprint: 0xe20345ff
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7639 rows and 98294 columns
+Presolve time: 0.11s
+Presolved: 2425 rows, 33352 columns, 103441 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.167e+04
+ Factor NZ  : 4.854e+05 (roughly 20 MB of memory)
+ Factor Ops : 1.924e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.84489464e+06  5.33529495e+03  5.61e+04 3.77e+01  5.03e+04     0s
+   1  -4.29572910e+06  7.92644515e+04  3.11e+04 4.90e+01  2.83e+04     0s
+
+Barrier performed 1 iterations in 0.23 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2190 iterations and 0.23 seconds (0.31 work units)
+Optimal objective  1.226072861e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  4  not_serving:  114
+update completed?  726
+alpha_k [1.0, 0.8819123753347372, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8964248574608854, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8583947119930577, 1.0, 0.32189801699724135, 0.9467588735199626, 1.0, 1.0, 1.0, 1.0, 0.7725552407929565, 1.0, 1.0, 1.0, 0.7851171146273656, 0.6659958972355497, 1.0, 1.0, 0.6897814649931001, 0.9904554369135954, 1.0, 0.14083038243615428, 0.539493883234832, 0.051503682719529105, 0.45444425929037363]
+Current Time slot: 62 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 631 number of Occupied Vehicles: 95
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 429352 nonzeros
+Model fingerprint: 0x56480b51
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7630 rows and 98603 columns
+Presolve time: 0.11s
+Presolved: 2434 rows, 33043 columns, 102822 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.255e+04
+ Factor NZ  : 3.706e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.513e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.22 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2047 iterations and 0.22 seconds (0.30 work units)
+Optimal objective  1.240619600e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  5  not_serving:  130
+update completed?  726
+alpha_k [1.0, 0.7620482444844655, 0.6985442241108258, 1.0, 1.0, 1.0, 1.0, 0.8607062761361763, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8671583471718849, 0.29241386125568786, 0.509748487864633, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7858622521249611, 1.0, 0.7396350608233185, 1.0, 0.43060945321905536, 0.7459031545591889, 0.7459031545589504, 0.11293828773052163, 0.404420340274798, 0.0821816734247237, 0.25401608149489324]
+Current Time slot: 63 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 640 number of Occupied Vehicles: 86
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 430388 nonzeros
+Model fingerprint: 0x7467280a
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7634 rows and 98738 columns
+Presolve time: 0.10s
+Presolved: 2430 rows, 32908 columns, 102657 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.295e+04
+ Factor NZ  : 3.654e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.371e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.26595822e+06  4.30787056e+03  6.20e+04 0.00e+00  1.92e+04     0s
+
+Barrier performed 0 iterations in 0.20 seconds (0.21 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1927 iterations and 0.20 seconds (0.27 work units)
+Optimal objective  1.227862846e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  2  not_serving:  129
+update completed?  726
+alpha_k [1.0, 1.0, 0.814714534756811, 1.0, 0.8429157471962319, 1.0, 1.0, 1.0, 1.0, 0.32272625615011635, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7639618260336714, 0.13046380567772656, 0.6343240207088836, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.2885552407930844, 1.0, 1.0, 1.0, 0.6813109852058815, 0.3893205629746757, 0.7957296239423969, 0.055241431232957675, 0.38988316494442365, 0.06387290486303389, 0.1785960835006434]
+Current Time slot: 64 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 628 number of Occupied Vehicles: 98
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431774 nonzeros
+Model fingerprint: 0xf38e2a70
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 8000 rows and 102170 columns
+Presolve time: 0.11s
+Presolved: 2064 rows, 29476 columns, 91032 nonzeros
+
+Ordering time: 0.05s
+
+Barrier statistics:
+ AA' NZ     : 8.032e+04
+ Factor NZ  : 3.042e+05 (roughly 15 MB of memory)
+ Factor Ops : 7.151e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -7.62257054e+06  5.03554459e+03  1.20e+05 0.00e+00  5.15e+04     0s
+
+Barrier performed 0 iterations in 0.19 seconds (0.19 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1599 iterations and 0.19 seconds (0.23 work units)
+Optimal objective  1.282902445e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  4  not_serving:  122
+update completed?  726
+alpha_k [1.0, 0.868360694904107, 0.8209861006377231, 1.0, 1.0, 1.0, 0.6006161473084253, 0.8341890934847385, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8299423126449363, 0.43947522973815223, 0.1716046135167592, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8190220190564294, 0.41903452137829617, 1.0, 1.0, 0.42396433927673793, 1.0, 0.500513456090605, 0.750770184136113, 0.05561260623225997, 0.5205339943336248, 0.07539114819782142, 0.4664979784922815]
+Current Time slot: 65 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 616 number of Occupied Vehicles: 110
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431396 nonzeros
+Model fingerprint: 0xe65c668e
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7637 rows and 99074 columns
+Presolve time: 0.12s
+Presolved: 2427 rows, 32572 columns, 101675 nonzeros
+
+Ordering time: 0.02s
+
+Barrier statistics:
+ AA' NZ     : 9.216e+04
+ Factor NZ  : 4.942e+05 (roughly 18 MB of memory)
+ Factor Ops : 2.006e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.71727480e+06  6.35510972e+03  1.18e+05 0.00e+00  2.78e+04     0s
+   1  -4.53964361e+06  9.33536530e+04  6.23e+04 1.79e+01  1.49e+04     0s
+
+Barrier performed 1 iterations in 0.27 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2019 iterations and 0.27 seconds (0.28 work units)
+Optimal objective  1.308018886e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  4  not_serving:  119
+update completed?  726
+alpha_k [1.0, 0.9751930233852146, 0.8945115861984531, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8715218024409097, 1.0, 1.0, 1.0, 1.0, 1.0, 0.927259806981111, 0.31881310379888167, 0.23910982784908502, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.3885534702545982, 1.0, 1.0, 0.7869437372245128, 0.4908043834801208, 0.7375930282804913, 0.6216855524075724, 0.03959780588584635, 0.5453382038668306, 0.044248082021888034, 0.5651686840069479]
+Current Time slot: 66 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 636 number of Occupied Vehicles: 90
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431018 nonzeros
+Model fingerprint: 0xb8002c2c
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7989 rows and 102270 columns
+Presolve time: 0.13s
+Presolved: 2075 rows, 29376 columns, 90276 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 7.864e+04
+ Factor NZ  : 4.066e+05 (roughly 16 MB of memory)
+ Factor Ops : 1.449e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.24704324e+06  5.83494404e+03  6.99e+04 0.00e+00  1.98e+04     0s
+
+Barrier performed 0 iterations in 0.22 seconds (0.16 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1672 iterations and 0.22 seconds (0.24 work units)
+Optimal objective  1.235965780e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  124
+update completed?  726
+alpha_k [1.0, 0.8339670295915812, 0.5348066712943063, 0.9743702626137833, 0.970363506394264, 1.0, 1.0, 0.8652407932009776, 1.0, 0.33931011498073105, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8467188190334968, 0.2136397020250286, 0.26829171882224884, 1.0, 1.0, 1.0, 1.0, 0.7442931554415274, 1.0, 1.0, 1.0, 0.3204595530375429, 1.0, 1.0, 0.5600264033664647, 0.6481204443454103, 0.35497058182603336, 0.6469090042627963, 0.052122939349462355, 0.5603464184533927, 0.049442331040080216, 0.11653074655907256]
+Current Time slot: 67 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 640 number of Occupied Vehicles: 86
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 432460 nonzeros
+Model fingerprint: 0x2bed021a
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7654 rows and 99068 columns
+Presolve time: 0.14s
+Presolved: 2410 rows, 32578 columns, 101875 nonzeros
+
+Ordering time: 0.06s
+
+Barrier statistics:
+ AA' NZ     : 9.116e+04
+ Factor NZ  : 3.700e+05 (roughly 17 MB of memory)
+ Factor Ops : 9.561e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+Barrier performed 0 iterations in 0.25 seconds (0.20 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2046 iterations and 0.26 seconds (0.28 work units)
+Optimal objective  1.190877487e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  5  not_serving:  120
+update completed?  726
+alpha_k [1.0, 0.7520936424764034, 1.0, 1.0, 0.9081600334362158, 1.0, 1.0, 1.0, 1.0, 0.7066041076487046, 1.0, 1.0, 1.0, 1.0, 0.5652832861188939, 0.6435532795816373, 0.4037737757990469, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.6486857381687972, 1.0, 0.35330205382428637, 1.0, 0.43483329701438533, 0.7165562781790955, 0.48626519236040006, 0.18234944713513895, 0.531462918572932, 0.055784534814352985, 0.648685738169078, 0.06650391601404737, 0.26918251719939357]
+Current Time slot: 68 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 641 number of Occupied Vehicles: 85
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 431816 nonzeros
+Model fingerprint: 0x1f05eb4f
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-01, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7676 rows and 99642 columns
+Presolve time: 0.22s
+Presolved: 2388 rows, 32004 columns, 100025 nonzeros
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ AA' NZ     : 9.200e+04
+ Factor NZ  : 5.149e+05 (roughly 18 MB of memory)
+ Factor Ops : 2.252e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.90469369e+06  4.57583199e+03  6.30e+04 0.00e+00  2.52e+04     0s
+   1  -2.46023808e+06  6.81470612e+04  3.23e+04 2.39e+01  1.31e+04     0s
+
+Barrier performed 1 iterations in 0.36 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2051 iterations and 0.36 seconds (0.30 work units)
+Optimal objective  1.158064203e+03
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  6  not_serving:  122
+update completed?  726
+alpha_k [1.0, 1.0, 0.9855860853026189, 1.0, 1.0, 1.0, 0.8389214892749612, 1.0, 1.0, 1.0, 0.6524944916585161, 1.0, 1.0, 0.8242035684106579, 0.9471694233752247, 0.9304939053580418, 0.31742975269868434, 0.9787417374877743, 1.0, 1.0, 1.0, 1.0, 0.8099931620587474, 1.0, 1.0, 1.0, 0.5062457262866658, 0.7829933899901171, 1.0, 0.9361877489012825, 0.5938433013970001, 0.607494871544122, 0.7952276617086543, 0.02174981638861058, 0.3516437380194448, 0.04240036407888071, 0.2609977966633383]
+Current Time slot: 69 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 631 number of Occupied Vehicles: 95
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 430738 nonzeros
+Model fingerprint: 0x131fa644
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 7e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 7629 rows and 99468 columns
+Presolve time: 0.14s
+Presolved: 2435 rows, 32178 columns, 100926 nonzeros
+
+Ordering time: 0.02s
+
+Barrier statistics:
+ AA' NZ     : 9.197e+04
+ Factor NZ  : 4.831e+05 (roughly 18 MB of memory)
+ Factor Ops : 1.897e+08 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -4.94893244e+06  4.74615466e+03  5.56e+04 0.00e+00  3.18e+04     0s
+   1  -2.38006958e+06  7.16460623e+04  2.70e+04 4.01e+01  1.58e+04     0s
+
+Barrier performed 1 iterations in 0.29 seconds (0.18 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 2081 iterations and 0.29 seconds (0.31 work units)
+Optimal objective  9.757462131e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  9  not_serving:  118
+update completed?  726
+alpha_k [1.0, 0.7940831831058185, 1.0, 1.0, 1.0, 0.980664075368583, 0.7530099150140609, 1.0, 1.0, 0.8168243145917682, 1.0, 1.0, 1.0, 1.0, 1.0, 0.4412001755574737, 0.5020066100095628, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.2409631728047015, 1.0, 1.0, 0.7437134963103668, 0.8730549739293888, 0.2231140488931266, 0.6341136126432732, 0.0, 0.6732794534245067, 0.058676097273846164, 0.30424643030869175]
+Current Time slot: 70 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 632 number of Occupied Vehicles: 94
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 405734 nonzeros
+Model fingerprint: 0xaa3abe04
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-02, 6e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 8368 rows and 109587 columns
+Presolve time: 0.14s
+Presolved: 1696 rows, 22059 columns, 72992 nonzeros
+
+Ordering time: 0.00s
+
+Barrier statistics:
+ AA' NZ     : 5.674e+04
+ Factor NZ  : 2.291e+05 (roughly 12 MB of memory)
+ Factor Ops : 5.895e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.50318062e+06  4.33844061e+03  1.65e+04 0.00e+00  5.81e+03     0s
+
+Barrier performed 0 iterations in 0.17 seconds (0.14 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 826 iterations and 0.17 seconds (0.15 work units)
+Optimal objective  8.846041218e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Optimization Error! Not reachable regions dispatched
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  10  not_serving:  108
+update completed?  726
+alpha_k [1.0, 0.9923134574660781, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9815921836161601, 1.0, 1.0, 0.9651775986058188, 0.4008168083097375, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.9075097546632387, 0.7515315155818373, 1.0, 1.0, 1.0, 0.3589404253520603, 0.6871145285311098, 0.06511464394926562, 0.6093498774979205, 0.12186997549965836, 0.08713408876299958]
+Current Time slot: 71 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+number of Vacant Vehicles: 635 number of Occupied Vehicles: 91
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Set parameter TimeLimit to value 300
+Set parameter BarHomogeneous to value 1
+Gurobi Optimizer version 9.5.2 build v9.5.2rc0 (mac64[rosetta2])
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 10064 rows, 131646 columns and 395584 nonzeros
+Model fingerprint: 0x5a777b06
+Coefficient statistics:
+  Matrix range     [2e-03, 1e+00]
+  Objective range  [1e-03, 7e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [8e-02, 4e+01]
+
+Concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Presolve removed 8243 rows and 104699 columns
+Presolve time: 0.12s
+Presolved: 1821 rows, 26947 columns, 81635 nonzeros
+
+Ordering time: 0.02s
+
+Barrier performed 0 iterations in 0.15 seconds (0.16 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+
+Solved with dual simplex
+Solved in 1237 iterations and 0.15 seconds (0.20 work units)
+Optimal objective  8.786256896e+02
+*********************************************************************************** mpc print generate XY for alpha ***********************************************************************************
+Current charging supply p:  {0: 8, 1: 4, 2: 3, 3: 4, 4: 2, 5: 10, 6: 4, 7: 3, 8: 1, 9: 3, 10: 2, 11: 3, 12: 1, 13: 3, 14: 20, 15: 20, 16: 2, 17: 20, 18: 20, 19: 20, 20: 20, 21: 20, 22: 20, 23: 20, 24: 20, 25: 20, 26: 20, 27: 20, 28: 20, 29: 20, 30: 20, 31: 20, 32: 20, 33: 20, 34: 20, 35: 20, 36: 20}
+wait for charge:  8  not_serving:  106
+update completed?  726
+alpha_k [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7052697656443725, 1.0, 0.4654780453252988, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.969745927761867, 0.9127020496565824, 1.0, 0.9127020496579985, 1.0, 0.4631622341548222, 0.6982170679881109, 0.35035981906221597, 1.0, 0.022245067876962316, 0.6104630102626062]
+
+Process finished with exit code 0

@@ -64,7 +64,7 @@ def call_rec():
     L2=3
     L=15
 
-    path = '/media/yuan/696d9c4b-3e39-41a3-ab8b-178a0c2f1195/taxiData/evcharging/20161213/'
+    path = '/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/evcharging/20161213/'
 
     for root,dirs,files in os.walk(path):
         cvalue=0
@@ -94,7 +94,7 @@ def call_rec():
                     energy = cvalue%L
                     energystatus.append(energy)
             cvalue+=1
-            gpspath= '/media/yuan/696d9c4b-3e39-41a3-ab8b-178a0c2f1195/taxiData/gps/evgpsvehiclesorted/20161213/'+file
+            gpspath= '/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/evgpsvehiclesorted/20161213/'+file
             if os.path.isfile(gpspath):
                 fopen =open(gpspath,'r')
                 gpsrecord=[]
@@ -114,7 +114,7 @@ def call_rec():
                     print file
                 else:
                     location.append(gps_to_region(gps))
-            dealpath = '/media/yuan/696d9c4b-3e39-41a3-ab8b-178a0c2f1195/taxiData/evdeal/20161213/'+file
+            dealpath = '/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/evdeal/20161213/'+file
             if os.path.isfile(dealpath):
                 fopen = open(dealpath,'r')
                 dealrecord=[]
@@ -519,10 +519,10 @@ def ground_charging():
         k=k.split(',')
         p.append(float(k[2]))
         occutime.append(0)
-    chargingpath ='/media/yuan/696d9c4b-3e39-41a3-ab8b-178a0c2f1195/taxiData/evcharging/20161215/'
+    chargingpath ='/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/evcharging/20161215/'
     for root,dirs,files in os.walk(chargingpath):
             for file in files:
-                gpspath='/media/yuan/696d9c4b-3e39-41a3-ab8b-178a0c2f1195/taxiData/gpssorted/20161215/'
+                gpspath='/Users/zihanding/Developer/Psquare/newevaluation_dis/datadir/gpssorted/20161215/'
                 if os.path.exists(gpspath+file):
                     fopen = open(gpspath+file,'r')
                     gpsrecord=[]
