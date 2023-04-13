@@ -50,6 +50,7 @@ def obtain_regions():
         k = k.strip().split(',')
         p[n] = int(float(k[-1]) / 5)
         n += 1
+    fopen.close()
     return n, p
 
 def gps_to_region(gps):
@@ -95,6 +96,7 @@ def obtain_reachable(n):
     for i in range(n):
         for j in range(n):
             c[i,j] = reachable[i][j]
+    fopen.close()
     return c
 def obtain_vehicles():
     """

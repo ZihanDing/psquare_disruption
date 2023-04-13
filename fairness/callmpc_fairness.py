@@ -143,19 +143,19 @@ def call_mpc_fairness(slot,beta1,beta2,round):
         # S,C = Y,X
 
         # using for fairness + disruption
-        if disruption[1] < time <= disruption[2]:
-            alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
-            print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
-
-            C, S = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
-            print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
-
-        with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/C/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
-            json_str = json.dumps({str(k): v for k, v in C.items()})
-            f.write(json_str)
-        with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/S/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
-            json_str = json.dumps({str(k): v for k, v in S.items()})
-            f.write(json_str)
+        # if disruption[1] < time <= disruption[2]:
+        #     alpha = fairness.alpha_generator.generate_alpha(time,X,Y,vehicles,reachable,distance)
+        #     print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
+        #
+        #     C, S = fairness.mpc_fairness.mpc_iteration_optimize_utility(time, timehorizon, vacant, occupied, disruption, beta2, alpha)
+        #     print '*********************************************************************************** mpc print disruption SC for dispatch ***********************************************************************************'
+        #
+        # with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/C/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
+        #     json_str = json.dumps({str(k): v for k, v in C.items()})
+        #     f.write(json_str)
+        # with open('/Users/zihanding/Developer/Psquare/newevaluation_dis/resultdata/fairness_beta/decision/S/round-' + str(round)+'/'+str(time)+'.json', 'w') as f:
+        #     json_str = json.dumps({str(k): v for k, v in S.items()})
+        #     f.write(json_str)
 
 
         # print '*********************************************************************************** mpc print generate SC for dispatch ***********************************************************************************'

@@ -187,6 +187,8 @@ beta2 = 0.1
 
 # fairness.callmpc_fairness.call_mpc_fairness(1, 0.1,0.1,62)  # Oracle+idle driving distance       use this!
 
-fairness.callmpc_fairness.call_mpc_fairness(1, 0.1, 0.1, 63)  # afc                            use this!
+# fairness.callmpc_fairness.call_mpc_fairness(1, 0.1, 0.1, 63)  # afc                            use this!
+#
+# fairness.callmpc_fairness.call_mpc_fairness(2, 0.1, 0.1, 64)  # afc                            use this!
 
-fairness.callmpc_fairness.call_mpc_fairness(2, 0.1, 0.1, 64)  # afc                            use this!
+fairness.callmpc_fairness.call_mpc_fairness(2, 0.1, 0.1, 65)  # oracle                          use this!
